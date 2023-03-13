@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 
 export default function SideBar() {
   return (
-    <CDBSidebar textColor="#fff" backgroundColor="#333">
+    <CDBSidebar textColor="#fff" backgroundColor="#212529">
       <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
         <a
           href="/"
@@ -23,21 +23,27 @@ export default function SideBar() {
 
       <CDBSidebarContent className="sidebar-content">
         <CDBSidebarMenu>
-          <NavLink exact to="/" activeClassName="activeClicked">
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeClicked" : ""
+            }
+          >
             <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
           </NavLink>
-          <NavLink exact to="/profile" activeClassName="activeClicked">
+          <NavLink
+            to="/profile"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeClicked" : ""
+            }
+          >
             <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
           </NavLink>
         </CDBSidebarMenu>
       </CDBSidebarContent>
 
-      <CDBSidebarFooter style={{ textAlign: "center" }}>
-        <div
-          style={{
-            padding: "20px 5px",
-          }}
-        >
+      <CDBSidebarFooter className="text-center">
+        <div className="px-20 py-5">
           Sidebar Footer
         </div>
       </CDBSidebarFooter>
