@@ -32,7 +32,14 @@ export default function NavBar() {
             />
           </Form>
           {!isLoading && !user && (
-            <Button variant="primary">Login</Button>
+            <Button variant="primary" onClick={() => loginWithRedirect()}>
+              Log In
+            </Button>
+          )}
+          {!isLoading && user && (
+            <Button variant="primary" onClick={() => logout()}>
+            Log Out
+          </Button>
           )}
         </Nav>
       </Container>
