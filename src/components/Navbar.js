@@ -3,12 +3,14 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { useAuth0 } from "@auth0/auth0-react";
 //import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
+  const { loginWithRedirect, logout, user, isLoading } = useAuth0();
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
@@ -17,25 +19,21 @@ export default function NavBar() {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2"
+              className="d-none d-sm-block me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <Button className="me-5" variant="outline-success">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
+            <FontAwesomeIcon
+              icon={faBell}
+              style={{ width: "20px", height: "20px", color: "white" }}
+              className="btn me-3"
+            />
           </Form>
-          <NavDropdown
-            className="mr-0"
-            title="Link"
-            id="navbarScrollingDropdown"
-          >
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">
-              Something else here
-            </NavDropdown.Item>
-          </NavDropdown>
+          {!isLoading && !user && (
+            <Button variant="primary">Login</Button>
+          )}
         </Nav>
       </Container>
     </Navbar>
