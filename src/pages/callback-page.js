@@ -4,7 +4,7 @@ export const CallbackPage = () => {
   return (
     <div className="">
       <NavBar />
-      <div className="page-layout__content" />
+      <div className="" />
     </div>
   );
 };
