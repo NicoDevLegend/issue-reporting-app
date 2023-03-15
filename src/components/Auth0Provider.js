@@ -20,10 +20,9 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={window.location.origin}
-      /* authorizationParams={{
-        redirect_uri: redirectUri,
-      }}*/
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
       onRedirectCallback={onRedirectCallback} 
     >
       {children}
