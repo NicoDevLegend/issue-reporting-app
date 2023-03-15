@@ -11,7 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
-  const handleLogin = async () => {
+  /* const handleLogin = async () => {
     await loginWithRedirect({
       appState: {
         returnTo: "/profile",
@@ -28,15 +28,15 @@ export default function NavBar() {
         screen_hint: "signup",
       },
     });
-  };
+  }; */
 
-  const handleLogout = () => {
+  /* const handleLogout = () => {
     logout({
       logoutParams: {
         returnTo: window.location.origin,
       },
     });
-  };
+  }; */
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
@@ -55,12 +55,12 @@ export default function NavBar() {
           </Form>
           {!isAuthenticated && (
             <>
-              <Button className="me-3" variant="primary" onClick={handleLogin()}>
+              <Button className="me-3" variant="primary" onClick={() => loginWithRedirect()}>
                 Login
               </Button>
-              <Button variant="light" onClick={handleSignUp()}>
+              {/* <Button variant="light" onClick={handleSignUp()}>
                 Signup
-              </Button>
+              </Button> */}
             </>
           )}
           {isAuthenticated && (
@@ -70,7 +70,7 @@ export default function NavBar() {
                 style={{ width: "20px", height: "20px", color: "white" }}
                 className="btn me-3"
               />
-              <Button variant="primary" onClick={handleLogout()}>
+              <Button variant="primary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                 Logout
               </Button>
             </>
