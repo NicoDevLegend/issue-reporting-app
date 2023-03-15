@@ -1,4 +1,4 @@
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 
 export const CallbackPage = () => {
   return (
