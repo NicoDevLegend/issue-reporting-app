@@ -10,7 +10,35 @@ import { useAuth0 } from "@auth0/auth0-react";
 //import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
-  const { loginWithRedirect, logout, user, isLoading } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
+  const handleLogin = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/profile",
+      },
+    });
+  };
+
+  const handleSignUp = async () => {
+    await loginWithRedirect({
+      appState: {
+        returnTo: "/profile",
+      },
+      authorizationParams: {
+        screen_hint: "signup",
+      },
+    });
+  };
+
+  const handleLogout = () => {
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin,
+      },
+    });
+  };
+
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
@@ -25,21 +53,28 @@ export default function NavBar() {
             <Button className="me-5" variant="outline-success">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
-            <FontAwesomeIcon
-              icon={faBell}
-              style={{ width: "20px", height: "20px", color: "white" }}
-              className="btn me-3"
-            />
           </Form>
-          {!isLoading && !user && (
-            <Button variant="primary" onClick={() => loginWithRedirect()}>
-              Log In
-            </Button>
+          {!isAuthenticated && (
+            <>
+              <Button variant="primary" onClick={handleLogin()}>
+                Login
+              </Button>
+              <Button variant="light" onClick={handleSignUp()}>
+                Signup
+              </Button>
+            </>
           )}
-          {!isLoading && user && (
-            <Button variant="primary" onClick={() => logout()}>
-            Log Out
-          </Button>
+          {isAuthenticated && (
+            <>
+              <FontAwesomeIcon
+                icon={faBell}
+                style={{ width: "20px", height: "20px", color: "white" }}
+                className="btn me-3"
+              />
+              <Button variant="primary" onClick={handleLogout()}>
+                Logout
+              </Button>
+            </>
           )}
         </Nav>
       </Container>
