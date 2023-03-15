@@ -55,7 +55,7 @@ export default function NavBar() {
           </Form>
           {!isAuthenticated && (
             <>
-              <Button variant="primary" onClick={handleLogin()}>
+              <Button className="me-3" variant="primary" onClick={handleLogin()}>
                 Login
               </Button>
               <Button variant="light" onClick={handleSignUp()}>
