@@ -7,16 +7,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react-dom";
 
 export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { show, setShow } = useState(false);
+
+  const handleShowFormControl = () => {
+    setShow(true);
+  };
 
   const handleSignUp = () => {
     loginWithRedirect({
       authorizationParams: {
         screen_hint: "signup",
       },
-    })
+    });
   };
 
   return (
@@ -30,7 +36,25 @@ export default function NavBar() {
               className="d-none d-sm-block me-2"
               aria-label="Search"
             />
-            <Button className="me-5" variant="outline-success">
+            <Button
+              className="d-none d-sm-block me-5"
+              variant="outline-success"
+            >
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </Button>
+            {show === true && (
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+            )}
+            <Button
+              className=".d-none .d-sm-block .d-md-none me-5"
+              variant="outline-success"
+              onClick={handleShowFormControl}
+            >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
           </Form>
