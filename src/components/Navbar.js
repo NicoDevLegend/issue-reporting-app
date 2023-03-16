@@ -12,7 +12,9 @@ export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const handleSignUp = () => {
-    loginWithRedirect();
+    loginWithRedirect({
+      screen_hint: "signup",
+    })
   };
 
   return (
