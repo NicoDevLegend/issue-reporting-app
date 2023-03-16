@@ -14,7 +14,7 @@ export default function NavBar() {
   const [show, setShow] = useState(false);
 
   const handleShowFormControl = () => {
-    if (show == false) {
+    if (show === false) {
       setShow(true)
     }else {
       setShow(false)
