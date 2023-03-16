@@ -13,7 +13,9 @@ export default function NavBar() {
 
   const handleSignUp = () => {
     loginWithRedirect({
-      screen_hint: "signup",
+      authorizationParams: {
+        screen_hint: "signup",
+      },
     })
   };
 
