@@ -13,9 +13,7 @@ export default function NavBar() {
 
   const handleSignUp = () => {
        loginWithRedirect({
-      appState: {
-        returnTo: "/profile",
-      },
+    
       authorizationParams: {
         screen_hint: "signup",
       },
