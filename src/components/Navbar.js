@@ -12,13 +12,8 @@ export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   const handleSignUp = () => {
-       loginWithRedirect({
-    
-      authorizationParams: {
-        screen_hint: "signup",
-      },
-    });
-  }; 
+    loginWithRedirect();
+  };
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
@@ -37,7 +32,11 @@ export default function NavBar() {
           </Form>
           {!isAuthenticated && (
             <>
-              <Button className="me-3" variant="primary" onClick={() => loginWithRedirect()}>
+              <Button
+                className="me-3"
+                variant="primary"
+                onClick={() => loginWithRedirect()}
+              >
                 Login
               </Button>
               <Button variant="light" onClick={handleSignUp()}>
@@ -52,7 +51,12 @@ export default function NavBar() {
                 style={{ width: "20px", height: "20px", color: "white" }}
                 className="btn me-3"
               />
-              <Button variant="primary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+              <Button
+                variant="primary"
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
                 Logout
               </Button>
             </>
