@@ -50,7 +50,7 @@ export default function NavBar() {
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="d-block d-sm-none me-2"
+                className="d-block d-sm-none fixed-top mt-75px"
                 aria-label="Search"
               />
             )}
