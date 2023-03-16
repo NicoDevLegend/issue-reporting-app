@@ -15,10 +15,10 @@ export default function NavBar() {
 
   const handleShowFormControl = () => {
     if (show === false) {
-      setShow(true)
-    }else {
-      setShow(false)
-    }  
+      setShow(true);
+    } else {
+      setShow(false);
+    }
   };
 
   const handleSignUp = () => {
@@ -50,7 +50,13 @@ export default function NavBar() {
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="d-block d-sm-none fixed-top mt-75px"
+                className="d-block d-sm-none position-absolute"
+                style={{
+                  width: "90%",
+                  Zindex: "20",
+                  right: "1em",
+                  top: "75px",
+                }}
                 aria-label="Search"
               />
             )}
