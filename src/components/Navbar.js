@@ -11,16 +11,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
-  /* const handleLogin = async () => {
-    await loginWithRedirect({
-      appState: {
-        returnTo: "/profile",
-      },
-    });
-  };
-
-  const handleSignUp = async () => {
-    await loginWithRedirect({
+  const handleSignUp = () => {
+       loginWithRedirect({
       appState: {
         returnTo: "/profile",
       },
@@ -28,15 +20,7 @@ export default function NavBar() {
         screen_hint: "signup",
       },
     });
-  }; */
-
-  /* const handleLogout = () => {
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-      },
-    });
-  }; */
+  }; 
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
@@ -58,9 +42,9 @@ export default function NavBar() {
               <Button className="me-3" variant="primary" onClick={() => loginWithRedirect()}>
                 Login
               </Button>
-              {/* <Button variant="light" onClick={handleSignUp()}>
+              <Button variant="light" onClick={handleSignUp()}>
                 Signup
-              </Button> */}
+              </Button>
             </>
           )}
           {isAuthenticated && (
