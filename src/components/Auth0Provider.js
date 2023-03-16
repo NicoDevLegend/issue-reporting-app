@@ -24,6 +24,7 @@ export const Auth0ProviderWithNavigate = ({ children }) => {
         redirect_uri: window.location.origin
       }}
       onRedirectCallback={onRedirectCallback} 
+      screen_hint="signup"
     >
       {children}
     </Auth0Provider>
