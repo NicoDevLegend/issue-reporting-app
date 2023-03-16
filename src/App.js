@@ -1,5 +1,6 @@
 import "./App.css";
 import { Auth0ProviderWithNavigate } from "./components/Auth0Provider";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -12,7 +13,7 @@ function App() {
     <Auth0ProviderWithNavigate>
       <div className="App">
         <div className="d-flex vh-100">
-          <SideBar />
+          {isAuthenticated && <SideBar />}
           <div className="w-100">
             <NavBar />
             <Routes>

@@ -7,7 +7,6 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SideBar() {
   const { isAuthenticated } = useAuth0();
@@ -23,36 +22,30 @@ export default function SideBar() {
           Sidebar
         </a>
       </CDBSidebarHeader>
-      {isAuthenticated && (
-        <>
-          <CDBSidebarContent className="sidebar-content">
-            <CDBSidebarMenu>
-              <NavLink
-                to="/"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "activeClicked" : ""
-                }
-              >
-                <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink
-                to="/profile"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "activeClicked" : ""
-                }
-              >
-                <CDBSidebarMenuItem icon="user">
-                  Profile page
-                </CDBSidebarMenuItem>
-              </NavLink>
-            </CDBSidebarMenu>
-          </CDBSidebarContent>
+      <CDBSidebarContent className="sidebar-content">
+        <CDBSidebarMenu>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeClicked" : ""
+            }
+          >
+            <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "activeClicked" : ""
+            }
+          >
+            <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+          </NavLink>
+        </CDBSidebarMenu>
+      </CDBSidebarContent>
 
-          <CDBSidebarFooter className="text-center">
-            <div className="px-20 py-5">Sidebar Footer</div>
-          </CDBSidebarFooter>
-        </>
-      )}
+      <CDBSidebarFooter className="text-center">
+        <div className="px-20 py-5">Sidebar Footer</div>
+      </CDBSidebarFooter>
     </CDBSidebar>
   );
 }
