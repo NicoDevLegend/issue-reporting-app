@@ -50,14 +50,14 @@ export default function NavBar() {
                 aria-label="Search"
               />
             )}
-            <Button
+          </Form>
+          <Button
               className=".d-none .d-sm-block .d-md-none me-5"
               variant="outline-success"
               onClick={handleShowFormControl}
             >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
-          </Form>
           {!isAuthenticated && (
             <>
               <Button
