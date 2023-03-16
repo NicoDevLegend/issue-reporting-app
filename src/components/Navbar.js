@@ -14,7 +14,11 @@ export default function NavBar() {
   const [show, setShow] = useState(false);
 
   const handleShowFormControl = () => {
-    setShow(true);
+    if (show == false) {
+      setShow(true)
+    }else {
+      setShow(false)
+    }  
   };
 
   const handleSignUp = () => {
@@ -42,17 +46,17 @@ export default function NavBar() {
             >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
-            {show === true && (
+            {show && (
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className=".d-block .d-sm-none me-2"
+                className="d-block d-sm-none me-2"
                 aria-label="Search"
               />
             )}
           </Form>
           <Button
-            className=".d-block .d-sm-none me-5"
+            className="d-block d-sm-none me-5"
             variant="outline-success"
             onClick={handleShowFormControl}
           >
