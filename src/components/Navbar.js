@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react-dom";
+import { useState } from "react";
 
 export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
