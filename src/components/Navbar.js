@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function NavBar() {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const { show, setShow } = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleShowFormControl = () => {
     setShow(true);
@@ -52,12 +52,12 @@ export default function NavBar() {
             )}
           </Form>
           <Button
-              className=".d-none .d-sm-block .d-md-none me-5"
-              variant="outline-success"
-              onClick={handleShowFormControl}
-            >
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </Button>
+            className=".d-none .d-sm-block .d-md-none me-5"
+            variant="outline-success"
+            onClick={handleShowFormControl}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </Button>
           {!isAuthenticated && (
             <>
               <Button
