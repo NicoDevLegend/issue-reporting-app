@@ -46,13 +46,13 @@ export default function NavBar() {
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2"
+                className=".d-block .d-sm-none me-2"
                 aria-label="Search"
               />
             )}
           </Form>
           <Button
-            className=".d-none .d-sm-block .d-md-none me-5"
+            className=".d-block .d-sm-none me-5"
             variant="outline-success"
             onClick={handleShowFormControl}
           >
