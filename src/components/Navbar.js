@@ -41,7 +41,7 @@ export default function NavBar() {
               >
                 Login
               </Button>
-              <Button variant="light" onClick={handleSignUp()}>
+              <Button variant="light" onClick={handleSignUp}>
                 Signup
               </Button>
             </>
