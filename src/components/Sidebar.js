@@ -18,7 +18,7 @@ export default function SideBar() {
           className="text-decoration-none"
           style={{ color: "inherit" }}
         >
-          Sidebar
+          Issue Report 
         </a>
       </CDBSidebarHeader>
       <CDBSidebarContent className="sidebar-content">

@@ -33,6 +33,9 @@ export default function NavBar() {
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
         <Nav className="" style={{ maxHeight: "100px" }}>
+          <Navbar.Brand href="/">Issue Report </Navbar.Brand>
+          {isAuthenticated && (
+            <>
           <Form className="d-flex">
             <Form.Control
               type="search"
@@ -42,7 +45,7 @@ export default function NavBar() {
             />
             <Button
               className="d-none d-sm-block me-5"
-              variant="outline-success"
+              variant="light"
             >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </Button>
@@ -63,11 +66,13 @@ export default function NavBar() {
           </Form>
           <Button
             className="d-block d-sm-none me-5"
-            variant="outline-success"
+            variant="light"
             onClick={handleShowFormControl}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </Button>
+          </>
+          )}
           {!isAuthenticated && (
             <>
               <Button
