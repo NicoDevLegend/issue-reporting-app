@@ -9,7 +9,6 @@ import {
 import { NavLink } from "react-router-dom";
 
 export default function SideBar() {
-  const { isAuthenticated } = useAuth0();
 
   return (
     <CDBSidebar textColor="#fff" backgroundColor="#212529">

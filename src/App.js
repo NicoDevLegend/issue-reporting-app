@@ -9,6 +9,8 @@ import SideBar from "./components/Sidebar";
 import NavBar from "./components/Navbar";
 
 function App() {
+   const { isAuthenticated } = useAuth0();
+
   return (
     <Auth0ProviderWithNavigate>
       <div className="App">
