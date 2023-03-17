@@ -33,7 +33,7 @@ export default function NavBar() {
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
         <Nav className="" style={{ maxHeight: "100px" }}>
-          <Navbar.Brand href="/">Issue Report </Navbar.Brand>
+          {!isAuthenticated && <Navbar.Brand className="position-absolute" style={{left: "1em"}} href="/">Issue Report </Navbar.Brand>}
           {isAuthenticated && (
             <>
           <Form className="d-flex">
