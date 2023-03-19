@@ -8,6 +8,7 @@ import SideBar from "./components/Sidebar";
 import NavBar from "./components/Navbar";
 
 function App() {
+  
 
   return (
     <Auth0ProviderWithNavigate>
