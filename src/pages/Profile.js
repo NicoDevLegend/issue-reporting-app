@@ -10,7 +10,7 @@ export default function Profile() {
 
   return (
     isAuthenticated && (
-      <div>
+      <div className="d-flex flex-column justify-content-center align-items-center h-75 gap-3">
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
