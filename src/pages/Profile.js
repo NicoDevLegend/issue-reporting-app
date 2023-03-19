@@ -7,6 +7,7 @@ export default function Profile() {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
+  console.log(user)
 
   return (
     isAuthenticated && (
