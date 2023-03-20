@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "./Loading";
 
 export default function LogOutButton() {
   const { logout, isLoading } = useAuth0();
