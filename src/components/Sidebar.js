@@ -13,42 +13,41 @@ export default function SideBar() {
   const { isAuthenticated } = useAuth0();
 
   return (
-   isAuthenticated && (
-    <CDBSidebar textColor="#fff" backgroundColor="#212529">
-      <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-        <a
-          href="/"
-          className="text-decoration-none"
-          style={{ color: "inherit" }}
-        >
-          Issue Report 
-        </a>
-      </CDBSidebarHeader>
-      <CDBSidebarContent className="sidebar-content">
-        <CDBSidebarMenu>
-          <NavLink
-            to="/"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "activeClicked" : ""
-            }
+    isAuthenticated && (
+      <CDBSidebar textColor="#fff" backgroundColor="#212529">
+        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+          <a
+            href="/"
+            className="text-decoration-none"
+            style={{ color: "inherit" }}
           >
-            <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
-          </NavLink>
-          <NavLink
-            to="/profile"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "activeClicked" : ""
-            }
-          >
-            <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
-          </NavLink>
-        </CDBSidebarMenu>
-      </CDBSidebarContent>
-
-      <CDBSidebarFooter className="text-center">
-        <div className="px-20 py-5">Sidebar Footer</div>
-      </CDBSidebarFooter>
-    </CDBSidebar>
-   )
+            Issue Report
+          </a>
+        </CDBSidebarHeader>
+        <CDBSidebarContent className="sidebar-content">
+          <CDBSidebarMenu>
+            <NavLink
+              to="/"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeClicked" : ""
+              }
+            >
+              <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink
+              to="/profile"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeClicked" : ""
+              }
+            >
+              <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+            </NavLink>
+          </CDBSidebarMenu>
+        </CDBSidebarContent>
+        <CDBSidebarFooter className="text-center">
+          <div className="px-20 py-5">Sidebar Footer</div>
+        </CDBSidebarFooter>
+      </CDBSidebar>
+    )
   );
 }

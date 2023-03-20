@@ -21,11 +21,11 @@ export default function Auth0ProviderWithNavigate({ children }) {
       domain={domain}
       clientId={clientId}
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
       }}
       onRedirectCallback={onRedirectCallback}
     >
       {children}
     </Auth0Provider>
   );
-};
+}
