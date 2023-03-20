@@ -1,5 +1,5 @@
 import "./App.css";
-import { useAuth0 } from "@auth0/auth0-react";
+//import { useAuth0 } from "@auth0/auth0-react";
 //import SideBar from "./components/Sidebar";
 //import NavBar from "./components/Navbar";
 import Loading from "./components/Loading";
@@ -9,7 +9,7 @@ import Loading from "./components/Loading";
 //import NotFound from "./pages/NotFound";
 
 function App() {
-  const { isLoading } = useAuth0();
+  //const { isLoading } = useAuth0();
 
   return <Loading />; /*  : (
     <div className="App">
