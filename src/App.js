@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SideBar from "./components/Sidebar";
 import NavBar from "./components/Navbar";
 import Loading from "./components/Loading";
+import AuthenticationGuard from "./components/AuthenticationGuard";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -21,7 +22,10 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={<AuthenticationGuard component={Profile} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
