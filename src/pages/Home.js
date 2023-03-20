@@ -1,12 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "../components/Loading";
 
 export default function Home() {
-  const { isAuthenticated, isLoading } = useAuth0();
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
     <div className="d-flex flex-column justify-content-center align-items-center h-75 gap-3">
