@@ -11,7 +11,7 @@ import Loading from "./components/Loading";
 function App() {
   const { isLoading } = useAuth0();
 
-  return isLoading && <Loading />; /*  : (
+  return <Loading />; /*  : (
     <div className="App">
       <div className="d-flex vh-100">
         <SideBar />
