@@ -2,9 +2,11 @@ import Button from "react-bootstrap/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function LogOutButton() {
-  const { logout } = useAuth0();
+  const { logout, isLoading } = useAuth0();
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Button
       variant="primary"
       onClick={() =>
