@@ -1,11 +1,11 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import SearchForm from ".components/SearchForm";
-import LogInButton from "components/LogInButton";
-import SignUpButton from ".components/SignUpButton";
-import LogOutButton from ".components/LogOutButton";
-import Notifications from ".components/Notifications";
+import SearchForm from "./SearchForm";
+import LogInButton from "./LogInButton";
+import SignUpButton from "./SignUpButton";
+import LogOutButton from "./LogOutButton";
+import Notifications from "./Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function NavBar() {
