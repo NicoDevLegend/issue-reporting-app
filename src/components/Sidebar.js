@@ -14,7 +14,7 @@ export default function SideBar() {
 
   return (
     isAuthenticated && (
-      <CDBSidebar textColor="#fff" backgroundColor="#212529" minWidth="200px">
+      <CDBSidebar textColor="#fff" backgroundColor="#212529" maxWidth="200px" >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
             href="/"
