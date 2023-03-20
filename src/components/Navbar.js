@@ -1,107 +1,37 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import SearchForm from ".components/SearchForm";
+import LogInButton from "components/LogInButton";
+import SignUpButton from ".components/SignUpButton";
+import LogOutButton from ".components/LogOutButton";
+import Notifications from ".components/Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
 
 export default function NavBar() {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const [show, setShow] = useState(false);
-
-  const handleShowFormControl = () => {
-    if (show === false) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  };
-
-  const handleSignUp = () => {
-    loginWithRedirect({
-      authorizationParams: {
-        screen_hint: "signup",
-      },
-    });
-  };
+  const { isAuthenticated } = useAuth0();
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
         <Nav className="" style={{ maxHeight: "100px" }}>
-          {!isAuthenticated && <Navbar.Brand className="position-absolute" style={{left: "1em"}} href="/">Issue Report </Navbar.Brand>}
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="d-none d-sm-block me-2"
-              aria-label="Search"
-            />
-            <Button
-              className="d-none d-sm-block me-5"
-              variant="light"
-            >
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </Button>
-            {show && (
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="d-block d-sm-none position-absolute"
-                style={{
-                  width: "90%",
-                  Zindex: "20",
-                  right: "1em",
-                  top: "75px",
-                }}
-                aria-label="Search"
-              />
-            )}
-          </Form>
-          <Button
-            className="d-block d-sm-none me-5"
-            variant="light"
-            onClick={handleShowFormControl}
-          >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </Button>
-          </>
-          )}
-          {!isAuthenticated && (
-            <>
-              <Button
-                className="me-3"
-                variant="primary"
-                onClick={() => loginWithRedirect()}
-              >
-                Login
-              </Button>
-              <Button variant="light" onClick={handleSignUp}>
-                Signup
-              </Button>
+              <SearchForm />
+              <Notifications />
+              <LogOutButton />
             </>
-          )}
-          {isAuthenticated && (
+          ) : (
             <>
-              <FontAwesomeIcon
-                icon={faBell}
-                style={{ width: "20px", height: "20px", color: "white" }}
-                className="btn me-3"
-              />
-              <Button
-                variant="primary"
-                onClick={() =>
-                  logout({ logoutParams: { returnTo: window.location.origin } })
-                }
+              <Navbar.Brand
+                className="position-absolute"
+                style={{ left: "1em" }}
+                href="/"
               >
-                Logout
-              </Button>
+                Issue Report{" "}
+              </Navbar.Brand>
+              <LogInButton />
+              <SignUpButton />
             </>
           )}
         </Nav>
