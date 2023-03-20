@@ -1,14 +1,20 @@
 import "./App.css";
-import { Auth0ProviderWithNavigate } from "./components/Auth0Provider";
+import Auth0ProviderWithNavigate from "./components/Auth0Provider";
+import Loading from "./components/Loading";
+import SideBar from "./components/Sidebar";
+import NavBar from "./components/Navbar";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import { CallbackPage } from "./pages/callback-page";
-import SideBar from "./components/Sidebar";
-import NavBar from "./components/Navbar";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Auth0ProviderWithNavigate>
@@ -20,7 +26,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/callback" element={<CallbackPage />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>

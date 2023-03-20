@@ -40,7 +40,7 @@ export default function SideBar() {
               isPending ? "pending" : isActive ? "activeClicked" : ""
             }
           >
-            <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
           </NavLink>
         </CDBSidebarMenu>
       </CDBSidebarContent>
