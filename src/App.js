@@ -10,29 +10,27 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 function App() {
-  /* const { isLoading } = useAuth0();
-
-  if (isLoading) {
-    <div className="d-flex justify-content-center align-items-center"> 
-    return <Loading />;
-    </div>
-  } */
+  const { isLoading } = useAuth0();
 
   return (
     <Auth0ProviderWithNavigate>
-      <div className="App">
-        <div className="d-flex vh-100">
-          <SideBar />
-          <div className="w-100">
-            <NavBar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="App">
+          <div className="d-flex vh-100">
+            <SideBar />
+            <div className="w-100">
+              <NavBar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Auth0ProviderWithNavigate>
   );
 }
