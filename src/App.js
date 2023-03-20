@@ -1,9 +1,9 @@
 import "./App.css";
 import Auth0ProviderWithNavigate from "./components/Auth0Provider";
-//import Loading from "./components/Loading";
+import Loading from "./components/Loading";
 import SideBar from "./components/Sidebar";
 import NavBar from "./components/Navbar";
-//import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
