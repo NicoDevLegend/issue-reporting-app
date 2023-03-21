@@ -9,10 +9,10 @@ export default function Profile() {
     (isLoading ? (
       <Loading />
     ) : (
-      <div className="d-flex flex-column justify-content-center align-items-center h-75 gap-3">
-        <img src={user.picture} alt={user.name} />
-        <h2>Username:{user['https://myapp.example.com/username']}</h2>
-        <p>{user.email}</p>
+      <div className="d-grid h-75 gap-3">
+        <img src={user.picture} alt={user.name} className="m3"/>
+        <h2>Username: {user['https://myapp.example.com/username']}</h2>
+        <p>E-mail: {user.email}</p>
       </div>
     ))
   );
