@@ -9,7 +9,7 @@ export default function Profile() {
     (isLoading ? (
       <Loading />
     ) : (
-      <div className="d-grid h-75 gap-3">
+      <div className="d-grid m-auto m-md-5 h-75 gap-3">
         <img src={user.picture} alt={user.name} className="m3"/>
         <h2>Username: {user['https://myapp.example.com/username']}</h2>
         <p>E-mail: {user.email}</p>
