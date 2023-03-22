@@ -8,7 +8,6 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import Avatar from "./Avatar";
 
 export default function SideBar() {
   const { isAuthenticated } = useAuth0();
@@ -46,7 +45,6 @@ export default function SideBar() {
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center">
-          <Avatar />
         </CDBSidebarFooter>
       </CDBSidebar>
     )
