@@ -9,9 +9,9 @@ export default function Avatar() {
 
   return (
     <Nav className="">
-      <Dropdown as={NavItem} id="nav-dropdown" drop="start">
+      <Dropdown as={NavItem} id="nav-dropdown" align="end" drop="start">
         <Dropdown.Toggle as={NavLink}>
-          <img src={user.picture} alt={user.name} className="" />
+          <img src={user.picture} alt={user.name} style={{with: "20px", height: "20px"}} />
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item>
