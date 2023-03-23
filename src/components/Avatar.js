@@ -14,7 +14,7 @@ export default function Avatar() {
           <img
             src={user.picture}
             alt={user.name}
-            style={{ with: "30px", height: "30px" }}
+            style={{ width: "30px", height: "30px" }}
             className="rounded-circle"
           />
         </Dropdown.Toggle>
