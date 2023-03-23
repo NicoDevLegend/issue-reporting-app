@@ -9,7 +9,7 @@ export default function Avatar() {
 
   return (
     <Nav>
-      <Dropdown as={NavItem} id="nav-dropdown" align="end">
+      <Dropdown as={NavItem} align="end">
         <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
