@@ -13,6 +13,8 @@ export default function Profile() {
         <img src={user.picture} alt={user.name} className="m-auto m-md-5"/>
         <h2>Username: {user['https://myapp.example.com/username']}</h2>
         <p>E-mail: {user.email}</p>
+        <p>First name</p>
+        <p>Last name</p>
       </div>
     ))
   );
