@@ -10,6 +10,7 @@ export default function LogOutButton() {
       onClick={() =>
         logout({ logoutParams: { returnTo: window.location.origin } })
       }
+      className="m-auto"
     >
       Logout
     </Button>

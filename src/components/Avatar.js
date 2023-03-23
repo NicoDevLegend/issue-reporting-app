@@ -20,16 +20,16 @@ export default function Avatar() {
           />
         </Dropdown.Toggle>
         <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
-          <Dropdown.Item>
+          <Dropdown.ItemText>
             <p>
               Signed in as:{" "}
               <strong>{user["https://myapp.example.com/username"]}</strong>
             </p>
-          </Dropdown.Item>
+          </Dropdown.ItemText>
           <Dropdown.Divider />
-          <Dropdown.Item>
+          <Dropdown.ItemText>
             <LogOutButton />
-          </Dropdown.Item>
+          </Dropdown.ItemText>
         </Dropdown.Menu>
       </Dropdown>
     </Nav>
