@@ -25,7 +25,6 @@ export default function Profile() {
           <Form.Group className="mb-4" controlId="formUserName">
             <Form.Label>Username</Form.Label>
             <Form.Control
-              disabled
             />
           </Form.Group>
           <Form.Text>{user["https://myapp.example.com/username"]}</Form.Text>
