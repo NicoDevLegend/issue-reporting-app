@@ -9,12 +9,12 @@ export default function Avatar() {
 
   return (
     <Nav>
-      <Dropdown as={NavItem} id="nav-dropdown" drop="start">
-        <Dropdown.Toggle as={NavLink}>
+      <Dropdown as={NavItem} id="nav-dropdown" drop="down-centered">
+        <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
             alt={user.name}
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: "35px", height: "35px" }}
             className="rounded-circle"
           />
         </Dropdown.Toggle>
