@@ -1,6 +1,6 @@
-import Nav from 'react-bootstrap/Nav';
-import NavItem from 'react-bootstrap/NavItem';
-import NavLink from 'react-bootstrap/NavLink';
+import Nav from "react-bootstrap/Nav";
+import NavItem from "react-bootstrap/NavItem";
+import NavLink from "react-bootstrap/NavLink";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -9,7 +9,7 @@ export default function Avatar() {
 
   return (
     <Nav>
-      <Dropdown as={NavItem} >
+      <Dropdown as={NavItem}>
         <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
@@ -18,7 +18,7 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu align="end">
+        <Dropdown.Menu style={{ right: "2em", top: "17px" }}>
           <Dropdown.Item>
             <p>
               Signed in as:{" "}
@@ -29,10 +29,6 @@ export default function Avatar() {
           <Dropdown.Item></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      </Nav>
+    </Nav>
   );
 }
-
-/* position: absolute;
-right: 2em;
-top: 17px; */
