@@ -17,7 +17,7 @@ export default function Profile() {
     ) : (
       <div className="d-grid h-75 gap-3 overflow-auto">
         <img src={user.picture} alt={user.name} className="mx-auto my-5 m-md-5"/>
-        <Form className="w-50  text-start mx-auto">
+        <Form className="w-50  text-start mx-auto d-flex justify-content-center flex-column">
       <Form.Group className="mb-4" controlId="formUserName">
         <Form.Label>Username</Form.Label>
         <Form.Control placeholder={user['https://myapp.example.com/username']} disabled/>
@@ -34,7 +34,8 @@ export default function Profile() {
       <Form.Label>Last name</Form.Label>
       <Form.Control placeholder="Doe" disabled/>
       </Form.Group>
-      <Button variant="primary" type="submit" className="mt-5" onClick={handleSubmit}>
+      <hr></hr>
+      <Button variant="primary" type="submit" className="mt-5 mx-auto" onClick={handleSubmit}>
         Save
       </Button>
     </Form>
