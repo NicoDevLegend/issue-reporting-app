@@ -4,7 +4,6 @@ import Nav from "react-bootstrap/Nav";
 import SearchForm from "./SearchForm";
 import LogInButton from "./LogInButton";
 import SignUpButton from "./SignUpButton";
-import LogOutButton from "./LogOutButton";
 import Avatar from "./Avatar";
 import Notifications from "./Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -20,7 +19,6 @@ export default function NavBar() {
             <>
               <SearchForm />
               <Notifications />
-              <LogOutButton />
               <Avatar />
             </>
           ) : (

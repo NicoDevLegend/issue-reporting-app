@@ -2,6 +2,7 @@ import Nav from "react-bootstrap/Nav";
 import NavItem from "react-bootstrap/NavItem";
 import NavLink from "react-bootstrap/NavLink";
 import Dropdown from "react-bootstrap/Dropdown";
+import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Avatar() {
@@ -26,7 +27,9 @@ export default function Avatar() {
             </p>
           </Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item></Dropdown.Item>
+          <Dropdown.Item>
+            <LogOutButton />
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </Nav>
