@@ -19,7 +19,10 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
+        <Dropdown.Menu
+          style={{ right: "5px", top: "35px" }}
+          className="d-flex justify-content-center text-center"
+        >
           <Dropdown.ItemText>
             <p>
               Signed in as:{" "}

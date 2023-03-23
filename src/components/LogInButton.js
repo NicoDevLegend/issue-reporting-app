@@ -7,7 +7,7 @@ export default function LogInButton() {
   return (
     <Button
       className="me-3"
-      variant="primary"
+      variant="info"
       onClick={() => loginWithRedirect()}
     >
       Login

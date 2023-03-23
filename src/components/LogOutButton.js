@@ -6,11 +6,10 @@ export default function LogOutButton() {
 
   return (
     <Button
-      variant="primary"
+      variant="info"
       onClick={() =>
         logout({ logoutParams: { returnTo: window.location.origin } })
       }
-      className="m-auto"
     >
       Logout
     </Button>
