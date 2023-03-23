@@ -1,3 +1,5 @@
+import NavItem from 'react-bootstrap/NavItem';
+import NavLink from 'react-bootstrap/NavLink';
 import Dropdown from "react-bootstrap/Dropdown";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -5,8 +7,9 @@ export default function Avatar() {
   const { user } = useAuth0();
 
   return (
-      <Dropdown align="end">
-        <Dropdown.Toggle className=" p-0">
+    <Nav>
+      <Dropdown as={NavItem} alignRight>
+        <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
             alt={user.name}
@@ -25,6 +28,7 @@ export default function Avatar() {
           <Dropdown.Item></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+      </Nav>
   );
 }
 
