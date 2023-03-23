@@ -11,24 +11,26 @@ export default function Profile() {
     (isLoading ? (
       <Loading />
     ) : (
-      <div className="d-grid h-75 gap-3">
-        <img src={user.picture} alt={user.name} className="m-auto m-md-5"/>
-        <Form>
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder={user.email} />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formUserName">
+      <div className="d-grid h-75 gap-3 overflow-auto">
+        <img src={user.picture} alt={user.name} className="mx-auto my-5 m-md-5"/>
+        <Form className="w-50  text-start mx-auto">
+      <Form.Group className="mb-4" controlId="formUserName">
         <Form.Label>Username</Form.Label>
         <Form.Control placeholder={user['https://myapp.example.com/username']} />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formFirstName">
+      <Form.Group className="mb-4" controlId="formEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder={user.email} />
+      </Form.Group>
+      <Form.Group className="mb-4" controlId="formFirstName">
       <Form.Label>First name</Form.Label>
+      <Form.Control placeholder="" />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formLastName">
+      <Form.Group className="mb-4" controlId="formLastName">
       <Form.Label>Last name</Form.Label>
+      <Form.Control placeholder="" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="mt-3">
         Save
       </Button>
     </Form>
