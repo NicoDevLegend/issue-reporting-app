@@ -19,13 +19,14 @@ export default function Profile() {
         <img
           src={user.picture}
           alt={user.name}
-          className="mx-auto my-5 m-md-5 border border-secondary border-opacity-25 border-3"
+          className="mx-auto mt-5 mx-md-5 border border-secondary border-opacity-25 border-3"
         />
-        <p className="mx-auto my-5 m-md-5 text-decoration-underline">
-          <strong>Role: User</strong>
+        <p className="p-3 w-auto mx-auto mb-5 ms-md-5 text-decoration-underline">
+          <strong>Account: User</strong>
         </p>
         <Form
-          className="w-auto  text-start mx-auto d-flex justify-content-center flex-column"
+          className="p-3 w-auto  text-start mx-auto d-flex justify-content-center flex-column"
+          style={{boxShadow: '0px 5px 5px 5px rgba(0,0,0,0.2)'}}
           onSubmit={handleSubmit}
         >
           <Form.Group className="mb-4" controlId="formUserName">
@@ -51,7 +52,7 @@ export default function Profile() {
           <Button
             variant="primary"
             type="submit"
-            className="mt-5 mx-auto"
+            className="my-5 mx-auto"
             onClick={handleSubmit}
           >
             Save
