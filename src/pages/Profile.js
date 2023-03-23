@@ -25,9 +25,10 @@ export default function Profile() {
           <Form.Group className="mb-4" controlId="formUserName">
             <Form.Label>Username</Form.Label>
             <Form.Control
+            type="text"
+            placeholder={user["https://myapp.example.com/username"]}
             />
           </Form.Group>
-          <Form.Text>{user["https://myapp.example.com/username"]}</Form.Text>
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder={user.email} disabled />
