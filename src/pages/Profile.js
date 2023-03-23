@@ -6,6 +6,10 @@ import Loading from "../components/Loading";
 export default function Profile() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+  function handleSubmit(e) {
+    e.preventDefault()
+  }
+
   return (
     isAuthenticated &&
     (isLoading ? (
@@ -30,7 +34,7 @@ export default function Profile() {
       <Form.Label>Last name</Form.Label>
       <Form.Control placeholder="Doe" disabled/>
       </Form.Group>
-      <Button variant="primary" type="submit" className="mt-3">
+      <Button variant="primary" type="submit" className="mt-5" onClick={handleSubmit}>
         Save
       </Button>
     </Form>
