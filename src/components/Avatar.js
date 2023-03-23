@@ -18,7 +18,7 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu align="end">
           <Dropdown.Item>
             <p>
               Signed in as:{" "}
