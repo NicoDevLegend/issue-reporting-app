@@ -8,7 +8,7 @@ export default function Avatar() {
   const { user } = useAuth0();
 
   return (
-    <Nav>
+    <Nav className="m-auto">
       <Dropdown as={NavItem}>
         <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
@@ -18,7 +18,7 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ right: "2em", top: "17px" }}>
+        <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
           <Dropdown.Item>
             <p>
               Signed in as:{" "}
