@@ -21,25 +21,28 @@ export default function Profile() {
           alt={user.name}
           className="mx-auto my-5 m-md-5 border border-secondary border-opacity-25 border-3"
         />
-        <Form className="w-auto  text-start mx-auto d-flex justify-content-center flex-column">
+        <Form
+          className="w-auto  text-start mx-auto d-flex justify-content-center flex-column"
+          onSubmit={handleSubmit}
+        >
           <Form.Group className="mb-4" controlId="formUserName">
             <Form.Label>Username</Form.Label>
             <Form.Control
-            type="text"
-            placeholder={user["https://myapp.example.com/username"]}
+              type="text"
+              defaultValue={user["https://myapp.example.com/username"]}
             />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder={user.email} disabled />
+            <Form.Control type="email" defaultValue={user.email} disabled />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formFirstName">
             <Form.Label>First name</Form.Label>
-            <Form.Control placeholder="Jon" disabled />
+            <Form.Control defaultValue="Jon" disabled />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formLastName">
             <Form.Label>Last name</Form.Label>
-            <Form.Control placeholder="Doe" disabled />
+            <Form.Control defaultValue="Doe" disabled />
           </Form.Group>
           <hr></hr>
           <Button
