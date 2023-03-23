@@ -21,6 +21,9 @@ export default function Profile() {
           alt={user.name}
           className="mx-auto my-5 m-md-5 border border-secondary border-opacity-25 border-3"
         />
+        <p className="mx-auto my-5 m-md-5 text-decoration-underline">
+          <strong>Role: User</strong>
+        </p>
         <Form
           className="w-auto  text-start mx-auto d-flex justify-content-center flex-column"
           onSubmit={handleSubmit}
@@ -34,15 +37,15 @@ export default function Profile() {
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" defaultValue={user.email} disabled />
+            <Form.Control type="email" defaultValue={user.email} />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formFirstName">
             <Form.Label>First name</Form.Label>
-            <Form.Control defaultValue="Jon" disabled />
+            <Form.Control defaultValue="Jon" />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formLastName">
             <Form.Label>Last name</Form.Label>
-            <Form.Control defaultValue="Doe" disabled />
+            <Form.Control defaultValue="Doe" />
           </Form.Group>
           <hr></hr>
           <Button
