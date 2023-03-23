@@ -21,7 +21,7 @@ export default function Avatar() {
         </Dropdown.Toggle>
         <Dropdown.Menu
           style={{ right: "5px", top: "35px" }}
-          className="d-flex justify-content-center text-center"
+          className="d-flex justify-content-center flex-column text-center"
         >
           <Dropdown.ItemText>
             <p>
