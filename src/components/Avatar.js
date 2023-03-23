@@ -9,7 +9,7 @@ export default function Avatar() {
 
   return (
     <Nav>
-      <Dropdown as={NavItem} alignRight>
+      <Dropdown as={NavItem} >
         <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
@@ -18,7 +18,7 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu align="end">
           <Dropdown.Item>
             <p>
               Signed in as:{" "}
