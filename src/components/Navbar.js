@@ -28,7 +28,7 @@ export default function NavBar() {
                 style={{ left: "1em" }}
                 href="/"
               >
-                Issue Report{" "}
+                Issue Reporting{" "}
               </Navbar.Brand>
               <LogInButton />
               <SignUpButton />
