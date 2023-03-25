@@ -37,13 +37,13 @@ export default function Profile() {
         <Form
           className="p-5 w-75 position-relative bg-light text-start mb-5 mx-auto d-flex justify-content-center flex-column rounded z-1"
           style={{
-            maxWidth: "800px",
+            maxWidth: "500px",
             boxShadow: "0px 10px 5px 5px rgba(0,0,0,0.2)",
             marginTop: "-150px",
           }}
           onSubmit={handleSubmit}
         >
-          <p className="p-3 w-auto mx-auto mt-4 mb-5 ms-md-5 text-decoration-underline" style={{ textUnderlineOffset: "3px"}}>
+          <p className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline" style={{ textUnderlineOffset: "3px"}}>
             <strong>Account: User</strong>
           </p>
           <Form.Group className="mb-4" controlId="formUserName">
