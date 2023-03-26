@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import IssuesTableList from "./components/IssuesTableList";
+import IssuesTableList from "../components/IssuesTableList";
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
