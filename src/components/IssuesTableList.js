@@ -1,35 +1,36 @@
-import Table from 'react-bootstrap/Table';
+import Table from "react-bootstrap/Table";
+import data from "../data.json";
 
 export default function IssuesTableList() {
-    return (
-        <Table striped>
+  return (
+    <Table striped bordered hover variant="dark" responsive>
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Issue No</th>
+          <th>Status</th>
+          <th>Description</th>
+          <th>Catogory</th>
+          <th>Priority</th>
+          <th>Assignee</th>
+          <th>Open</th>
+          <th>Close</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {data &&
+          data.IssueList.map((issue, index) => {
+            <tr>
+              <td>{issue.IssueNo}</td>
+              <td>{issue.Status}</td>
+              <td>{issue.Description}</td>
+              <td>{issue.Category}</td>
+              <td>{issue.Priority}</td>
+              <td>{issue.Assignee}</td>
+              <td>{issue.Open}</td>
+              <td>{issue.Close}</td>
+            </tr>;
+          })}
       </tbody>
     </Table>
-    )
+  );
 }
