@@ -18,8 +18,8 @@ export default function IssuesTableList() {
       </thead>
       <tbody>
         {data &&
-          data.IssueList.map((issue, index) => {
-            <tr>
+          data.IssueList.map((issue, index) => 
+            <tr key={index}>
               <td>{issue.IssueNo}</td>
               <td>{issue.Status}</td>
               <td>{issue.Description}</td>
@@ -28,8 +28,8 @@ export default function IssuesTableList() {
               <td>{issue.Assignee}</td>
               <td>{issue.Open}</td>
               <td>{issue.Close}</td>
-            </tr>;
-          })}
+            </tr>
+          )}
       </tbody>
     </Table>
   );
