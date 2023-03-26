@@ -5,7 +5,7 @@ export default function Home() {
   const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
-    <div className="d-flex flex-column justify-content-center align-items-center vh-100 gap-3">
+    <div className="d-grid align-items-center vh-100 gap-3">
       <IssuesTableList />
     </div>
   ) : (

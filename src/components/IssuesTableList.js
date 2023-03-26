@@ -3,7 +3,8 @@ import data from "../data.json";
 
 export default function IssuesTableList() {
   return (
-    <Table striped bordered hover variant="dark" responsive="sm">
+    <div className="m-4" style={{ overflowX: "auto" }}>
+    <Table striped bordered hover variant="dark">
       <thead>
         <tr>
           <th>Issue No</th>
@@ -32,5 +33,6 @@ export default function IssuesTableList() {
           )}
       </tbody>
     </Table>
+    </div>
   );
 }
