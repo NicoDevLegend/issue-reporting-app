@@ -9,7 +9,7 @@ export default function IssuesTableList() {
           <th>Issue No</th>
           <th>Status</th>
           <th>Description</th>
-          <th>Catogory</th>
+          <th>Category</th>
           <th>Priority</th>
           <th>Assignee</th>
           <th>Open</th>
