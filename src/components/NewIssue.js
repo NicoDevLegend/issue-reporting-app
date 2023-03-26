@@ -5,7 +5,7 @@ export default function NewIssue() {
     <div style={{ marginBottom: "-200px" }}>
       <strong>New Issue</strong>
       <Button
-        className="m-1"
+        className="ms-3"
         variant="secondary"
         size="sm"
         style={{
