@@ -3,7 +3,7 @@ import data from "../data.json";
 
 export default function IssuesTableList() {
   return (
-    <Table striped bordered hover variant="dark" responsive>
+    <Table striped bordered hover variant="dark" responsive="sm">
       <thead>
         <tr>
           <th>Issue No</th>
