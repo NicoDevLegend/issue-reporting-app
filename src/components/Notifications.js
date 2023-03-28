@@ -8,9 +8,9 @@ export default function Notifications() {
   return (
     <OverlayTrigger
       trigger="click"
-      placement="bottom-start"
+      placement="bottom"
       overlay={
-        <Popover id="popover-positioned-bottom-start">
+        <Popover id="popover-positioned-bottom">
           <Popover.Header as="h3">"Notifications"</Popover.Header>
           <Popover.Body>
             <strong>An issue was solved</strong>
