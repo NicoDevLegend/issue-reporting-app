@@ -1,35 +1,46 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 export default function Notifications() {
-  return (
-    <OverlayTrigger
-      trigger="click"
-      placement="bottom"
-      overlay={
-        <Popover id="popover-positioned-bottom">
-          <Popover.Header as="h3">"Notifications"</Popover.Header>
-          <Popover.Body>
-            <p><strong>An issue was solved</strong></p>
-            <p><strong>An issue was solved</strong></p>
-          </Popover.Body>
-        </Popover>
-      }
-    >
-      <Button variant="dark" className="me-3 my-auto">
-        
-      </Button>
-    </OverlayTrigger>
-  );
-}
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
 
-/* <FontAwesomeIcon
+  const handleClick = (e) => {
+    setShow(!show);
+    setTarget(e.target);
+  };
+
+  return (
+    <div ref={ref}>
+      <Button>Holy guacamole!</Button>
+      <Button variant="dark" className="me-3 my-auto" onClick={handleClick}>
+        <FontAwesomeIcon
           icon={faBell}
           style={{
             width: "20px",
             height: "20px",
           }}
-        /> *//* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons"; */
+        />
+      </Button>
+
+      <Overlay
+        show={show}
+        target={target}
+        placement="bottom"
+        container={ref}
+        containerPadding={20}
+      >
+        <Popover id="popover-contained">
+          <Popover.Header as="h3">Popover bottom</Popover.Header>
+          <Popover.Body>
+            <strong>Holy guacamole!</strong> Check this info.
+          </Popover.Body>
+        </Popover>
+      </Overlay>
+    </div>
+  );
+}
