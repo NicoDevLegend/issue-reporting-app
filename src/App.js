@@ -7,7 +7,7 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Calendar from ".pages/Calendar";
+import Calendar from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
 
 function App() {
