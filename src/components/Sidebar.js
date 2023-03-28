@@ -48,7 +48,7 @@ export default function SideBar() {
                 isPending ? "pending" : isActive ? "activeClicked" : ""
               }
             >
-              <CDBSidebarMenuItem icon="calendar-days">Calendar</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar">Calendar</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
