@@ -1,3 +1,4 @@
+import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,16 +19,17 @@ export default function Notifications() {
         </Popover>
       }
     >
-      <FontAwesomeIcon
-        icon={faBell}
-        style={{
-          width: "20px",
-          height: "20px",
-          color: "white",
-          cursor: "pointer",
-        }}
-        className="me-3 my-auto"
-      />
+      <Button variant="dark">
+        <FontAwesomeIcon
+          icon={faBell}
+          style={{
+            width: "20px",
+            height: "20px",
+            color: "white",
+          }}
+          className="me-3 my-auto"
+        />
+      </Button>
     </OverlayTrigger>
   );
 }
