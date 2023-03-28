@@ -13,8 +13,8 @@ export default function Notifications() {
         <Popover id="popover-positioned-bottom">
           <Popover.Header as="h3">"Notifications"</Popover.Header>
           <Popover.Body>
-            <strong>An issue was solved</strong>
-            <strong>An issue was solved</strong>
+            <p><strong>An issue was solved</strong></p>
+            <p><strong>An issue was solved</strong></p>
           </Popover.Body>
         </Popover>
       }
