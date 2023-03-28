@@ -6,8 +6,8 @@ export default function CalendarPage() {
   const [value, onChange] = useState(new Date());
 
   return (
-    <div className="d-grid vh-100">
-      <Calendar onChange={onChange} value={value} />
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <Calendar onChange={onChange} value={value} calendarType="US" />
     </div>
   );
 }
