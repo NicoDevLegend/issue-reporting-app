@@ -25,11 +25,11 @@ export default function Notifications() {
   );
 }
 
-{/* <FontAwesomeIcon
+/* <FontAwesomeIcon
           icon={faBell}
           style={{
             width: "20px",
             height: "20px",
           }}
         /> *//* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons"; */}
+import { faBell } from "@fortawesome/free-regular-svg-icons"; */
