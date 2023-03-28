@@ -1,6 +1,6 @@
 import Calendar from "react-calendar";
 
-export default function Calendar() {
+export default function CalendarPage() {
   return (
     <div>
       <Calendar />

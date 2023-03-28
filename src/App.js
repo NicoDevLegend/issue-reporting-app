@@ -7,7 +7,7 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Calendar from "./pages/Calendar";
+import CalendarPage from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
               path="/profile"
               element={<AuthenticationGuard component={Profile} />}
             />
-            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/calendar" element={<CalendarPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
