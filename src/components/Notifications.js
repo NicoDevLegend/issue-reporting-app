@@ -1,8 +1,8 @@
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-regular-svg-icons"; */
 
 export default function Notifications() {
   return (
@@ -20,14 +20,16 @@ export default function Notifications() {
       }
     >
       <Button variant="dark" className="me-3 my-auto">
-        <FontAwesomeIcon
+        
+      </Button>
+    </OverlayTrigger>
+  );
+}
+
+{/* <FontAwesomeIcon
           icon={faBell}
           style={{
             width: "20px",
             height: "20px",
           }}
-        />
-      </Button>
-    </OverlayTrigger>
-  );
-}
+        /> */}
