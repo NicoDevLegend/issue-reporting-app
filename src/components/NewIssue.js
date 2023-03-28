@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 
 export default function NewIssue() {
   return (
-    <div style={{ marginBottom: "-200px" }}>
+    <div className="d-flex flex-column m-auto">
       <Button
         variant="secondary"
         style={{
