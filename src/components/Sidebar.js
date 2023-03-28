@@ -42,6 +42,14 @@ export default function SideBar() {
             >
               <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink
+              to="/calendar"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeClicked" : ""
+              }
+            >
+              <CDBSidebarMenuItem icon="calendar-days">Calendar</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center">
