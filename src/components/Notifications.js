@@ -8,9 +8,9 @@ export default function Notifications() {
   return (
     <OverlayTrigger
       trigger="click"
-      placement="auto-start"
+      placement="bottom-start"
       overlay={
-        <Popover id="notifications">
+        <Popover id="popover-positioned-bottom-start">
           <Popover.Header as="h3">"Notifications"</Popover.Header>
           <Popover.Body>
             <strong>An issue was solved</strong>
@@ -19,15 +19,13 @@ export default function Notifications() {
         </Popover>
       }
     >
-      <Button variant="dark">
+      <Button variant="dark" className="me-3 my-auto">
         <FontAwesomeIcon
           icon={faBell}
           style={{
             width: "20px",
             height: "20px",
-            color: "white",
           }}
-          className="me-3 my-auto"
         />
       </Button>
     </OverlayTrigger>
