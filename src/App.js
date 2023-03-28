@@ -27,7 +27,7 @@ function App() {
               path="/profile"
               element={<AuthenticationGuard component={Profile} />}
             />
-            <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/calendar" element={<AuthenticationGuard component={CalendarPage} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
