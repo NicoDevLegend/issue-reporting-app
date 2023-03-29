@@ -10,14 +10,14 @@ export default function Notifications() {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
- /*  const handleClick = (e) => {
+  const handleClick = (e) => {
     setShow(!show);
     setTarget(e.target);
-  }; */
+  };
 
   return (
     <div ref={ref}>
-      <Button>Holy guacamole!</Button>
+      <Button onClick={handleClick}>Holy guacamole!</Button>
       {/* <Button variant="dark" className="me-3 my-auto" onClick={handleClick}>
         <FontAwesomeIcon
           icon={faBell}
