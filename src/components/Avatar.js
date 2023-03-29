@@ -27,6 +27,7 @@ export default function Avatar() {
               Signed in as:{" "}
               <strong>{user["https://myapp.example.com/username"]}</strong>
             </p>
+            <p><strong>Account: User</strong></p>
           </Dropdown.ItemText>
           <Dropdown.Divider />
           <Dropdown.ItemText className="d-flex justify-content-center">
