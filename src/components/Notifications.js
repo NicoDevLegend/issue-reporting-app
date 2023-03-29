@@ -33,7 +33,12 @@ export default function Notifications() {
           className="bg-light position-absolute p-3 rounded"
           style={{ right: "5em", width: "150px", height: "auto" }}
         >
-          Notifications
+          <p>Notifications</p>
+          <p>Message</p>
+          <p>Message</p>
+          <p>Message</p>
+          <p>Message</p>
+          <p>Message</p>
         </div>
       )}
     </div>
