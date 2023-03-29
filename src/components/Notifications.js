@@ -40,8 +40,15 @@ export default function Notifications() {
       />
       {show && (
         <div
-          className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded"
-          style={{ right: "5em", width: "150px", height: "auto" }}
+          className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
+          style={{
+            right: "5em",
+            width: "200px",
+            height: "auto",
+            maxHeight: "25em",
+            overflowX: "auto",
+            scrollbarWidth: "thin",
+          }}
           ref={ref}
         >
           <p>Notifications</p>
