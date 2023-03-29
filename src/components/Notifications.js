@@ -14,7 +14,7 @@ export default function Notifications() {
   };
 
   return (
-    <div>
+    <div className="mx-auto my-1">
       <FontAwesomeIcon
         icon={faBell}
         style={{
@@ -27,7 +27,7 @@ export default function Notifications() {
       />
       {show && (
         <div
-          className="bg-light position-absolute p-3 border border-secondary-subtle rounded"
+          className="bg-light position-absolute p-3 border border-dark-subtle rounded"
           style={{ right: "5em", width: "150px", height: "auto" }}
         >
           Notifications
