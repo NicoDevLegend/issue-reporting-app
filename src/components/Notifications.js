@@ -10,10 +10,10 @@ export default function Notifications() {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const handleClick = (e) => {
+ /*  const handleClick = (e) => {
     setShow(!show);
     setTarget(e.target);
-  };
+  }; */
 
   return (
     <div ref={ref}>
