@@ -6,7 +6,7 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 export default function Notifications() {
   const [show, setShow] = useState(false);
 
-  const ref = useOutsideClick(handleClickOutside);
+  const ref = useOutsideClick(handleShowNotifications);
 
   const handleShowNotifications = () => {
     if (show === false) {
