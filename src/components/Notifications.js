@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-regular-svg-icons"; */
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
@@ -18,7 +18,7 @@ export default function Notifications() {
   return (
     <div ref={ref}>
       <Button>Holy guacamole!</Button>
-      <Button variant="dark" className="me-3 my-auto" onClick={handleClick}>
+      {/* <Button variant="dark" className="me-3 my-auto" onClick={handleClick}>
         <FontAwesomeIcon
           icon={faBell}
           style={{
@@ -26,7 +26,7 @@ export default function Notifications() {
             height: "20px",
           }}
         />
-      </Button>
+      </Button> */}
 
       <Overlay
         show={show}
