@@ -5,8 +5,7 @@ import SearchForm from "./SearchForm";
 import LogInButton from "./LogInButton";
 import SignUpButton from "./SignUpButton";
 import Avatar from "./Avatar";
-import { Example } from "./test";
-//import Notifications from "./Notifications";
+import Notifications from "./Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function NavBar() {
@@ -19,7 +18,7 @@ export default function NavBar() {
           {isAuthenticated ? (
             <>
               <SearchForm />
-              <Example />
+              <Notifications />
               <Avatar />
             </>
           ) : (
