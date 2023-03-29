@@ -1,21 +1,20 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 export default function Notifications() {
+  const [show, setShow] = useState(false);
+
+  const handleShowNotifications = () => {
+    if (show === false) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
 
   return (
     <div>
-      <button
-        type="button"
-        className="btn btn-secondary"
-        data-bs-container="body"
-        data-bs-toggle="popover"
-        data-bs-placement="bottom"
-        data-bs-content="Bottom popover"
-      >
-        Popover on bottom
-      </button>
-
       <FontAwesomeIcon
         icon={faBell}
         style={{
@@ -23,7 +22,13 @@ export default function Notifications() {
           height: "20px",
           cursor: "pointer",
         }}
+        onClick={handleShowNotifications}
       />
+      {show && (
+        <div className="bg-light position-absolute top-0 end-0">
+          Notifications
+        </div>
+      )}
     </div>
   );
 }
