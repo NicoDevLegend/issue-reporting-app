@@ -7,6 +7,7 @@ import AuthenticationGuard from "./components/AuthenticationGuard";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import NotificationsPage from "./pages/NotificationsPage";
 import CalendarPage from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
 
