@@ -21,11 +21,15 @@ export default function Notifications() {
           width: "20px",
           height: "20px",
           cursor: "pointer",
+          color: "white"
         }}
         onClick={handleShowNotifications}
       />
       {show && (
-        <div className="bg-light position-absolute top-0 end-0">
+        <div
+          className="bg-light position-absolute p-3 border border-secondary-subtle rounded"
+          style={{ right: "5em", width: "150px", height: "auto" }}
+        >
           Notifications
         </div>
       )}
