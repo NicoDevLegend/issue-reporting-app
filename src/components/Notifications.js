@@ -6,8 +6,6 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 export default function Notifications() {
   const [show, setShow] = useState(false);
 
-  const ref = useOutsideClick(handleShowNotifications);
-
   const handleShowNotifications = () => {
     if (show === false) {
       setShow(true);
@@ -15,6 +13,8 @@ export default function Notifications() {
       setShow(false);
     }
   };
+
+  const ref = useOutsideClick(handleShowNotifications);
 
   const handleNotificationsClick = (e) => {
     e.stopPropagation();
@@ -31,6 +31,7 @@ export default function Notifications() {
             color: "white",
           }}
           onClick={handleShowNotifications}
+          ref={ref}
         />
       {show && (
         <div
