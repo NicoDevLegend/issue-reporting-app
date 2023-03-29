@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
@@ -14,7 +15,8 @@ export default function Notifications() {
   };
 
   return (
-    <div className="mx-auto my-1">
+    <div className="mx-3 my-auto">
+      <Link to="/notifications">
       <FontAwesomeIcon
         icon={faBell}
         style={{
@@ -25,9 +27,10 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
+      </Link>
       {show && (
         <div
-          className="bg-light position-absolute p-3 border border-dark-subtle rounded"
+          className="bg-light position-absolute p-3 rounded"
           style={{ right: "5em", width: "150px", height: "auto" }}
         >
           Notifications

@@ -27,7 +27,14 @@ function App() {
               path="/profile"
               element={<AuthenticationGuard component={Profile} />}
             />
-            <Route path="/calendar" element={<AuthenticationGuard component={CalendarPage} />} />
+            <Route
+              path="/notifications"
+              element={<AuthenticationGuard component={NotificationsPage} />}
+            />
+            <Route
+              path="/calendar"
+              element={<AuthenticationGuard component={CalendarPage} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
