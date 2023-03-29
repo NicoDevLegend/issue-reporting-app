@@ -5,12 +5,13 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 export default function Notifications() {
   const [show, setShow] = useState(false);
 
-  const handleShowNotifications = () => {
+  const handleShowNotifications = (e) => {
     if (show === false) {
       setShow(true);
     } else {
       setShow(false);
     }
+    e.stopPropagation();
   };
 
   useEffect(() => {
