@@ -15,8 +15,8 @@ export default function Notifications() {
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleOutside, true);
-  }, [show]);
+    document.addEventListener("mousedown", handleOutside, true);
+  }, []);
 
   const handleOutside = (e) => {
     if (!ref.current.contains(e.target)){
