@@ -13,7 +13,7 @@ export default function Notifications() {
     } else if (show === true && outside === true) {
       setShow(false);
     } else if (show === false && outside === true) {
-      setShow(false);
+      setShow(true);
     }
   };
 
