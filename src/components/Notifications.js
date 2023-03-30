@@ -5,27 +5,22 @@ import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
-  const [outside, setOutside] = useState(false);
 
-  const handleShowNotifications = () => {
+  const handleShowNotifications = (e) => {
     if (show === false) {
       setShow(true);
+    } else if (!ref.current.contains(e.target)){
+      setShow(false);
     } else {
       setShow(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("click", handleShowNotifications, true);
   }, []);
 
   const ref = useRef(null);
-
-  const handleClickOutside = (e) => {
-    if (!ref.current.contains(e.target)) {
-      setOutside(true);
-    }
-  };
 
   return (
     <div className="mx-3 my-auto">
@@ -39,7 +34,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      {show || outside ? (
+      {show && (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
@@ -62,7 +57,7 @@ export default function Notifications() {
           <p>Message</p>
           <p>Message</p>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
