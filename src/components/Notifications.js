@@ -18,7 +18,7 @@ export default function Notifications() {
 
   useEffect(() => {
     document.addEventListener("click", handleShowNotifications, true);
-  }, []);
+  }, [show]);
 
   const ref = useRef(null);
 
