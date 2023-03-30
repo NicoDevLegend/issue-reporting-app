@@ -23,7 +23,7 @@ export default function Notifications() {
 
   const handleClickOutside = (e) => {
     if (!ref.current.contains(e.target)) {
-      setOutside(true)
+      setOutside(true);
     }
   };
 
@@ -39,7 +39,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      {show || outside &&(
+      {show || outside ? (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
@@ -62,7 +62,7 @@ export default function Notifications() {
           <p>Message</p>
           <p>Message</p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
