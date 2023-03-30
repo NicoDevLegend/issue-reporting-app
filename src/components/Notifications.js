@@ -16,7 +16,7 @@ export default function Notifications() {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
-  }, [setShow]);
+  }, []);
 
   const ref = useRef(null);
 
@@ -37,6 +37,7 @@ export default function Notifications() {
           color: "white",
         }}
         onClick={handleShowNotifications}
+        ref={ref}
       />
       {show && (
         <div
