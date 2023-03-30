@@ -15,7 +15,7 @@ export default function Notifications() {
   };
 
   useEffect(() => {
-    document.addEventListener("mouseup", handleOutside, true);
+    document.addEventListener("click", handleOutside);
   }, []);
 
   const handleOutside = (e) => {
