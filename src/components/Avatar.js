@@ -4,6 +4,7 @@ import NavLink from "react-bootstrap/NavLink";
 import Dropdown from "react-bootstrap/Dropdown";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 export default function Avatar() {
   const { user } = useAuth0();
@@ -28,6 +29,7 @@ export default function Avatar() {
               <strong>{user["https://myapp.example.com/username"]}</strong>
             </p>
             <p><strong>Account: User</strong></p>
+            <Link to="/profile"><p>Profile</p></Link>
           </Dropdown.ItemText>
           <Dropdown.Divider />
           <Dropdown.ItemText className="d-flex justify-content-center">
