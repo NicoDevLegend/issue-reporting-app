@@ -15,7 +15,7 @@ export default function Notifications() {
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleOutside);
+    document.addEventListener("click", handleOutside, true);
   }, []);
 
   const handleOutside = (e) => {
@@ -27,6 +27,7 @@ export default function Notifications() {
   const ref = useRef(null);
 
   return (
+    <>
     <div className="mx-3 my-auto">
       <FontAwesomeIcon
         icon={faBell}
@@ -38,6 +39,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
+      </div>
       {show && (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
@@ -62,6 +64,6 @@ export default function Notifications() {
           <p>Message</p>
         </div>
       )}
-    </div>
+    </>
   );
 }
