@@ -27,7 +27,6 @@ export default function Notifications() {
   const ref = useRef(null);
 
   return (
-    <>
     <div className="mx-3 my-auto">
       <FontAwesomeIcon
         icon={faBell}
@@ -39,7 +38,6 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      </div>
       {show && (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
@@ -64,6 +62,6 @@ export default function Notifications() {
           <p>Message</p>
         </div>
       )}
-    </>
+    </div>
   );
 }
