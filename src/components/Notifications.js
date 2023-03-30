@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
+  const [outside, setOutside] = useState(false);
 
   const handleShowNotifications = () => {
     if (show === false) {
@@ -22,7 +23,7 @@ export default function Notifications() {
 
   const handleClickOutside = (e) => {
     if (!ref.current.contains(e.target)) {
-      setShow(false);
+      setOutside(true)
     }
   };
 
@@ -37,9 +38,8 @@ export default function Notifications() {
           color: "white",
         }}
         onClick={handleShowNotifications}
-        ref={ref}
       />
-      {show && (
+      {show || outside &&(
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
