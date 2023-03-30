@@ -15,7 +15,7 @@ export default function Notifications() {
       setShow(false);
       setOutside(false);
     } else if (show === false && outside === true) {
-      setShow(true);
+      setShow(false);
     }
   };
 
