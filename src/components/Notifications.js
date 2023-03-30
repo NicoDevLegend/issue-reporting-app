@@ -5,19 +5,6 @@ import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
-  const [outside, setOutside] = useState(false);
-
-  const handleShowNotifications = () => {
-    if (show === false && outside === false) {
-      setShow(true);
-      setOutside(true);
-    } else if (show === true && outside === true) {
-      setShow(false);
-      setOutside(false);
-    } else if (show === false && outside === true) {
-      setShow(false);
-    }
-  };
 
   useEffect(() => {
     document.addEventListener("click", handleOutside, true);
@@ -41,7 +28,7 @@ export default function Notifications() {
           cursor: "pointer",
           color: "white",
         }}
-        onClick={handleShowNotifications}
+        onClick={handleOutside}
       />
       {show && (
         <div
