@@ -55,11 +55,11 @@ export default function Notifications() {
         >
           <Nav>
             <Nav.Item>
-              <Link.Container to="notifications">
+              <LinkContainer to="notifications">
                 <Nav.Link>
                   <p>Notifications</p>
                 </Nav.Link>
-              </Link.Container>
+              </LinkContainer>
             </Nav.Item>
           </Nav>
           <p>Message</p>
