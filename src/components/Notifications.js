@@ -5,10 +5,15 @@ import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
+  const [outside, setOutside] = useOutside(false);
 
   const handleShowNotifications = () => {
     if (show === false) {
       setShow(true);
+    } else if (outside === true && show === true) {
+      setShow(false);
+    } else if (outside === true && show === false) {
+      setShow(false);
     }
   };
 
@@ -17,10 +22,10 @@ export default function Notifications() {
   }, []);
 
   const handleOutside = (e) => {
-    if (!ref.current.contains(e.target)){
-      setShow(false);
+    if (!ref.current.contains(e.target)) {
+      setOutside(true);
     }
-  }
+  };
 
   const ref = useRef(null);
 
@@ -36,7 +41,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      {show && (
+      {show || !outside ? (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
@@ -59,7 +64,7 @@ export default function Notifications() {
           <p>Message</p>
           <p>Message</p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

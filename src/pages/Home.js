@@ -7,7 +7,7 @@ export default function Home() {
 
   return isAuthenticated ? (
     <div className="d-grid vh-100">
-      <h1><strong>Issues</strong></h1>
+      <h1 className="d-flex flex-column m-auto"><strong>Issues</strong></h1>
       <NewIssue />
       <IssuesTableList />
     </div>
