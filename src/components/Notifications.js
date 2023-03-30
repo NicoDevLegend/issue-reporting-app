@@ -12,7 +12,7 @@ export default function Notifications() {
 
   const handleOutside = (e) => {
     if (!ref.current.contains(e.target)) {
-      setShow(false);
+      !show ? setShow(true) : setShow(false);
     }
   };
 
