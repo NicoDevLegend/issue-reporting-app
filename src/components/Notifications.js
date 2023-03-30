@@ -53,15 +53,9 @@ export default function Notifications() {
           }}
           ref={ref}
         >
-          <Nav>
-            <Nav.Item>
-              <LinkContainer to="notifications">
-                <Nav.Link>
-                  <p>Notifications</p>
-                </Nav.Link>
-              </LinkContainer>
-            </Nav.Item>
-          </Nav>
+          <Link to="notifications">
+            <p>Notifications</p>
+          </Link>
           <p>Message</p>
           <p>Message</p>
           <p>Message</p>
