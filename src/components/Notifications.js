@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
@@ -52,9 +53,15 @@ export default function Notifications() {
           }}
           ref={ref}
         >
-          <Link to="notifications">
-          <p>Notifications</p>
-          </Link>
+          <Nav>
+            <Nav.Item>
+              <Link.Container to="notifications">
+                <Nav.Link>
+                  <p>Notifications</p>
+                </Nav.Link>
+              </Link.Container>
+            </Nav.Item>
+          </Nav>
           <p>Message</p>
           <p>Message</p>
           <p>Message</p>
