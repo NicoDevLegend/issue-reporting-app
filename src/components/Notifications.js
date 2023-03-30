@@ -24,7 +24,6 @@ export default function Notifications() {
     if (!ref.current.contains(e.target)) {
       setShow(false);
     }
-    e.stopPropagation();
   };
 
   return (
