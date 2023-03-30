@@ -9,8 +9,6 @@ export default function Notifications() {
   const handleShowNotifications = () => {
     if (show === false) {
       setShow(true);
-    } else {
-      setShow(false);
     }
   };
 
