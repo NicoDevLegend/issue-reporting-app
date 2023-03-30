@@ -39,7 +39,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      {show && isAuthenticated && (
+      {show && (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
