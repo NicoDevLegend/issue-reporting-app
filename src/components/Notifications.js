@@ -6,19 +6,23 @@ import { Link } from "react-router-dom";
 export default function Notifications() {
   const [show, setShow] = useState(false);
 
-  const handleShowNotifications = (e) => {
+  const handleShowNotifications = () => {
     if (show === false) {
       setShow(true);
-    } else if (!ref.current.contains(e.target)){
-      setShow(false);
     } else {
       setShow(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleShowNotifications, true);
+    document.addEventListener("click", handleOutside, true);
   }, [show]);
+
+  const handleOutside = (e) => {
+    if (!ref.current.contains(e.target)){
+      setShow(false);
+    }
+  }
 
   const ref = useRef(null);
 
