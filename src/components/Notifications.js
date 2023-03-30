@@ -52,7 +52,7 @@ export default function Notifications() {
           }}
           ref={ref}
         >
-          <Link to="notifications">
+          <Link to="/">
             <p>Notifications</p>
           </Link>
           <p>Message</p>

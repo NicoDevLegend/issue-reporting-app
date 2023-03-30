@@ -30,7 +30,7 @@ function App() {
             />
             <Route
               path="/notifications"
-              element={<NotificationsPage />}
+              element={<AuthenticationGuard component={NotificationsPage} />}
             />
             <Route
               path="/calendar"
