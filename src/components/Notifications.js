@@ -16,7 +16,7 @@ export default function Notifications() {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
-  }, []);
+  }, [handleShowNotifications]);
 
   const ref = useRef(null);
 
