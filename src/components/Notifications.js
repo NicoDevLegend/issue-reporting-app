@@ -10,8 +10,10 @@ export default function Notifications() {
   const handleShowNotifications = () => {
     if (show === false && outside === false) {
       setShow(true);
+      setOutside(true);
     } else if (show === true && outside === true) {
       setShow(false);
+      setOutside(false);
     } else if (show === false && outside === true) {
       setShow(true);
     }
@@ -24,7 +26,6 @@ export default function Notifications() {
   const handleOutside = (e) => {
     if (!ref.current.contains(e.target)) {
       setShow(false);
-      setOutside(true);
     }
   };
 
