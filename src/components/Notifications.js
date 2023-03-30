@@ -2,9 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
+
+  const { isAuthenticated } = useAuth0();
 
   const handleShowNotifications = () => {
     if (show === false) {
@@ -39,7 +42,7 @@ export default function Notifications() {
         }}
         onClick={handleShowNotifications}
       />
-      {show && (
+      {show && isAuthenticated && (
         <div
           className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
           style={{
@@ -52,7 +55,7 @@ export default function Notifications() {
           }}
           ref={ref}
         >
-          <Link to="/">
+          <Link to="/notifications">
             <p>Notifications</p>
           </Link>
           <p>Message</p>
