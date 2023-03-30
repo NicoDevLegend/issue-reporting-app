@@ -22,7 +22,7 @@ export default function Notifications() {
 
   const handleClickOutside = (e) => {
     if (!ref.current.contains(e.target)) {
-      setShow(false);
+      handleShowNotifications();
     }
   };
 
@@ -48,6 +48,7 @@ export default function Notifications() {
             maxHeight: "25em",
             overflowX: "auto",
             scrollbarWidth: "thin",
+            zIndex: "5",
           }}
           ref={ref}
         >
