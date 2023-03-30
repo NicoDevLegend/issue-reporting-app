@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Notifications() {
   const [show, setShow] = useState(false);
-  const [outside, setOutside] = useOutside(false);
+  const [outside, setOutside] = useState(false);
 
   const handleShowNotifications = () => {
     if (show === false) {
