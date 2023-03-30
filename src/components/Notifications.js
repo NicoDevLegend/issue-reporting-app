@@ -16,13 +16,13 @@ export default function Notifications() {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
-  }, [handleClickOutside]);
+  }, [setShow]);
 
   const ref = useRef(null);
 
   const handleClickOutside = (e) => {
     if (!ref.current.contains(e.target)) {
-      handleShowNotifications();
+      setShow(false);
     }
   };
 
