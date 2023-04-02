@@ -8,7 +8,7 @@ export default function SearchForm() {
   const [show, setShow] = useState(false);
 
   const handleShowFormControl = () => {
-    if (show === false) {
+    if (!show) {
       setShow(true);
     } else {
       setShow(false);
