@@ -70,7 +70,6 @@ export default function Profile() {
             variant="primary"
             type="submit"
             className="mx-auto"
-            onClick={handleSubmit}
           >
             Save
           </Button>
