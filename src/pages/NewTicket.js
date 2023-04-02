@@ -11,43 +11,68 @@ export default function NewTicket() {
 
   return (
     isAuthenticated && (
-      <div className="d-grid vh-100">
-        <h1 className="d-flex flex-column m-auto">
+      <div className="d-grid mb-5">
+        <h1
+          className="p-2 d-flex flex-column mx-auto mt-5 mb-2 border border-secondary border-opacity-25 border-3 rounded"
+          style={{
+            boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
+          }}
+        >
           <strong>New Ticket</strong>
         </h1>
         <Form
-          className="p-2 w-50 mx-auto my-3"
+          className="p-5 w-75 text-start mx-auto mt-3 mb-5 bg-light d-flex justify-content-center flex-column rounded"
+          style={{
+            maxWidth: "600px",
+            boxShadow: "0px 5px 10px 10px rgba(0,0,0,0.2)",
+          }}
           onSubmit={handleSubmit}
         >
-          <Form.Group className="mb-3">
-            <Form.Label>Category</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label>
+              <strong>Category</strong>
+            </Form.Label>
             <Form.Control as="select">
               <option>select</option>
               <option>select</option>
               <option>select</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label>
+              <strong>Description</strong>
+            </Form.Label>
             <Form.Control as="textarea" rows={3} />
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Priority</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label>
+              <strong>Priority</strong>
+            </Form.Label>
             <Form.Control as="select">
               <option>select</option>
               <option>select</option>
               <option>select</option>
             </Form.Control>
           </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Assign to</Form.Label>
+          <Form.Group className="mb-4">
+            <Form.Label>
+              <strong>Assign to</strong>
+            </Form.Label>
             <Form.Control as="select">
               <option>select</option>
               <option>select</option>
               <option>select</option>
             </Form.Control>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Form.Group controlId="formFileMultiple" className="mb-4">
+            <Form.Label>
+              <strong>Attachments</strong>
+            </Form.Label>
+            <br></br>
+            <Form.Control type="file" multiple />
+          </Form.Group>
+          <hr></hr>
+          <Button variant="primary" type="submit" className="mx-auto mt-2 mb-3">
             Submit
           </Button>
         </Form>

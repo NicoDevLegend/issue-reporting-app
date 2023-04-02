@@ -7,7 +7,14 @@ export default function Home() {
 
   return isAuthenticated ? (
     <div className="d-grid vh-100">
-      <h1 className="d-flex flex-column m-auto"><strong>Issues</strong></h1>
+      <h1
+        className="p-2 d-flex flex-column m-auto border border-secondary border-opacity-25 border-3 rounded"
+        style={{
+          boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
+        }}
+      >
+        <strong>Issues</strong>
+      </h1>
       <NewIssue />
       <IssuesTableList />
     </div>

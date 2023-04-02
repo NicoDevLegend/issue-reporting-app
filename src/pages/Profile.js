@@ -47,22 +47,22 @@ export default function Profile() {
             <strong>Account: User</strong>
           </p>
           <Form.Group className="mb-4" controlId="formUserName">
-            <Form.Label>Username</Form.Label>
+            <Form.Label><strong>Username</strong></Form.Label>
             <Form.Control
               type="text"
               defaultValue={user["https://myapp.example.com/username"]}
             />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label><strong>Email address</strong></Form.Label>
             <Form.Control type="email" defaultValue={user.email} />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formFirstName">
-            <Form.Label>First name</Form.Label>
+            <Form.Label><strong>First name</strong></Form.Label>
             <Form.Control defaultValue="Jon" />
           </Form.Group>
           <Form.Group className="mb-4" controlId="formLastName">
-            <Form.Label>Last name</Form.Label>
+            <Form.Label><strong>Last name</strong></Form.Label>
             <Form.Control defaultValue="Doe" />
           </Form.Group>
           <hr></hr>
