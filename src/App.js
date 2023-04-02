@@ -8,8 +8,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import NotificationsPage from "./pages/NotificationsPage";
+import NewTicket from "./pages/NewTicket";
 import CalendarPage from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
+
 
 function App() {
   const { isLoading } = useAuth0();
@@ -31,6 +33,10 @@ function App() {
             <Route
               path="/notifications"
               element={<AuthenticationGuard component={NotificationsPage} />}
+            />
+            <Route
+              path="/newticket"
+              element={<AuthenticationGuard component={NewTicket} />}
             />
             <Route
               path="/calendar"
