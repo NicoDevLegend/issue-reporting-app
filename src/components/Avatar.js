@@ -29,7 +29,7 @@ export default function Avatar() {
               <strong>{user["https://myapp.example.com/username"]}</strong>
             </p>
             <p><strong>Account: User</strong></p>
-            <Link to="/profile"><p>Profile</p></Link>
+            <Link to="/profile" className="text-decoration-none text-reset"><p>Profile</p></Link>
           </Dropdown.ItemText>
           <Dropdown.Divider />
           <Dropdown.ItemText className="d-flex justify-content-center">

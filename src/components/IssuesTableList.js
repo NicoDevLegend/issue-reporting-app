@@ -1,17 +1,52 @@
 import Table from "react-bootstrap/Table";
 import data from "../data.json";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function IssuesTableList() {
   return (
-    <div className="mx-2 mb-auto" style={{ overflow: "auto", height: "auto", maxHeight: "15em"  }}>
+    <div className="container" style={{ overflow: "auto" }}>
       <Table striped bordered hover variant="dark" className="mb-0">
-        <thead>
+        <thead className="align-middle">
           <tr>
             <th>Issue No</th>
-            <th>Status</th>
+            <th>
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant="dark"
+                >
+                  <strong>Status</strong>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>Not Resolved</Dropdown.Item>
+                  <Dropdown.Item>Resolved</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </th>
             <th>Description</th>
-            <th>Category</th>
-            <th>Priority</th>
+            <th><Dropdown>
+                <Dropdown.Toggle
+                  variant="dark"
+                >
+                  <strong>Category</strong>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>1</Dropdown.Item>
+                  <Dropdown.Item>2</Dropdown.Item>
+                  <Dropdown.Item>3</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown></th>
+            <th><Dropdown>
+                <Dropdown.Toggle
+                  variant="dark"
+                >
+                  <strong>Priority</strong>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item>Important</Dropdown.Item>
+                  <Dropdown.Item>Very Important</Dropdown.Item>
+                  <Dropdown.Item>Urgent</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown></th>
             <th>Assignee</th>
             <th>Open</th>
             <th>Close</th>

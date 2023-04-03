@@ -6,9 +6,9 @@ export default function Home() {
   const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
-    <div className="d-grid vh-100">
+    <div className="d-grid align-content-start vh-100">
       <h1
-        className="p-2 d-flex flex-column m-auto border border-secondary border-opacity-25 border-3 rounded"
+        className="p-2 mx-auto mt-5 mb-4 border border-secondary border-opacity-25 border-3 rounded"
         style={{
           boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
         }}

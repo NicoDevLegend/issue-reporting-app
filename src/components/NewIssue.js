@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function NewIssue() {
   return (
-    <div className="d-flex flex-column m-auto">
+    <div className="mx-auto mb-3">
       <Link to="/newticket">
         <Button
           variant="secondary"
