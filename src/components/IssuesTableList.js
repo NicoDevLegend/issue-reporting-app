@@ -2,31 +2,31 @@ import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import data from "../data.json";
 import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTashUndo } from "@fortawesome/free-solid-svg-icons";
+import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function IssuesTableList() {
   const [value, setValue] = useState(null);
+  const [filter, setFilter] = useState();
 
-  console.log(value);
+  console.log(filter);
 
   return (
-    <div className="container" style={{ overflow: "auto" }}>
+    <div className="container bg-dark" style={{ overflow: "auto", minHeight: "300px"}}>
       <div className="w-100" style={{ height: "40px" }}>
         {value && (
-          <FontAwesomeIcon
-          icon={faTashUndo}
-          className="position-relative"
-          style={{
-            width: "20px",
-            height: "20px",
-            cursor: "pointer",
-            color: "gray",
-            top: "0", 
-            right: "30%"
-          }}
+          <Button
+            variant="secondary"
+            className="position-relative"
+            style={{
+              top: "0",
+              right: "30%",
+            }}
             onClick={() => setValue(null)}
-          />
+          >
+            <FontAwesomeIcon icon={faRotateLeft} />
+          </Button>
         )}
       </div>
       <Table striped bordered hover variant="dark" className="mb-0">
@@ -39,37 +39,89 @@ export default function IssuesTableList() {
                   <strong>Status</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="Not Resolved">
+                  <Dropdown.Item
+                    eventKey="Not Resolved"
+                    onClick={() => {
+                      setFilter("Status");
+                    }}
+                  >
                     Not Resolved
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="Resolved">Resolved</Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Resolved"
+                    onClick={() => {
+                      setFilter("Status");
+                    }}
+                  >
+                    Resolved
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </th>
             <th>Description</th>
             <th>
-              <Dropdown>
+              <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
                 <Dropdown.Toggle variant="dark">
                   <strong>Category</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1">1</Dropdown.Item>
-                  <Dropdown.Item eventKey="2">2</Dropdown.Item>
-                  <Dropdown.Item eventKey="3">3</Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="1"
+                    onClick={() => {
+                      setFilter("Category");
+                    }}
+                  >
+                    1
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="2"
+                    onClick={() => {
+                      setFilter("Category");
+                    }}
+                  >
+                    2
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="3"
+                    onClick={() => {
+                      setFilter("Category");
+                    }}
+                  >
+                    3
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </th>
             <th>
-              <Dropdown>
+              <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
                 <Dropdown.Toggle variant="dark">
                   <strong>Priority</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="Important">Important</Dropdown.Item>
-                  <Dropdown.Item eventKey="Very Important">
+                  <Dropdown.Item
+                    eventKey="Important"
+                    onClick={() => {
+                      setFilter("Priority");
+                    }}
+                  >
+                    Important
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Very Important"
+                    onClick={() => {
+                      setFilter("Priority");
+                    }}
+                  >
                     Very Important
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="Urgent">Urgent</Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey="Urgent"
+                    onClick={() => {
+                      setFilter("Priority");
+                    }}
+                  >
+                    Urgent
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </th>
@@ -113,20 +165,23 @@ export default function IssuesTableList() {
               </tr>
             ))
           ) : value ? (
-            data.IssueList.filter((issue) => issue.Status === value).map(
-              (issue, index) => (
-                <tr key={index}>
-                  <td>{issue.IssueNo}</td>
-                  <td>{issue.Status}</td>
-                  <td>{issue.Description}</td>
-                  <td>{issue.Category}</td>
-                  <td>{issue.Priority}</td>
-                  <td>{issue.Assignee}</td>
-                  <td>{issue.Open}</td>
-                  <td>{issue.Close}</td>
-                </tr>
-              )
-            )
+            data.IssueList.filter(
+              (issue) =>
+                (filter === "Status" && issue.Status === value) ||
+                (filter === "Category" && issue.Category === value) ||
+                (filter === "Priority" && issue.Priority === value)
+            ).map((issue, index) => (
+              <tr key={index}>
+                <td>{issue.IssueNo}</td>
+                <td>{issue.Status}</td>
+                <td>{issue.Description}</td>
+                <td>{issue.Category}</td>
+                <td>{issue.Priority}</td>
+                <td>{issue.Assignee}</td>
+                <td>{issue.Open}</td>
+                <td>{issue.Close}</td>
+              </tr>
+            ))
           ) : (
             <div className="m-5">There aren’t any open issues.</div>
           )}
