@@ -13,7 +13,10 @@ export default function IssuesTableList() {
   console.log(filter);
 
   return (
-    <div className="container bg-dark" style={{ overflow: "auto", minHeight: "300px"}}>
+    <div
+      className="container bg-dark"
+      style={{ overflow: "auto", minHeight: "300px" }}
+    >
       <div className="w-100" style={{ height: "40px" }}>
         {value && (
           <Button
@@ -30,12 +33,12 @@ export default function IssuesTableList() {
         )}
       </div>
       <Table striped bordered hover variant="dark" className="mb-0">
-        <thead className="align-middle">
+        <thead className="align-middle text-info">
           <tr>
             <th>Issue No</th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark">
+                <Dropdown.Toggle variant="dark" className="text-info">
                   <strong>Status</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -61,7 +64,7 @@ export default function IssuesTableList() {
             <th>Description</th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark">
+                <Dropdown.Toggle variant="dark" className="text-info">
                   <strong>Category</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -94,7 +97,7 @@ export default function IssuesTableList() {
             </th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark">
+                <Dropdown.Toggle variant="dark" className="text-info">
                   <strong>Priority</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -128,7 +131,7 @@ export default function IssuesTableList() {
             <th>Assignee</th>
             <th>
               <Dropdown>
-                <Dropdown.Toggle variant="dark">
+                <Dropdown.Toggle variant="dark" className="text-info">
                   <strong>Open</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -139,7 +142,7 @@ export default function IssuesTableList() {
             </th>
             <th>
               <Dropdown>
-                <Dropdown.Toggle variant="dark">
+                <Dropdown.Toggle variant="dark" className="text-info">
                   <strong>Close</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -183,7 +186,11 @@ export default function IssuesTableList() {
               </tr>
             ))
           ) : (
-            <div className="m-5">There aren’t any open issues.</div>
+            <tr>
+              <td colSpan={8}>
+                <h3>There aren’t any open issues.</h3>
+              </td>
+            </tr>
           )}
         </tbody>
       </Table>

@@ -35,7 +35,7 @@ export default function Profile() {
           }}
         />
         <Form
-          className="p-5 w-75 position-relative bg-light text-start mb-5 mx-auto d-flex justify-content-center flex-column rounded z-1"
+          className="p-5 w-75 bg-dark text-light position-relative bg-light text-start mb-5 mx-auto d-flex justify-content-center flex-column rounded z-1"
           style={{
             maxWidth: "500px",
             boxShadow: "0px 10px 5px 5px rgba(0,0,0,0.2)",
@@ -67,7 +67,7 @@ export default function Profile() {
           </Form.Group>
           <hr></hr>
           <Button
-            variant="primary"
+            variant="info"
             type="submit"
             className="mx-auto"
           >

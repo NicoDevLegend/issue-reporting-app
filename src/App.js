@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <div className="d-flex">
         <SideBar />
-        <div className="w-100">
+        <div className="w-100 bg-secondary">
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
