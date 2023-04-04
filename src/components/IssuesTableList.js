@@ -10,35 +10,51 @@ export default function IssuesTableList() {
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
 
-  console.log(filter);
+  const originalColors = {
+    Status: "text-info",
+    NotResolved: "bg-danger",
+    Resolved: "bg-success",
+    Category: "text-info",
+    Priority: "text-info",
+    Important: "text-success",
+    VeryImportant: "text-warning",
+    Urgent: "text-danger",
+    Open: "text-info",
+    Close: "text-info",
+  };
+
+  const [filterColor, setFilterColor] = useState(originalColors);
 
   return (
     <div
       className="container bg-dark"
       style={{ overflow: "auto", minHeight: "300px" }}
     >
-      <div className="w-100" style={{ height: "40px" }}>
+      <div className="w-100" style={{ height: "50px" }}>
         {value && (
           <Button
-            variant="secondary"
+            variant="primary"
             className="position-relative"
             style={{
-              top: "0",
+              top: "5px",
               right: "30%",
             }}
-            onClick={() => setValue(null)}
+            onClick={() => {
+              setValue(null);
+              setFilterColor(originalColors);
+            }}
           >
             <FontAwesomeIcon icon={faRotateLeft} />
           </Button>
         )}
       </div>
-      <Table striped bordered hover variant="dark" className="mb-0">
+      <Table bordered variant="dark" className="mb-0">
         <thead className="align-middle text-info">
           <tr>
             <th>Issue No</th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark" className="text-info">
+                <Dropdown.Toggle variant="dark" className={filterColor.Status}>
                   <strong>Status</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -46,6 +62,10 @@ export default function IssuesTableList() {
                     eventKey="Not Resolved"
                     onClick={() => {
                       setFilter("Status");
+                      setFilterColor({
+                        ...originalColors,
+                        Status: "text-danger",
+                      });
                     }}
                   >
                     Not Resolved
@@ -54,6 +74,10 @@ export default function IssuesTableList() {
                     eventKey="Resolved"
                     onClick={() => {
                       setFilter("Status");
+                      setFilterColor({
+                        ...originalColors,
+                        Status: "text-success",
+                      });
                     }}
                   >
                     Resolved
@@ -64,7 +88,10 @@ export default function IssuesTableList() {
             <th>Description</th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark" className="text-info">
+                <Dropdown.Toggle
+                  variant="dark"
+                  className={filterColor.Category}
+                >
                   <strong>Category</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -72,6 +99,10 @@ export default function IssuesTableList() {
                     eventKey="1"
                     onClick={() => {
                       setFilter("Category");
+                      setFilterColor({
+                        ...originalColors,
+                        Category: "text-light",
+                      });
                     }}
                   >
                     1
@@ -80,6 +111,10 @@ export default function IssuesTableList() {
                     eventKey="2"
                     onClick={() => {
                       setFilter("Category");
+                      setFilterColor({
+                        ...originalColors,
+                        Category: "text-light",
+                      });
                     }}
                   >
                     2
@@ -88,6 +123,10 @@ export default function IssuesTableList() {
                     eventKey="3"
                     onClick={() => {
                       setFilter("Category");
+                      setFilterColor({
+                        ...originalColors,
+                        Category: "text-light",
+                      });
                     }}
                   >
                     3
@@ -97,7 +136,10 @@ export default function IssuesTableList() {
             </th>
             <th>
               <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
-                <Dropdown.Toggle variant="dark" className="text-info">
+                <Dropdown.Toggle
+                  variant="dark"
+                  className={filterColor.Priority}
+                >
                   <strong>Priority</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -105,6 +147,10 @@ export default function IssuesTableList() {
                     eventKey="Important"
                     onClick={() => {
                       setFilter("Priority");
+                      setFilterColor({
+                        ...originalColors,
+                        Priority: "text-success",
+                      });
                     }}
                   >
                     Important
@@ -113,6 +159,10 @@ export default function IssuesTableList() {
                     eventKey="Very Important"
                     onClick={() => {
                       setFilter("Priority");
+                      setFilterColor({
+                        ...originalColors,
+                        Priority: "text-warning",
+                      });
                     }}
                   >
                     Very Important
@@ -121,6 +171,10 @@ export default function IssuesTableList() {
                     eventKey="Urgent"
                     onClick={() => {
                       setFilter("Priority");
+                      setFilterColor({
+                        ...originalColors,
+                        Priority: "text-danger",
+                      });
                     }}
                   >
                     Urgent
@@ -131,7 +185,7 @@ export default function IssuesTableList() {
             <th>Assignee</th>
             <th>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" className="text-info">
+                <Dropdown.Toggle variant="dark" className={filterColor.Open}>
                   <strong>Open</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -142,7 +196,7 @@ export default function IssuesTableList() {
             </th>
             <th>
               <Dropdown>
-                <Dropdown.Toggle variant="dark" className="text-info">
+                <Dropdown.Toggle variant="dark" className={filterColor.Close}>
                   <strong>Close</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -158,10 +212,35 @@ export default function IssuesTableList() {
             data.IssueList.map((issue, index) => (
               <tr key={index}>
                 <td>{issue.IssueNo}</td>
-                <td>{issue.Status}</td>
+                {issue.Status === "Resolved" ? (
+                  <td className={originalColors.Resolved}>{issue.Status}</td>
+                ) : (
+                  <td className={originalColors.NotResolved}>{issue.Status}</td>
+                )}
                 <td>{issue.Description}</td>
                 <td>{issue.Category}</td>
-                <td>{issue.Priority}</td>
+                {issue.Priority === "Important" ? (
+                  <td
+                    className={originalColors.Important}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                ) : issue.Priority === "Very Important" ? (
+                  <td
+                    className={originalColors.VeryImportant}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                ) : (
+                  <td
+                    className={originalColors.Urgent}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                )}
                 <td>{issue.Assignee}</td>
                 <td>{issue.Open}</td>
                 <td>{issue.Close}</td>
@@ -176,10 +255,35 @@ export default function IssuesTableList() {
             ).map((issue, index) => (
               <tr key={index}>
                 <td>{issue.IssueNo}</td>
-                <td>{issue.Status}</td>
+                {issue.Status === "Resolved" ? (
+                  <td className={originalColors.Resolved}>{issue.Status}</td>
+                ) : (
+                  <td className={originalColors.NotResolved}>{issue.Status}</td>
+                )}
                 <td>{issue.Description}</td>
                 <td>{issue.Category}</td>
-                <td>{issue.Priority}</td>
+                {issue.Priority === "Important" ? (
+                  <td
+                    className={originalColors.Important}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                ) : issue.Priority === "Very Important" ? (
+                  <td
+                    className={originalColors.VeryImportant}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                ) : (
+                  <td
+                    className={originalColors.Urgent}
+                    style={{ hover: "inherit" }}
+                  >
+                    {issue.Priority}
+                  </td>
+                )}
                 <td>{issue.Assignee}</td>
                 <td>{issue.Open}</td>
                 <td>{issue.Close}</td>

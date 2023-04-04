@@ -14,7 +14,13 @@ export default function SideBar() {
 
   return (
     isAuthenticated && (
-      <CDBSidebar textColor="#fff" backgroundColor="#212529" maxWidth="200px" className="h-auto">
+      <CDBSidebar
+        textColor="#fff"
+        backgroundColor="#212529"
+        maxWidth="200px"
+        className="h-auto"
+        breakpoint={1400}
+      >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
             href="/"
@@ -48,7 +54,9 @@ export default function SideBar() {
                 isPending ? "pending" : isActive ? "activeClicked" : ""
               }
             >
-              <CDBSidebarMenuItem icon="clipboard-list">New Ticket</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="clipboard-list">
+                New Ticket
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink
               to="/calendar"
@@ -60,9 +68,7 @@ export default function SideBar() {
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-        <CDBSidebarFooter className="text-center">
-          footer
-        </CDBSidebarFooter>
+        <CDBSidebarFooter className="text-center">footer</CDBSidebarFooter>
       </CDBSidebar>
     )
   );
