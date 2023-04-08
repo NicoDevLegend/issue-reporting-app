@@ -20,7 +20,7 @@ export default function Home({ value }) {
     </div>
   ) : (
     <div
-      className="bg-light d-flex flex-column justify-content-center align-items-center gap-3"
+      className="bg-white d-flex flex-column justify-content-center align-items-center gap-3"
       style={{ height: "75vh" }}
     >
       <h2>

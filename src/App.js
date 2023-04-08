@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import NotificationsPage from "./pages/NotificationsPage";
 import NewTicket from "./pages/NewTicket";
-import CalendarPage from "./pages/Calendar";
 import NotFound from "./pages/NotFound";
 
 
@@ -37,10 +36,6 @@ function App() {
             <Route
               path="/newticket"
               element={<AuthenticationGuard component={NewTicket} />}
-            />
-            <Route
-              path="/calendar"
-              element={<AuthenticationGuard component={CalendarPage} />}
             />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -7,7 +7,7 @@
             "Category": "1",
             "Priority": "Important",
             "Assignee": "Diana T",
-            "Open": "14-1-23",
+            "Open": "2023-01-14",
             "Close": ""
         },
         {
@@ -17,8 +17,8 @@
             "Category": "1",
             "Priority": "Very Important",
             "Assignee": "Adam J",
-            "Open": "20-1-23",
-            "Close": "5-2-23"
+            "Open": "2023-01-20",
+            "Close": "2023-02-05"
         },
         {
             "IssueNo": "3",
@@ -27,7 +27,7 @@
             "Category": "2",
             "Priority": "Important",
             "Assignee": "Jason R",
-            "Open": "13-2-23",
+            "Open": "2023-02-13",
             "Close": ""
         },
         {
@@ -37,7 +37,7 @@
             "Category": "3",
             "Priority": "Important",
             "Assignee": "Diana T",
-            "Open": "14-3-23",
+            "Open": "2023-03-14",
             "Close": ""
         },
         {
@@ -47,8 +47,8 @@
             "Category": "2",
             "Priority": "Urgent",
             "Assignee": "Adam J",
-            "Open": "20-3-23",
-            "Close": "5-2-23"
+            "Open": "2023-03-20",
+            "Close": "2023-02-02"
         },
         {
             "IssueNo": "6",
@@ -57,7 +57,7 @@
             "Category": "3",
             "Priority": "Urgent",
             "Assignee": "Jason R",
-            "Open": "3-4-23",
+            "Open": "2023-04-03",
             "Close": ""
         }
     ]

@@ -58,14 +58,6 @@ export default function SideBar() {
                 New Ticket
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              to="/calendar"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "activeClicked" : ""
-              }
-            >
-              <CDBSidebarMenuItem icon="calendar">Calendar</CDBSidebarMenuItem>
-            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center">footer</CDBSidebarFooter>
