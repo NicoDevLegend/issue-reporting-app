@@ -11,9 +11,7 @@ import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function IssuesTableList() {
   const [data, setData] = useState(DATA);
-  const [allData, setAllData] = useState(DATA);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
 
@@ -33,23 +31,26 @@ export default function IssuesTableList() {
   const [filterColor, setFilterColor] = useState(originalColors);
 
   const handleSelect = (date) => {
-    let filtered = allData.filter((data) => {
-      let dataDate = new Date(data.IssueList["Open"]);
+    let filtered = data.IssueList.filter((issue) => {
+      let issueDate = new Date(issue.Open);
       return (
-        dataDate >= date.selection.startDate &&
-        dataDate <= date.selection.endDate
+        issueDate >= date.selection.startDate &&
+        issueDate <= date.selection.endDate
       );
     });
-    setStartDate(date.selection.startDate);
-    setEndDate(date.selection.endDate);
-    setData(filtered);
+    setSelectionRange([date.selection]);
+    setFilteredData(filtered);
+    setValue("Open");
+    console.log(filteredData)
   };
 
-  const selectionRange = {
-    startDate: startDate,
-    endDate: endDate,
-    key: "selection",
-  };
+  const [selectionRange, setSelectionRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
 
   return (
     <div
@@ -66,6 +67,7 @@ export default function IssuesTableList() {
               right: "30%",
             }}
             onClick={() => {
+              setFilteredData(null);
               setData(DATA);
               setValue(null);
               setFilterColor(originalColors);
@@ -216,10 +218,13 @@ export default function IssuesTableList() {
                   <strong>Open</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item className="p-0">
                   <DefinedRange
                     onChange={handleSelect}
-                    ranges={[selectionRange]}
+                    inputRanges={[]}
+                    ranges={selectionRange}
                   />
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </th>
@@ -274,7 +279,7 @@ export default function IssuesTableList() {
                 </tr>
               );
             })
-          ) : value ? (
+          ) : value && value !== "Open" ? (
             data.IssueList.filter(
               (issue) =>
                 (filter === "Status" && issue.Status === value) ||
@@ -312,8 +317,8 @@ export default function IssuesTableList() {
                 </tr>
               );
             })
-          ) : value ? (
-            data.IssueList.map((issue, index) => {
+          ) : filteredData && filteredData !== [] && value === "Open" ? (
+            filteredData.map((issue, index) => {
               let dateOpen = new Date(issue.Open);
               let dateClose = new Date(issue.Close);
               return (
