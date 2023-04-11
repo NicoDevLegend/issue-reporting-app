@@ -30,18 +30,38 @@ export default function IssuesTableList() {
 
   const [filterColor, setFilterColor] = useState(originalColors);
 
-  const handleSelect = (date) => {
+  const handleOpenSelect = (date) => {
     let filtered = data.IssueList.filter((issue) => {
-      let issueDate = new Date(issue.Open);
+      let issueOpenDate = new Date(issue.Open);
       return (
-        issueDate >= date.selection.startDate &&
-        issueDate <= date.selection.endDate
+        issueOpenDate >= date.selection.startDate &&
+        issueOpenDate <= date.selection.endDate
       );
     });
     setSelectionRange([date.selection]);
     setFilteredData(filtered);
+    setFilterColor({
+      ...originalColors,
+      Open: "text-light",
+    });
     setValue("Open");
-    console.log(filteredData)
+  };
+
+  const handleCloseSelect = (date) => {
+    let filtered = data.IssueList.filter((issue) => {
+      let issueCloseDate = new Date(issue.Close);
+      return (
+        issueCloseDate >= date.selection.startDate &&
+        issueCloseDate <= date.selection.endDate
+      );
+    });
+    setSelectionRange([date.selection]);
+    setFilteredData(filtered);
+    setFilterColor({
+      ...originalColors,
+      Close: "text-light",
+    });
+    setValue("Close");
   };
 
   const [selectionRange, setSelectionRange] = useState([
@@ -219,11 +239,11 @@ export default function IssuesTableList() {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item className="p-0">
-                  <DefinedRange
-                    onChange={handleSelect}
-                    inputRanges={[]}
-                    ranges={selectionRange}
-                  />
+                    <DefinedRange
+                      onChange={handleOpenSelect}
+                      inputRanges={[]}
+                      ranges={selectionRange}
+                    />
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -234,8 +254,13 @@ export default function IssuesTableList() {
                   <strong>Close</strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="">Newest</Dropdown.Item>
-                  <Dropdown.Item eventKey="">Oldest</Dropdown.Item>
+                  <Dropdown.Item className="p-0">
+                    <DefinedRange
+                      onChange={handleCloseSelect}
+                      inputRanges={[]}
+                      ranges={selectionRange}
+                    />
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </th>
@@ -313,7 +338,11 @@ export default function IssuesTableList() {
                   )}
                   <td>{issue.Assignee}</td>
                   <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>{dateClose.toLocaleDateString()}</td>
+                  <td>
+                    {dateClose.toLocaleDateString() === "Invalid Date"
+                      ? ""
+                      : dateClose.toLocaleDateString()}
+                  </td>
                 </tr>
               );
             })
@@ -346,7 +375,48 @@ export default function IssuesTableList() {
                   )}
                   <td>{issue.Assignee}</td>
                   <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>{dateClose.toLocaleDateString()}</td>
+                  <td>
+                    {dateClose.toLocaleDateString() === "Invalid Date"
+                      ? ""
+                      : dateClose.toLocaleDateString()}
+                  </td>
+                </tr>
+              );
+            })
+          ) : filteredData && filteredData !== [] && value === "Close" ? (
+            filteredData.map((issue, index) => {
+              let dateOpen = new Date(issue.Open);
+              let dateClose = new Date(issue.Close);
+              return (
+                <tr key={index}>
+                  <td>{issue.IssueNo}</td>
+                  {issue.Status === "Resolved" ? (
+                    <td className={originalColors.Resolved}>{issue.Status}</td>
+                  ) : (
+                    <td className={originalColors.NotResolved}>
+                      {issue.Status}
+                    </td>
+                  )}
+                  <td>{issue.Description}</td>
+                  <td>{issue.Category}</td>
+                  {issue.Priority === "Important" ? (
+                    <td className={originalColors.Important}>
+                      {issue.Priority}
+                    </td>
+                  ) : issue.Priority === "Very Important" ? (
+                    <td className={originalColors.VeryImportant}>
+                      {issue.Priority}
+                    </td>
+                  ) : (
+                    <td className={originalColors.Urgent}>{issue.Priority}</td>
+                  )}
+                  <td>{issue.Assignee}</td>
+                  <td>{dateOpen.toLocaleDateString()}</td>
+                  <td>
+                    {dateClose.toLocaleDateString() === "Invalid Date"
+                      ? ""
+                      : dateClose.toLocaleDateString()}
+                  </td>
                 </tr>
               );
             })
