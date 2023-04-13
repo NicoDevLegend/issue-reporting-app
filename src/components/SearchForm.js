@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function SearchForm() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(DATA);
+  //const [data, setData] = useState(DATA);
   const [searchResult, setSearchResult] = useState([]);
 
   const handleShowFormControl = () => {
@@ -21,15 +21,15 @@ export default function SearchForm() {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-    
+
     if (!!search) {
-      const filter = data.IssueList.filter((data) => {
+      const filter = DATA.IssueList.filter((data) => {
         return data.Description.toLowerCase().includes(
           search.toLocaleLowerCase()
         );
       });
       setSearchResult(filter);
-    }else {
+    } else {
       setSearchResult([]);
     }
   };
