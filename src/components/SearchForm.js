@@ -8,8 +8,9 @@ import { useState } from "react";
 export default function SearchForm() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
-  //const [data, setData] = useState(DATA);
-  const [searchResult, setSearchResult] = useState([]);
+  const [results, setResults] = useState([]);
+
+  const data = DATA.IssueList.map((data) => data.Assignee);
 
   const handleShowFormControl = () => {
     if (!show) {
@@ -21,18 +22,20 @@ export default function SearchForm() {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-
-    if (!!search) {
-      const filter = DATA.IssueList.filter((data) => {
-        return data.Description.toLowerCase().includes(
-          search.toLocaleLowerCase()
-        );
-      });
-      setSearchResult(filter);
-    } else {
-      setSearchResult([]);
-    }
+    filterResult();
   };
+ 
+  const filterData = data.filter((item, index) => {
+    return data.indexOf(item) === index;
+  });
+
+  const filterResult = ()=> {
+      const filter = !!search
+        ? filterData.filter((e) => e.toLowerCase().includes(search.toLowerCase()))
+        : [];
+      setResults(filter);
+  }
+  
 
   return (
     <>
@@ -45,6 +48,25 @@ export default function SearchForm() {
           value={search}
           onChange={handleChange}
         />
+        {search !== "" && (
+              <div
+                className="p-2 d-none d-sm-block position-absolute bg-white text-start rounded-1"
+                style={{
+                  width: "230px",
+                  zIndex: "30",
+                  margin: "auto",
+                  top: "60px",
+                  minHeight: "50px",
+                  maxHeight: "300px",
+                  overflowX: "auto",
+                  scrollbarWidth: "thin",
+                }}
+              >
+                {results.map((item, index) => {
+                  return <p key={index}>{item}</p>;
+                })}
+              </div>
+            )}
         <Button className="d-none d-sm-block me-5" variant="light">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </Button>
@@ -66,7 +88,7 @@ export default function SearchForm() {
             />
             {search !== "" && (
               <div
-                className="p-2 position-absolute bg-white text-start rounded-1"
+                className="p-2 d-block d-sm-none position-absolute bg-white text-start rounded-1"
                 style={{
                   width: "90%",
                   zIndex: "30",
@@ -78,9 +100,9 @@ export default function SearchForm() {
                   scrollbarWidth: "thin",
                 }}
               >
-                {searchResult.map((data, index) => (
-                  <p key={index}>{data.Description}</p>
-                ))}
+                {results.map((item, index) => {
+                  return <p key={index}>{item}</p>;
+                })}
               </div>
             )}
           </>
