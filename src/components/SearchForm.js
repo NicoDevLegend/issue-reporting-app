@@ -24,18 +24,17 @@ export default function SearchForm() {
     setSearch(e.target.value);
     filterResult();
   };
- 
+
   const filterData = data.filter((item, index) => {
     return data.indexOf(item) === index;
   });
 
-  const filterResult = ()=> {
-      const filter = !!search
-        ? filterData.filter((e) => e.toLowerCase().includes(search.toLowerCase()))
-        : [];
-      setResults(filter);
-  }
-  
+  const filterResult = () => {
+    const filter = !!search
+      ? filterData.filter((e) => e.toLowerCase().includes(search.toLowerCase()))
+      : [];
+    setResults(filter);
+  };
 
   return (
     <>
@@ -49,24 +48,24 @@ export default function SearchForm() {
           onChange={handleChange}
         />
         {search !== "" && (
-              <div
-                className="p-2 d-none d-sm-block position-absolute bg-white text-start rounded-1"
-                style={{
-                  width: "230px",
-                  zIndex: "30",
-                  margin: "auto",
-                  top: "60px",
-                  minHeight: "50px",
-                  maxHeight: "300px",
-                  overflowX: "auto",
-                  scrollbarWidth: "thin",
-                }}
-              >
-                {results.map((item, index) => {
-                  return <p key={index}>{item}</p>;
-                })}
-              </div>
-            )}
+          <div
+            className="p-2 d-none d-sm-block position-absolute bg-white text-start rounded-1"
+            style={{
+              width: "230px",
+              zIndex: "30",
+              margin: "auto",
+              top: "60px",
+              minHeight: "50px",
+              maxHeight: "300px",
+              overflowX: "auto",
+              scrollbarWidth: "thin",
+            }}
+          >
+            {results.map((item, index) => {
+              return <p key={index}>{item}</p>;
+            })}
+          </div>
+        )}
         <Button className="d-none d-sm-block me-5" variant="light">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </Button>
