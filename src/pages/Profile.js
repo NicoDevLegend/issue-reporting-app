@@ -1,14 +1,31 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
 
 export default function Profile() {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const {
+    control,
+    register,
+    handleSubmit,
+    resetField,
+    formState: { isDirty, dirtyFields },
+    //formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      Username: user["https://myapp.example.com/username"],
+      email: user.email,
+      firstName: "Jon",
+      lastName: "Doe",
+    },
+  });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     isAuthenticated &&
@@ -41,36 +58,117 @@ export default function Profile() {
             boxShadow: "0px 10px 5px 5px rgba(0,0,0,0.2)",
             marginTop: "-150px",
           }}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
-          <p className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline" style={{ textUnderlineOffset: "3px"}}>
+          <p
+            className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline"
+            style={{ textUnderlineOffset: "3px" }}
+          >
             <strong>Account: User</strong>
           </p>
           <Form.Group className="mb-4" controlId="formUserName">
-            <Form.Label><strong>Username</strong></Form.Label>
-            <Form.Control
-              type="text"
-              defaultValue={user["https://myapp.example.com/username"]}
+            <Form.Label>
+              <strong>Username</strong>
+            </Form.Label>
+            <Controller
+              name="Username"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  type="text"
+                  {...field}
+                  {...register("Username")}
+                />
+              )}
             />
+            {isDirty && dirtyFields.Username && (
+              <Button
+                className="my-1"
+                variant="warning"
+                size="sm"
+                onClick={() => resetField("Username")}
+              >
+                Reset
+              </Button>
+            )}
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
-            <Form.Label><strong>Email address</strong></Form.Label>
-            <Form.Control type="email" defaultValue={user.email} />
+            <Form.Label>
+              <strong>Email address</strong>
+            </Form.Label>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Form.Control type="email" {...field} {...register("email")} />
+              )}
+            />
+            {isDirty && dirtyFields.email && (
+              <Button
+                className="my-1"
+                variant="warning"
+                size="sm"
+                onClick={() => resetField("email")}
+              >
+                Reset
+              </Button>
+            )}
           </Form.Group>
           <Form.Group className="mb-4" controlId="formFirstName">
-            <Form.Label><strong>First name</strong></Form.Label>
-            <Form.Control defaultValue="Jon" />
+            <Form.Label>
+              <strong>First name</strong>
+            </Form.Label>
+            <Controller
+              name="firstName"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  type="text"
+                  {...field}
+                  {...register("firstName")}
+                />
+              )}
+            />
+            {isDirty && dirtyFields.firstName && (
+              <Button
+                className="my-1"
+                variant="warning"
+                size="sm"
+                onClick={() => resetField("firstName")}
+              >
+                Reset
+              </Button>
+            )}
           </Form.Group>
           <Form.Group className="mb-4" controlId="formLastName">
-            <Form.Label><strong>Last name</strong></Form.Label>
-            <Form.Control defaultValue="Doe" />
+            <Form.Label>
+              <strong>Last name</strong>
+            </Form.Label>
+            <Controller
+              name="lastName"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  type="text"
+                  {...field}
+                  {...register("lastName")}
+                />
+              )}
+            />
+            {isDirty && dirtyFields.lastName && (
+              <Button
+                className="my-1"
+                variant="warning"
+                size="sm"
+                onClick={() => resetField("lastName")}
+              >
+                Reset
+              </Button>
+            )}
           </Form.Group>
           <hr></hr>
-          <Button
-            variant="info"
-            type="submit"
-            className="mx-auto"
-          >
+          <Button variant="info" type="submit" className="mx-auto">
             Save
           </Button>
         </Form>
