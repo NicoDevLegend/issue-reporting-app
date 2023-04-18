@@ -77,7 +77,7 @@ export default function SearchForm() {
               className="d-block d-sm-none position-absolute"
               style={{
                 width: "90%",
-                Zindex: "20",
+                zIndex: "20",
                 right: "1em",
                 top: "75px",
               }}

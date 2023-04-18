@@ -168,7 +168,7 @@ export default function Profile() {
           </Form.Group>
           <hr></hr>
           <Button variant="info" type="submit" className="mx-auto">
-            Save
+            {dirtyFields && dirtyFields.length > 0 ? "Save Changes" : "Save"}
           </Button>
         </Form>
       </div>
