@@ -6,7 +6,6 @@ export default function NewTicket() {
   const { isAuthenticated } = useAuth0();
   const {
     control,
-    register,
     handleSubmit,
     reset,
     formState: { errors },
@@ -65,7 +64,6 @@ export default function NewTicket() {
                   as="select"
                   isInvalid={errors.Category}
                   {...field}
-                  {...register("Category")}
                 >
                   <option value="">---</option>
                   <option value="1">1</option>
@@ -93,7 +91,6 @@ export default function NewTicket() {
                   as="textarea"
                   isInvalid={errors.Description}
                   rows={3}
-                  {...register("Description")}
                 />
               )}
             />
@@ -123,7 +120,6 @@ export default function NewTicket() {
                   as="select"
                   isInvalid={errors.Priority}
                   {...field}
-                  {...register("Priority")}
                   required
                 >
                   <option value="">---</option>
@@ -152,7 +148,6 @@ export default function NewTicket() {
                   as="select"
                   isInvalid={errors.Assignee}
                   {...field}
-                  {...register("Assignee")}
                   required
                 >
                   <option value="">---</option>
