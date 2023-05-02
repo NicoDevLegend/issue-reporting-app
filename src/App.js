@@ -11,7 +11,6 @@ import NotificationsPage from "./pages/NotificationsPage";
 import NewTicket from "./pages/NewTicket";
 import NotFound from "./pages/NotFound";
 
-
 function App() {
   const { isLoading } = useAuth0();
 

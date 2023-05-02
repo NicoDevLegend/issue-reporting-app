@@ -20,16 +20,18 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu
-          style={{ right: "5px", top: "35px" }}
-        >
+        <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
           <Dropdown.ItemText className="text-center">
             <p>
               Signed in as:{" "}
               <strong>{user["https://myapp.example.com/username"]}</strong>
             </p>
-            <p><strong>Account: User</strong></p>
-            <Link to="/profile" className="text-decoration-none text-reset"><p>Profile</p></Link>
+            <p>
+              <strong>Account: User</strong>
+            </p>
+            <Link to="/profile" className="text-decoration-none text-reset">
+              <p>Profile</p>
+            </Link>
           </Dropdown.ItemText>
           <Dropdown.Divider />
           <Dropdown.ItemText className="d-flex justify-content-center">

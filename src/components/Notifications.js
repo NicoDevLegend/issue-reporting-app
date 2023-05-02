@@ -64,7 +64,10 @@ export default function Notifications() {
             }}
             ref={ref}
           >
-            <Link to="/notifications" className="text-decoration-none text-reset">
+            <Link
+              to="/notifications"
+              className="text-decoration-none text-reset"
+            >
               <p>Notifications</p>
             </Link>
             <p>Message</p>

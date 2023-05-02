@@ -3,10 +3,8 @@ import Loading from "./Loading";
 
 export default function AuthenticationGuard({ component }) {
   const Component = withAuthenticationRequired(component, {
-    onRedirecting: () => (
-        <Loading />
-    ),
+    onRedirecting: () => <Loading />,
   });
 
   return <Component />;
-};
+}
