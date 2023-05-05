@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
+//import axios from "axios";
 
 export default function NewTicket() {
   const { isAuthenticated } = useAuth0();
@@ -12,20 +13,34 @@ export default function NewTicket() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      IssueNo: "",
+      //IssueNo: "",
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",
       Priority: "",
       Assignee: "",
-      Open: new Date(),
-      Close: "",
+      //Open: new Date(),
+      //Close: "",
     },
   });
 
-  const onSubmit = (data, e) => {
+  const onSubmit = async (data, e) => {
+    //const formData = new FormData();
+    //formData.append("file", data);
+    //alert(JSON.stringify(data));
+
+    await fetch(process.env.SERVICE_API, {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        console.log(res)
+        return res.json()})
+      .then((d) => {
+        alert(d);
+      });
     e.target.reset();
-    alert(JSON.stringify(data));
   };
 
   return (

@@ -1,11 +1,9 @@
 import { useState } from "react";
-import Table from "react-bootstrap/Table";
 import DATA from "../data.json";
-import Dropdown from "react-bootstrap/Dropdown";
 import { DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import Button from "react-bootstrap/Button";
+import { Table, Dropdown, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 

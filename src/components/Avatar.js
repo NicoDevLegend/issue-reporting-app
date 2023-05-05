@@ -1,7 +1,4 @@
-import Nav from "react-bootstrap/Nav";
-import NavItem from "react-bootstrap/NavItem";
-import NavLink from "react-bootstrap/NavLink";
-import Dropdown from "react-bootstrap/Dropdown";
+import { Nav, NavItem, NavLink, Dropdown } from "react-bootstrap";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";

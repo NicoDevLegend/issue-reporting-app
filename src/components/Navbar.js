@@ -1,6 +1,4 @@
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import SearchForm from "./SearchForm";
 import LogInButton from "./LogInButton";
 import SignUpButton from "./SignUpButton";

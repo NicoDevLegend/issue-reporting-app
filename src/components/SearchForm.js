@@ -1,5 +1,4 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Button, Form } from "react-bootstrap";
 import DATA from "../data.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
