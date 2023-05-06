@@ -1,6 +1,8 @@
 import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
+//import { useEffect } from "react";
+
 //import axios from "axios";
 
 export default function NewTicket() {
@@ -24,22 +26,32 @@ export default function NewTicket() {
     },
   });
 
-  const onSubmit = async (data, e) => {
-    //const formData = new FormData();
-    //formData.append("file", data);
-    //alert(JSON.stringify(data));
+ /*  useEffect(() => {
+    // POST request using fetch inside useEffect React hook
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: 'React Hooks POST Request Example' })
+    };
+    fetch("https://test.nicolegend.repl.co/api/ticket", requestOptions)
+        .then(response => response.json())
+        .then(data => alert(data));
 
-    await fetch(process.env.SERVICE_API, {
+// empty dependency array means this effect will only run once (like componentDidMount in classes)
+}, []); */
+
+  const onSubmit = async (data, e) => {
+
+     await fetch(process.env.REACT_APP_SERVICE_API, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-      .then((res) => {
-        console.log(res)
-        return res.json()})
-      .then((d) => {
-        alert(d);
-      });
+      .then((res) => res.json())
+      .then((d) => alert(JSON.stringify(d)))
+      .catch((err) => {
+        alert("Something is wrong!!")
+      })
     e.target.reset();
   };
 
