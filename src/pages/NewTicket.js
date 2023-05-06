@@ -6,7 +6,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 //import axios from "axios";
 
 export default function NewTicket() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
+  const userID = user.sub;
   const {
     control,
     handleSubmit,
@@ -16,6 +17,7 @@ export default function NewTicket() {
     mode: "onChange",
     defaultValues: {
       //IssueNo: "",
+      userID: userID,
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",
