@@ -17,7 +17,7 @@ export default function NewTicket() {
     mode: "onChange",
     defaultValues: {
       //IssueNo: "",
-      userID: userID,
+      userID: userID.replace("auth0|", ""),
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",

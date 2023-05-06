@@ -1,17 +1,18 @@
-import { useState } from "react";
-import DATA from "../data.json";
+import { useEffect, useState } from "react";
 import { DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { Table, Dropdown, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function IssuesTableList() {
-  const [data, setData] = useState(DATA);
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
+  const { user } = useAuth0();
 
   const originalColors = {
     Status: "text-info",
@@ -28,8 +29,14 @@ export default function IssuesTableList() {
 
   const [filterColor, setFilterColor] = useState(originalColors);
 
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVICE_API}/${user.sub.replace("auth0|", "")}`)
+    .then(response => response.json())
+    .then(d => setData(d))
+  }, [user]);
+
   const handleOpenSelect = (date) => {
-    let filtered = data.IssueList.filter((issue) => {
+    let filtered = data.filter((issue) => {
       let issueOpenDate = new Date(issue.Open);
       return (
         issueOpenDate >= date.selection.startDate &&
@@ -46,7 +53,7 @@ export default function IssuesTableList() {
   };
 
   const handleCloseSelect = (date) => {
-    let filtered = data.IssueList.filter((issue) => {
+    let filtered = data.filter((issue) => {
       let issueCloseDate = new Date(issue.Close);
       return (
         issueCloseDate >= date.selection.startDate &&
@@ -86,7 +93,7 @@ export default function IssuesTableList() {
             }}
             onClick={() => {
               setFilteredData(null);
-              setData(DATA);
+              setData(data);
               setValue(null);
               setFilterColor(originalColors);
             }}
@@ -265,8 +272,8 @@ export default function IssuesTableList() {
           </tr>
         </thead>
         <tbody>
-          {data.IssueList && !value ? (
-            data.IssueList.map((issue, index) => {
+          {data && !value ? (
+            data.map((issue, index) => {
               let dateOpen = new Date(issue.Open);
               let dateClose = new Date(issue.Close);
               return (
@@ -303,7 +310,7 @@ export default function IssuesTableList() {
               );
             })
           ) : value && value !== "Open" ? (
-            data.IssueList.filter(
+            data.filter(
               (issue) =>
                 (filter === "Status" && issue.Status === value) ||
                 (filter === "Category" && issue.Category === value) ||
