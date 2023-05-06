@@ -7,7 +7,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
-  const userID = user.sub;
   const {
     control,
     handleSubmit,
@@ -17,7 +16,7 @@ export default function NewTicket() {
     mode: "onChange",
     defaultValues: {
       //IssueNo: "",
-      userID: userID.replace("auth0|", ""),
+      userID: user.sub.replace("auth0|", ""),
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",
