@@ -2,8 +2,10 @@ import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
+import { useEffect, useRef, useState } from "react";
 
 export default function Profile() {
+  const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
   const {
     control,
@@ -15,12 +17,19 @@ export default function Profile() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      Username: user["https://myapp.example.com/username"],
+      Username: user.AppUsername,
       email: user.email,
-      firstName: "Jon",
-      lastName: "Doe",
+      firstName: user.AppFirstName,
+      lastName: user.AppLastName,
     },
   });
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+      inputRef.current.focus();
+  },[formInputState])
+  
 
   const onSubmit = (data) => {
     console.log(data);
@@ -78,6 +87,8 @@ export default function Profile() {
                   type="text"
                   {...field}
                   {...register("Username")}
+                  disabled={formInputState}
+                  ref={inputRef}
                 />
               )}
             />
@@ -100,7 +111,12 @@ export default function Profile() {
               name="email"
               control={control}
               render={({ field }) => (
-                <Form.Control type="email" {...field} {...register("email")} />
+                <Form.Control
+                  type="email"
+                  {...field}
+                  {...register("email")}
+                  disabled={formInputState}
+                />
               )}
             />
             {isDirty && dirtyFields.email && (
@@ -126,6 +142,7 @@ export default function Profile() {
                   type="text"
                   {...field}
                   {...register("firstName")}
+                  disabled={formInputState}
                 />
               )}
             />
@@ -152,6 +169,7 @@ export default function Profile() {
                   type="text"
                   {...field}
                   {...register("lastName")}
+                  disabled={formInputState}
                 />
               )}
             />
@@ -167,9 +185,20 @@ export default function Profile() {
             )}
           </Form.Group>
           <hr></hr>
-          <Button variant="info" type="submit" className="mx-auto">
-            {dirtyFields && dirtyFields.length > 0 ? "Save Changes" : "Save"}
-          </Button>
+          {isDirty && Object.keys(dirtyFields).length > 0 ? (
+            <Button variant="success" type="submit" className="mx-auto">
+              Save Changes
+            </Button>
+          ) : (
+            <Button
+              variant="info"
+              type="button"
+              className="mx-auto"
+              onClick={()=>{setFormInputState(false)}}
+            >
+              Edit
+            </Button>
+          )}
         </Form>
       </div>
     ))
