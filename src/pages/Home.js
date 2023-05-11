@@ -30,7 +30,7 @@ export default function Home({ value }) {
           boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
         }}
       >
-        <strong>Issues</strong>
+        <strong>Issue List</strong>
       </h1>
       <NewIssue />
       <IssuesTableList />

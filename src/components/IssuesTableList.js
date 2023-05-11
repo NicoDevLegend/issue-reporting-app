@@ -32,7 +32,7 @@ export default function IssuesTableList() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVICE_API}/${user.sub.replace("auth0|", "")}`)
     .then(response => response.json())
-    .then(d => setData(d))
+    .then(d =>setData(d))
   }, [user]);
 
   const handleOpenSelect = (date) => {
@@ -272,7 +272,7 @@ export default function IssuesTableList() {
           </tr>
         </thead>
         <tbody>
-          {data && !value ? (
+          {data && data.length !== 0 && !value ? (
             data.map((issue, index) => {
               let dateOpen = new Date(issue.Open);
               let dateClose = new Date(issue.Close);
