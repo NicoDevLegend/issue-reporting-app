@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useFormState } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
 import { useEffect, useRef, useState } from "react";
@@ -12,24 +12,32 @@ export default function Profile() {
     register,
     handleSubmit,
     resetField,
-    formState: { isDirty, dirtyFields },
-    //formState: { errors },
+    setValue, 
+    setError,
+    formState: { errors, isDirty }
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      Username: user.AppUsername,
+      username: user.AppUsername,
       email: user.email,
       firstName: user.AppFirstName,
       lastName: user.AppLastName,
     },
   });
 
-  const inputRef = useRef(null);
+  const { dirtyFields } = useFormState({
+    control
+  });
+
+  const inputRef = useRef();
 
   useEffect(() => {
       inputRef.current.focus();
   },[formInputState])
   
+  useEffect(() => {
+    register("username", { required: true });
+  }, [register]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -80,24 +88,34 @@ export default function Profile() {
               <strong>Username</strong>
             </Form.Label>
             <Controller
-              name="Username"
+              name="username"
               control={control}
               render={({ field }) => (
                 <Form.Control
                   type="text"
                   {...field}
-                  {...register("Username")}
+                  isInvalid={errors.username}
                   disabled={formInputState}
                   ref={inputRef}
+                  onChange={e => {
+                    const value = e.target.value
+                      setValue("username", value, { shouldDirty: true })
+                      if (value === "") {
+                      setError("username", "notMatch")
+                      }
+                    }}
                 />
               )}
             />
-            {isDirty && dirtyFields.Username && (
+             <Form.Control.Feedback type="invalid">
+              The name will be not emply.
+            </Form.Control.Feedback>
+            {isDirty && dirtyFields.username && (
               <Button
                 className="my-1"
                 variant="warning"
                 size="sm"
-                onClick={() => resetField("Username")}
+                onClick={() => resetField("username")}
               >
                 Reset
               </Button>
@@ -110,15 +128,20 @@ export default function Profile() {
             <Controller
               name="email"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Form.Control
                   type="email"
                   {...field}
+                  isInvalid={errors.email}
                   {...register("email")}
                   disabled={formInputState}
                 />
               )}
             />
+            <Form.Control.Feedback type="invalid">
+              The name will be not emply.
+            </Form.Control.Feedback>
             {isDirty && dirtyFields.email && (
               <Button
                 className="my-1"
@@ -137,15 +160,20 @@ export default function Profile() {
             <Controller
               name="firstName"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Form.Control
                   type="text"
                   {...field}
+                  isInvalid={errors.firstName}
                   {...register("firstName")}
                   disabled={formInputState}
                 />
               )}
             />
+            <Form.Control.Feedback type="invalid">
+              The name will be not emply.
+            </Form.Control.Feedback>
             {isDirty && dirtyFields.firstName && (
               <Button
                 className="my-1"
@@ -164,15 +192,20 @@ export default function Profile() {
             <Controller
               name="lastName"
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <Form.Control
                   type="text"
                   {...field}
+                  isInvalid={errors.lastName}
                   {...register("lastName")}
                   disabled={formInputState}
                 />
               )}
             />
+            <Form.Control.Feedback type="invalid">
+              The name will be not emply.
+            </Form.Control.Feedback>
             {isDirty && dirtyFields.lastName && (
               <Button
                 className="my-1"

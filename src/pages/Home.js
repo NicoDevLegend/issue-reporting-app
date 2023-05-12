@@ -13,7 +13,7 @@ export default function Home({ value }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: postUser["https://myapp.example.com/username"],
+          username: postUser.AppUsername,
           userID: postUser.sub.replace("auth0|", ""),
         })
       })
