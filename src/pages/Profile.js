@@ -49,12 +49,10 @@ export default function Profile() {
       <Loading />
     ) : (
       <div className="d-grid gap-3">
-        <img
-          src=""
-          alt="banner"
+        <div
           className="m-0 w-auto position-relative bg-primary z-0"
           style={{ height: "400px", left: "0", right: "0" }}
-        />
+        ></div>
         <img
           src={user.picture}
           alt={user.name}
@@ -108,7 +106,7 @@ export default function Profile() {
               )}
             />
              <Form.Control.Feedback type="invalid">
-              The name will be not emply.
+              The name must not be empty.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.username && (
               <Button
@@ -128,20 +126,26 @@ export default function Profile() {
             <Controller
               name="email"
               control={control}
-              rules={{ required: true }}
+              rules={{ required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ }}
               render={({ field }) => (
                 <Form.Control
                   type="email"
                   {...field}
                   isInvalid={errors.email}
-                  {...register("email")}
                   disabled={formInputState}
                 />
               )}
             />
+            {errors.email?.type === "required" && (
+              <Form.Control.Feedback type="invalid">
+                The email must not be empty.
+              </Form.Control.Feedback>
+            )}
+            {errors.email?.type === "pattern" && (
             <Form.Control.Feedback type="invalid">
-              The name will be not emply.
+              Please enter a valid email.
             </Form.Control.Feedback>
+            )}
             {isDirty && dirtyFields.email && (
               <Button
                 className="my-1"
@@ -160,19 +164,18 @@ export default function Profile() {
             <Controller
               name="firstName"
               control={control}
-              rules={{ required: true }}
+              rules={{ maxLength: 10 }}
               render={({ field }) => (
                 <Form.Control
                   type="text"
                   {...field}
                   isInvalid={errors.firstName}
-                  {...register("firstName")}
                   disabled={formInputState}
                 />
               )}
             />
             <Form.Control.Feedback type="invalid">
-              The name will be not emply.
+            The maximun length of the first name is 10 characters.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.firstName && (
               <Button
@@ -192,19 +195,18 @@ export default function Profile() {
             <Controller
               name="lastName"
               control={control}
-              rules={{ required: true }}
+              rules={{ maxLength: 10 }}
               render={({ field }) => (
                 <Form.Control
                   type="text"
                   {...field}
                   isInvalid={errors.lastName}
-                  {...register("lastName")}
                   disabled={formInputState}
                 />
               )}
             />
             <Form.Control.Feedback type="invalid">
-              The name will be not emply.
+            The maximun length of the last name is 10 characters.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.lastName && (
               <Button
@@ -221,6 +223,15 @@ export default function Profile() {
           {isDirty && Object.keys(dirtyFields).length > 0 ? (
             <Button variant="success" type="submit" className="mx-auto">
               Save Changes
+            </Button>
+          ) : !formInputState ? (
+            <Button
+              variant="danger"
+              type="button"
+              className="mx-auto"
+              onClick={()=>{setFormInputState(true)}}
+            >
+              Cancel
             </Button>
           ) : (
             <Button
