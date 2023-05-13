@@ -24,7 +24,7 @@ export default function NewTicket() {
 
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
-      process.env.REACT_APP_SERVICE_API + "/ticket",
+      `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub.replace("auth0|", "")}`,
       data
     );
     alert(resData);

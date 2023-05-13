@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import UserRole from "../components/UserRole";
 import UserBanner from "../components/UserBanners";
+import axiosPatch from "../services/ServiceAxiosPatch";
 
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
@@ -26,8 +27,8 @@ export default function Profile() {
     defaultValues: {
       username: user.AppUsername,
       email: user.email,
-      firstName: user.AppFirstName,
-      lastName: user.AppLastName,
+      firstName: user.given_name,
+      lastName: user.family_name,
     },
   });
 
@@ -46,8 +47,12 @@ export default function Profile() {
     register("username", { required: true });
   }, [register]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await axiosPatch(
+      `${process.env.REACT_APP_SERVICE_API}/${user.sub}/users`,
+      data
+    );
+    window.location.reload();
   };
 
   return (
