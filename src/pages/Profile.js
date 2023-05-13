@@ -1,20 +1,26 @@
 import { Button, Form } from "react-bootstrap";
-import { Controller, useForm, useFormState } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
 import { useEffect, useRef, useState } from "react";
+import useAxiosGet from "../services/ServiceAxiosGet";
+import UserRole from "../components/UserRole";
+import UserBanner from "../components/UserBanners";
 
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [data] = useAxiosGet(
+    `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
+  );
   const {
     control,
     register,
     handleSubmit,
     resetField,
-    setValue, 
+    setValue,
     setError,
-    formState: { errors, isDirty }
+    formState: { errors, isDirty, dirtyFields },
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -25,16 +31,17 @@ export default function Profile() {
     },
   });
 
-  const { dirtyFields } = useFormState({
-    control
-  });
-
   const inputRef = useRef();
+  let actualUser = "Default";
+
+  if (data) {
+    actualUser = data[0].name;
+  }
 
   useEffect(() => {
-      inputRef.current.focus();
-  },[formInputState])
-  
+    inputRef.current.focus();
+  }, [formInputState]);
+
   useEffect(() => {
     register("username", { required: true });
   }, [register]);
@@ -49,10 +56,7 @@ export default function Profile() {
       <Loading />
     ) : (
       <div className="d-grid gap-3">
-        <div
-          className="m-0 w-auto position-relative bg-primary z-0"
-          style={{ height: "400px", left: "0", right: "0" }}
-        ></div>
+        <UserBanner role={actualUser} />
         <img
           src={user.picture}
           alt={user.name}
@@ -79,7 +83,7 @@ export default function Profile() {
             className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline"
             style={{ textUnderlineOffset: "3px" }}
           >
-            <strong>Account: User</strong>
+            {data && <UserRole role={actualUser} />}
           </p>
           <Form.Group className="mb-4" controlId="formUserName">
             <Form.Label>
@@ -95,17 +99,17 @@ export default function Profile() {
                   isInvalid={errors.username}
                   disabled={formInputState}
                   ref={inputRef}
-                  onChange={e => {
-                    const value = e.target.value
-                      setValue("username", value, { shouldDirty: true })
-                      if (value === "") {
-                      setError("username", "notMatch")
-                      }
-                    }}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setValue("username", value, { shouldDirty: true });
+                    if (value === "") {
+                      setError("username", "notMatch");
+                    }
+                  }}
                 />
               )}
             />
-             <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid">
               The name must not be empty.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.username && (
@@ -126,7 +130,11 @@ export default function Profile() {
             <Controller
               name="email"
               control={control}
-              rules={{ required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ }}
+              rules={{
+                required: true,
+                pattern:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              }}
               render={({ field }) => (
                 <Form.Control
                   type="email"
@@ -142,9 +150,9 @@ export default function Profile() {
               </Form.Control.Feedback>
             )}
             {errors.email?.type === "pattern" && (
-            <Form.Control.Feedback type="invalid">
-              Please enter a valid email.
-            </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Please enter a valid email.
+              </Form.Control.Feedback>
             )}
             {isDirty && dirtyFields.email && (
               <Button
@@ -175,7 +183,7 @@ export default function Profile() {
               )}
             />
             <Form.Control.Feedback type="invalid">
-            The maximun length of the first name is 10 characters.
+              The maximun length of the first name is 10 characters.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.firstName && (
               <Button
@@ -206,7 +214,7 @@ export default function Profile() {
               )}
             />
             <Form.Control.Feedback type="invalid">
-            The maximun length of the last name is 10 characters.
+              The maximun length of the last name is 10 characters.
             </Form.Control.Feedback>
             {isDirty && dirtyFields.lastName && (
               <Button
@@ -229,7 +237,9 @@ export default function Profile() {
               variant="danger"
               type="button"
               className="mx-auto"
-              onClick={()=>{setFormInputState(true)}}
+              onClick={() => {
+                setFormInputState(true);
+              }}
             >
               Cancel
             </Button>
@@ -238,7 +248,9 @@ export default function Profile() {
               variant="info"
               type="button"
               className="mx-auto"
-              onClick={()=>{setFormInputState(false)}}
+              onClick={() => {
+                setFormInputState(false);
+              }}
             >
               Edit
             </Button>
