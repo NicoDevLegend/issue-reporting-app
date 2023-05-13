@@ -1,26 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import NewIssue from "../components/NewIssue";
 import IssuesTableList from "../components/IssuesTableList";
-import { useEffect, useState } from "react";
 
 export default function Home({ value }) {
-  const { isAuthenticated, user } = useAuth0();
-  const [postUser] = useState(user);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetch(process.env.REACT_APP_SERVICE_USER, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: postUser.AppUsername,
-          userID: postUser.sub.replace("auth0|", ""),
-        })
-      })
-      .then(response => response.json())
-      .catch(err => null)
-    }
-  }, [postUser, isAuthenticated]);
+  const { isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
     <div className="d-grid align-content-start vh-100">

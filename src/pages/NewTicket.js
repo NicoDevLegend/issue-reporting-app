@@ -1,9 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
-//import { useEffect } from "react";
-
-//import axios from "axios";
+import axiosPost from "../services/ServiceAxiosPost";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
@@ -15,44 +13,21 @@ export default function NewTicket() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      //IssueNo: "",
       userID: user.sub.replace("auth0|", ""),
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",
       Priority: "",
       Assignee: "",
-      //Open: new Date(),
-      //Close: "",
     },
   });
 
- /*  useEffect(() => {
-    // POST request using fetch inside useEffect React hook
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'React Hooks POST Request Example' })
-    };
-    fetch("https://test.nicolegend.repl.co/api/ticket", requestOptions)
-        .then(response => response.json())
-        .then(data => alert(data));
-
-// empty dependency array means this effect will only run once (like componentDidMount in classes)
-}, []); */
-
   const onSubmit = async (data, e) => {
-
-     await fetch(process.env.REACT_APP_SERVICE_API, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((d) => alert(JSON.stringify(d)))
-      .catch((err) => {
-        alert("Something is wrong!!")
-      })
+    const resData = await axiosPost(
+      process.env.REACT_APP_SERVICE_API + "/ticket",
+      data
+    );
+    alert(resData);
     e.target.reset();
   };
 
@@ -118,6 +93,7 @@ export default function NewTicket() {
                 <Form.Control
                   as="textarea"
                   isInvalid={errors.Description}
+                  {...field}
                   rows={3}
                 />
               )}

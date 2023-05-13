@@ -164,7 +164,7 @@ export default function Profile() {
             <Controller
               name="firstName"
               control={control}
-              rules={{ maxLength: 10 }}
+              rules={{ maxLength: 15 }}
               render={({ field }) => (
                 <Form.Control
                   type="text"
@@ -195,7 +195,7 @@ export default function Profile() {
             <Controller
               name="lastName"
               control={control}
-              rules={{ maxLength: 10 }}
+              rules={{ maxLength: 15 }}
               render={({ field }) => (
                 <Form.Control
                   type="text"

@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { Table, Dropdown, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function IssuesTableList() {
-  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
   const { user } = useAuth0();
+  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub.replace("auth0|", "")}`)
 
   const originalColors = {
     Status: "text-info",
@@ -28,12 +29,6 @@ export default function IssuesTableList() {
   };
 
   const [filterColor, setFilterColor] = useState(originalColors);
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVICE_API}/${user.sub.replace("auth0|", "")}`)
-    .then(response => response.json())
-    .then(d =>setData(d))
-  }, [user]);
 
   const handleOpenSelect = (date) => {
     let filtered = data.filter((issue) => {
@@ -93,7 +88,6 @@ export default function IssuesTableList() {
             }}
             onClick={() => {
               setFilteredData(null);
-              setData(data);
               setValue(null);
               setFilterColor(originalColors);
             }}
