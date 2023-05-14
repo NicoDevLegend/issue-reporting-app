@@ -130,7 +130,11 @@ export default function Profile() {
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>
-              <strong>Email address</strong>
+              <strong>Email address{!formInputState && (
+              <span className="text-warning">
+                (The email can't be changed).
+              </span>
+            )}</strong>
             </Form.Label>
             <Controller
               name="email"
@@ -145,7 +149,8 @@ export default function Profile() {
                   type="email"
                   {...field}
                   isInvalid={errors.email}
-                  disabled={formInputState}
+                  disabled
+                  className="text-secondary"
                 />
               )}
             />
