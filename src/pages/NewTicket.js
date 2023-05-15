@@ -2,9 +2,11 @@ import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
+import axiosGet from "../services/ServiceAxiosGet";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
+  const [data] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const {
     control,
     handleSubmit,
@@ -155,6 +157,10 @@ export default function NewTicket() {
                   required
                 >
                   <option value="">---</option>
+                  {data && (
+                    data.map((user, index) => (
+                      <option key={index} value={user.username}>{user.username}</option>))
+                  )}
                   <option value="Diana T">Diana T</option>
                   <option value="Adam J">Adam J</option>
                   <option value="Jason R">Jason R</option>
