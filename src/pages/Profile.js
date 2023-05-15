@@ -131,49 +131,23 @@ export default function Profile() {
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>
               <strong>Email address{!formInputState && (
-              <span className="text-warning">
-                (The email can't be changed).
-              </span>
-            )}</strong>
+                <span className="text-warning">
+                  (The email can't be changed).
+                </span>
+              )}</strong>
             </Form.Label>
             <Controller
               name="email"
               control={control}
-              rules={{
-                required: true,
-                pattern:
-                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              }}
               render={({ field }) => (
                 <Form.Control
                   type="email"
                   {...field}
-                  isInvalid={errors.email}
                   disabled
                   className="text-secondary"
                 />
               )}
             />
-            {errors.email?.type === "required" && (
-              <Form.Control.Feedback type="invalid">
-                The email must not be empty.
-              </Form.Control.Feedback>
-            )}
-            {errors.email?.type === "pattern" && (
-              <Form.Control.Feedback type="invalid">
-                Please enter a valid email.
-              </Form.Control.Feedback>
-            )}
-            {isDirty && dirtyFields.email && (
-              <Button
-                className="my-1"
-                variant="warning"
-                size="sm"
-                onClick={() => resetField("email")}
-              >
-                Reset
-              </Button>
-            )}
           </Form.Group>
           <Form.Group className="mb-4" controlId="formFirstName">
             <Form.Label>
