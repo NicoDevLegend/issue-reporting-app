@@ -6,7 +6,8 @@ import axiosGet from "../services/ServiceAxiosGet";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
-  const [data] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
+  const [dataUsers] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
+  //const 
   const {
     control,
     handleSubmit,
@@ -157,13 +158,10 @@ export default function NewTicket() {
                   required
                 >
                   <option value="">---</option>
-                  {data && (
-                    data.map((user, index) => (
+                  {dataUsers && (
+                    dataUsers.map((user, index) => (
                       <option key={index} value={user.username}>{user.username}</option>))
                   )}
-                  <option value="Diana T">Diana T</option>
-                  <option value="Adam J">Adam J</option>
-                  <option value="Jason R">Jason R</option>
                 </Form.Control>
               )}
             />
