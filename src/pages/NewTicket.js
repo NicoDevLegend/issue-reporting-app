@@ -6,8 +6,9 @@ import axiosGet from "../services/ServiceAxiosGet";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
+  const roleId = "rol_tb8J1E0n0Rs2YBKV";
   const [dataUsers] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
-  //const 
+  const [dataRoles] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${roleId}/users`);
   const {
     control,
     handleSubmit,
@@ -159,13 +160,12 @@ export default function NewTicket() {
                 >
                   <option value="">---</option>
                   {dataUsers && (
-                    dataUsers.map((user, index) => (
+                    dataUsers.filter(user => dataRoles.includes(user.user_id)).map((user, index) => (
                       <option key={index} value={user.username}>{user.username}</option>))
                   )}
                 </Form.Control>
               )}
             />
-
             <Form.Control.Feedback type="invalid">
               Please choose an Assignation.
             </Form.Control.Feedback>
