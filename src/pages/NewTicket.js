@@ -13,7 +13,7 @@ export default function NewTicket() {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      userID: user.sub.replace("auth0|", ""),
+      userID: user.sub,
       Status: "Not Resolved",
       Description: "Need to be fixed",
       Category: "",
@@ -24,7 +24,7 @@ export default function NewTicket() {
 
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
-      `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub.replace("auth0|", "")}`,
+      `${process.env.REACT_APP_SERVICE_API}/ticket`,
       data
     );
     alert(resData);

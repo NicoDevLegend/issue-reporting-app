@@ -13,7 +13,7 @@ export default function IssuesTableList() {
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
   const { user } = useAuth0();
-  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub.replace("auth0|", "")}`)
+  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}`)
 
   const originalColors = {
     Status: "text-info",

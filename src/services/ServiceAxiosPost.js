@@ -5,8 +5,8 @@ export default function axiosPost(url, data) {
     .post(url, data, {
       headers: { "Content-Type": "application/json" },
     })
-    .then(function (response) {
-      return JSON.stringify(response.data);
+    .then(function (res) {
+      return JSON.stringify(res.data);
     })
     .catch(function (error) {
       return "Something is wrong!!";
