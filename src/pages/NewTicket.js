@@ -27,8 +27,9 @@ export default function NewTicket() {
   });
 
   if (dataUsers) {
-    const test = dataUsers.filter(user => dataRoles.includes(user.user_id))
-    console.log(test);
+    const test = dataRoles.map(user => user.user_id)
+    const test2 =dataUsers.filter(user => test.includes(user.userID))
+    console.log(test2);
   }
 
   const onSubmit = async (data, e) => {
