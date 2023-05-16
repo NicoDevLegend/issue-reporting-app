@@ -7,27 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
+import { originalColors } from "../Utilities/originalColors";
 
 export default function IssuesTableList() {
   const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
   const { user } = useAuth0();
-  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}`)
-
-  const originalColors = {
-    Status: "text-info",
-    NotResolved: "bg-danger",
-    Resolved: "bg-success",
-    Category: "text-info",
-    Priority: "text-info",
-    Important: "text-success",
-    VeryImportant: "text-warning",
-    Urgent: "text-danger",
-    Open: "text-info",
-    Close: "text-info",
-  };
-
+  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}`);
   const [filterColor, setFilterColor] = useState(originalColors);
 
   const handleOpenSelect = (date) => {
