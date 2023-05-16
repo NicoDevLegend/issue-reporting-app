@@ -26,6 +26,8 @@ export default function NewTicket() {
     },
   });
 
+  console.log(dataUsers, dataRoles);
+
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
       `${process.env.REACT_APP_SERVICE_API}/ticket`,
