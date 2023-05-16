@@ -28,9 +28,8 @@ export default function NewTicket() {
 
   if (dataUsers) {
     const test = dataUsers.filter(user => dataRoles.includes(user.user_id))
+    console.log(test);
   }
-
-  console.log(test);
 
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
