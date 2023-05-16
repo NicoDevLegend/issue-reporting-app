@@ -26,8 +26,9 @@ export default function NewTicket() {
     },
   });
 
-  const test = []
-  test = dataUsers.filter(user => dataRoles.includes(user.user_id))
+  if (dataUsers) {
+    const test = dataUsers.filter(user => dataRoles.includes(user.user_id))
+  }
 
   console.log(test);
 
