@@ -5,6 +5,6 @@ export default function TableUserHeader({ userSub }) {
         `${process.env.REACT_APP_SERVICE_API}/${userSub}/roles`
     );
     return (
-        data && data.name === "User" ? (<th>Assignee</th>) : data && data.name === "Support" ? (<th>Reported by</th>) : (<th></th>)
+        data && data[0].name === "User" ? (<th>Assignee</th>) : data && data[0].name === "Support" ? (<th>Reported by</th>) : (<th></th>)
     )
 }
