@@ -61,7 +61,7 @@ export default function IssuesTableList() {
 
   return (
     <div
-      className="container bg-dark"
+      className="container bg-dark mb-1"
       style={{ overflow: "auto", minHeight: "300px" }}
     >
       <div className="w-100" style={{ height: "50px" }}>
