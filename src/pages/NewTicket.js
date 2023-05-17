@@ -26,11 +26,6 @@ export default function NewTicket() {
     },
   });
 
-  if (dataUsers) {
-    const test2 =dataUsers.filter(user => dataRoles.includes(user.userID)).map(user => user.username)
-    console.log(test2);
-  }
-
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
       `${process.env.REACT_APP_SERVICE_API}/ticket`,
@@ -164,8 +159,8 @@ export default function NewTicket() {
                   required
                 >
                   <option value="">---</option>
-                  {dataUsers && dataRoles&& (
-                     dataUsers.filter(user => dataRoles.includes(user.userID)).map((user, index) => (
+                  {dataUsers && dataRoles && (
+                    dataUsers.filter(user => dataRoles.includes(user.userID)).map((user, index) => (
                       <option key={index} value={user.username}>{user.username}</option>))
                   )}
                 </Form.Control>
