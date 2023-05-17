@@ -8,6 +8,7 @@ import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
 import { originalColors } from "../Utilities/originalColors";
+import TableUserData from "./TableUserData";
 
 export default function IssuesTableList() {
   const [filteredData, setFilteredData] = useState(null);
@@ -280,7 +281,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <td>{issue.Assignee}</td>
+                  <TableUserData assigneeID={issue.Assignee} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"

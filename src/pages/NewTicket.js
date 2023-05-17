@@ -6,9 +6,8 @@ import axiosGet from "../services/ServiceAxiosGet";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
-  const roleId = "rol_tb8J1E0n0Rs2YBKV";
   const [dataUsers] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
-  const [dataRoles] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${roleId}/users`);
+  const [dataRoles] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`);
   const {
     control,
     handleSubmit,
@@ -22,7 +21,7 @@ export default function NewTicket() {
       Description: "Need to be fixed",
       Category: "",
       Priority: "",
-      Assignee: "",
+      AssigneeID: "",
     },
   });
 
@@ -161,7 +160,7 @@ export default function NewTicket() {
                   <option value="">---</option>
                   {dataUsers && dataRoles && (
                     dataUsers.filter(user => dataRoles.includes(user.userID)).map((user, index) => (
-                      <option key={index} value={user.username}>{user.username}</option>))
+                      <option key={index} value={user.userID}>{user.username}</option>))
                   )}
                 </Form.Control>
               )}
@@ -175,7 +174,7 @@ export default function NewTicket() {
               <strong>Attachments</strong>
             </Form.Label>
             <br></br>
-            <Form.Control type="file" multiple />
+            <Form.Control type="file" className="me-auto" />
           </Form.Group>
           <hr></hr>
           <Form.Group className="mx-auto mt-2 mb-3">
