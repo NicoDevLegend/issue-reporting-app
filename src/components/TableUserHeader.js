@@ -1,6 +1,6 @@
 import useAxiosGet from "../services/ServiceAxiosGet";
 
-export default function TableUserData({ userSub }) {
+export default function TableUserHeader({ userSub }) {
     const [data] = useAxiosGet(
         `${process.env.REACT_APP_SERVICE_API}/${userSub}/roles`
     );
