@@ -18,7 +18,7 @@ function App() {
     <Loading />
   ) : (
     <div className="App">
-      <div className="d-flex">
+      <div className="d-flex min-vh-100">
         <SideBar />
         <div className="w-100 bg-secondary">
           <NavBar />

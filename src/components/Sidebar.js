@@ -18,8 +18,9 @@ export default function SideBar() {
         textColor="#fff"
         backgroundColor="#212529"
         maxWidth="200px"
-        className="h-auto"
-        breakpoint={1400}
+        className="h-auto min-vh-100"
+        breakpoint={720}
+        toggled
       >
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
