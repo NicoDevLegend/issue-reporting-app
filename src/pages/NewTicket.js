@@ -147,13 +147,13 @@ export default function NewTicket() {
               </strong>
             </Form.Label>
             <Controller
-              name="Assignee"
+              name="AssigneeID"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <Form.Control
                   as="select"
-                  isInvalid={errors.Assignee}
+                  isInvalid={errors.AssigneeID}
                   {...field}
                   required
                 >
