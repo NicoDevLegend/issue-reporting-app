@@ -8,6 +8,7 @@ import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
 import { originalColors } from "../Utilities/originalColors";
+import TableUserHeader from "./TableUserHeader";
 import TableUserData from "./TableUserData";
 
 export default function IssuesTableList() {
@@ -218,7 +219,7 @@ export default function IssuesTableList() {
                 </Dropdown.Menu>
               </Dropdown>
             </th>
-            <th>Assignee</th>
+            <TableUserHeader userSub={user.sub}/>
             <th>
               <Dropdown>
                 <Dropdown.Toggle variant="dark" className={filterColor.Open}>
@@ -281,7 +282,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.AssigneeID} />
+                  <TableUserData userID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -323,7 +324,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.AssigneeID} />
+                  <TableUserData userID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -360,7 +361,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.AssigneeID} />
+                  <TableUserData userID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -397,7 +398,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.AssigneeID} />
+                  <TableUserData userID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
