@@ -281,7 +281,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.Assignee} />
+                  <TableUserData assigneeID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -323,7 +323,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.Assignee} />
+                  <TableUserData assigneeID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -360,7 +360,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.Assignee} />
+                  <TableUserData assigneeID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
@@ -397,7 +397,7 @@ export default function IssuesTableList() {
                   ) : (
                     <td className={originalColors.Urgent}>{issue.Priority}</td>
                   )}
-                  <TableUserData assigneeID={issue.Assignee} />
+                  <TableUserData assigneeID={issue.AssigneeID} />
                   <td>{dateOpen.toLocaleDateString()}</td>
                   <td>
                     {dateClose.toLocaleDateString() === "Invalid Date"
