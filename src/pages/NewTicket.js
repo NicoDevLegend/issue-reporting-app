@@ -27,8 +27,7 @@ export default function NewTicket() {
   });
 
   if (dataUsers) {
-    const test = dataRoles.map(user => user.user_id)
-    const test2 =dataUsers.filter(user => test.includes(user.userID))
+    const test2 =dataUsers.filter(user => dataRoles.includes(user.userID)).map(user => user.username)
     console.log(test2);
   }
 
@@ -165,8 +164,8 @@ export default function NewTicket() {
                   required
                 >
                   <option value="">---</option>
-                  {dataUsers && (
-                    dataUsers.filter(user => dataRoles.includes(user.user_id)).map((user, index) => (
+                  {dataUsers && dataRoles&& (
+                     dataUsers.filter(user => dataRoles.includes(user.userID)).map((user, index) => (
                       <option key={index} value={user.username}>{user.username}</option>))
                   )}
                 </Form.Control>
