@@ -2,12 +2,12 @@ import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
-import axiosGet from "../services/ServiceAxiosGet";
+import useAxiosGet from "../services/ServiceAxiosGet";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
-  const [dataUsers] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
-  const [dataRoles] = axiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`);
+  const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
+  const [dataRoles] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`);
   const {
     control,
     handleSubmit,
