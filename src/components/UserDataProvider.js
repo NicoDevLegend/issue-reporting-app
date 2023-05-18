@@ -3,14 +3,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import useAxiosGet from "../services/ServiceAxiosGet";
 
 export const UserDataContext = createContext();
-const { user } = useAuth0();
 
 export function useUserDataContext() {
   return useContext(UserDataContext);
 }
 
 export function UserDataContextProvider({ children }) {
-  //const { user } = useAuth0();
+  const { user } = useAuth0();
   const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
   //const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/user`);
 console.log(user);
