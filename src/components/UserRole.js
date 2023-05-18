@@ -4,8 +4,8 @@ import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function initialState() {
-  const userData = localStorage.getItem("userData");
-  return userData ? JSON.parse(userData) : "";
+  const userRole = localStorage.getItem("userRole");
+  return userRole ? JSON.parse(userRole) : "";
 }
 
 export default function UserRole() {
@@ -15,9 +15,9 @@ export default function UserRole() {
   const [userRole, setUserRole] = useState(initialState);
 
   useEffect(() => {
-    localStorage.setItem("userData", JSON.stringify(userData));
+    localStorage.setItem("userRole", JSON.stringify(userRole));
     if (data) {
-      setUserData(data[0].name)
+      setUserRole(data[0].name)
     }
   }, [userRole, data]);
 
