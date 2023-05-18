@@ -12,6 +12,7 @@ export function UserDataContextProvider({ children }) {
   const { user } = useAuth0();
   const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
   //const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/user`);
+console.log/(user, data);
 
   function initialState() {
     const userData = localStorage.getItem("userData");
