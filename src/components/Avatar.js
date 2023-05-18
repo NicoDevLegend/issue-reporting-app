@@ -3,7 +3,7 @@ import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import useAxiosGet from "../services/ServiceAxiosGet";
-import UserRole from "./UserRole";
+//import UserRole from "./UserRole";
 
 export default function Avatar() {
   const { user } = useAuth0();
