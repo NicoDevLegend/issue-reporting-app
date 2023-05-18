@@ -24,7 +24,7 @@ export function UserDataContextProvider({ children }) {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
-  if (dataRole /*&& dataUser*/) {
+  if (data /*&& dataUser*/) {
     setUserData(/*{ Role: dataRole[0], User: dataUser }*/data[0])
   }
 
