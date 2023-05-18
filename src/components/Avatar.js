@@ -3,7 +3,6 @@ import LogOutButton from "./LogOutButton";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import { useUserDataContext } from "./UserDataProvider";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import UserRole from "./UserRole";
 
