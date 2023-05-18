@@ -7,9 +7,13 @@ import UserRole from "./UserRole";
 
 export default function Avatar() {
   const { user } = useAuth0();
-  const [data] = useAxiosGet(
+  const data = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
   );
+
+  if (data) {
+    console.log(data)
+  }   
 
   return (
     <Nav className="m-auto">
@@ -32,7 +36,7 @@ export default function Avatar() {
                   Signed in as: <strong>{user.AppUsername}</strong>
                 </p>
                 <p>
-                <UserRole role={data[0].name} />
+                {/*<UserRole role={data[0].name} />*/}
                 </p>
                 <Link to="/profile" className="text-decoration-none text-reset">
                   <p>Profile</p>
