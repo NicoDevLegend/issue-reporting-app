@@ -32,7 +32,7 @@ export default function Avatar() {
                   Signed in as: <strong>{user.AppUsername}</strong>
                 </p>
                 <p>
-                <UserRole role={userData.Role/*data[0].name*/} />
+                <UserRole role={userData/*data[0].name*/} />
                 </p>
                 <Link to="/profile" className="text-decoration-none text-reset">
                   <p>Profile</p>

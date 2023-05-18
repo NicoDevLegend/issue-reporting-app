@@ -10,12 +10,12 @@ export function useUserDataContext() {
 
 export function UserDataContextProvider({ children }) {
   const { user } = useAuth0();
-  const [dataRole] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
-  const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/user`);
+  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
+  //const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/user`);
 
   function initialState() {
     const userData = localStorage.getItem("userData");
-    return userData ? JSON.parse(userData) : { Role: "", User: "" };
+    return userData ? JSON.parse(userData) : ""/*{ Role: "", User: "" }*/;
   }
 
   const [userData, setUserData] = useState(initialState);
@@ -24,8 +24,8 @@ export function UserDataContextProvider({ children }) {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
-  if (dataRole && dataUser) {
-    setUserData({ Role: dataRole[0], User: dataUser })
+  if (dataRole /*&& dataUser*/) {
+    setUserData(/*{ Role: dataRole[0], User: dataUser }*/data[0])
   }
 
   return (
