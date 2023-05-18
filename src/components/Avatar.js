@@ -7,7 +7,7 @@ import useAxiosGet from "../services/ServiceAxiosGet";
 
 export default function Avatar() {
   const { user } = useAuth0();
-  const data = useAxiosGet(
+  const [data] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
   );
 
