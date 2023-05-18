@@ -19,11 +19,10 @@ export default function Avatar() {
 
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(userData));
+    if (data) {
+      setUserData(data[0].name)
+    }
   }, [userData]);
-
-  if (data) {
-    setUserData(data[0].name)
-  }
 
   return (
     <Nav className="m-auto">
