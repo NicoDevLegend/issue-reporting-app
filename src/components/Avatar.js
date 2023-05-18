@@ -3,13 +3,27 @@ import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { useUserDataContext } from "./UserDataProvider";
-//import useAxiosGet from "../services/ServiceAxiosGet";
+import useAxiosGet from "../services/ServiceAxiosGet";
 import UserRole from "./UserRole";
 
 export default function Avatar() {
   const { user } = useAuth0();
-  const { userData } = useUserDataContext();
-  //const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
+  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
+
+  function initialState() {
+    const userData = localStorage.getItem("userData");
+    return userData ? JSON.parse(userData) : "";
+  }
+
+  const [userData, setUserData] = useState(initialState);
+
+  useEffect(() => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }, [userData]);
+
+  if (data) {
+    setUserData(data[0])
+  }
 
   return (
     <Nav className="m-auto">
@@ -32,7 +46,7 @@ export default function Avatar() {
                   Signed in as: <strong>{user.AppUsername}</strong>
                 </p>
                 <p>
-                <UserRole role={userData/*data[0].name*/} />
+                <UserRole role={userData} />
                 </p>
                 <Link to="/profile" className="text-decoration-none text-reset">
                   <p>Profile</p>
