@@ -12,7 +12,7 @@ export default function Avatar() {
   );
 
   if (data) {
-    console.log(data)
+    console.log(data[0])
   }   
 
   return (
