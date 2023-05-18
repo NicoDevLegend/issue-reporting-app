@@ -2,18 +2,15 @@ import { Nav, NavItem, NavLink, Dropdown } from "react-bootstrap";
 import LogOutButton from "./LogOutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
-import useAxiosGet from "../services/ServiceAxiosGet";
-//import UserRole from "./UserRole";
+import { useUserDataContext } from "./UserDataProvider";
+//import useAxiosGet from "../services/ServiceAxiosGet";
+import UserRole from "./UserRole";
 
 export default function Avatar() {
   const { user } = useAuth0();
-  const [data] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
-  );
+  const { userData } = useUserDataContext();
+  //const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`); 
 
-  if (data) {
-    console.log(data[0])
-  }   
 
   return (
     <Nav className="m-auto">
@@ -27,7 +24,7 @@ export default function Avatar() {
           />
         </Dropdown.Toggle>
         <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
-          {!data ? (
+          {/*!data*/!userData ? (
             <div style={{ minHeight: "200px" }}></div>
           ) : (
             <>
@@ -36,7 +33,7 @@ export default function Avatar() {
                   Signed in as: <strong>{user.AppUsername}</strong>
                 </p>
                 <p>
-                {/*<UserRole role={data[0].name} />*/}
+                <UserRole role={userData.Role/*data[0].name*/} />
                 </p>
                 <Link to="/profile" className="text-decoration-none text-reset">
                   <p>Profile</p>

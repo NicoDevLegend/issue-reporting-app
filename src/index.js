@@ -10,7 +10,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Auth0ProviderWithNavigate>
-      <App />
+      <UserDataProvider>
+        <App />
+      </UserDataProvider>
     </Auth0ProviderWithNavigate>
   </BrowserRouter>
 );

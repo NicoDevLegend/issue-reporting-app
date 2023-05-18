@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import useAxiosGet from "../services/ServiceAxiosGet";
 
 export const UserDataContext = createContext();
@@ -8,12 +9,12 @@ export function useUserDataContext() {
 }
 
 function initialState() {
-    const [dataRole] = useAxiosGet(
-        `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
-      );
-    const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${userID}/user`);
+  const { user } = useAuth0();
+  const [dataRole] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
+  const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${userID}/user`);
+
   const userData = localStorage.getItem("userData");
-  return userData ? JSON.parse(userData) : data[0];
+  return userData ? JSON.parse(userData) : { Role: dataRole[0], User: dataUser };
 }
 
 export function UserDataProvider({ children }) {
