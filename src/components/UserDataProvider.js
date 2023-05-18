@@ -8,16 +8,16 @@ export function useUserDataContext() {
   return useContext(UserDataContext);
 }
 
-export function UserDataProvider({ children }) {
+export function UserDataContextProvider({ children }) {
   const { user } = useAuth0();
   const [dataRole] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
-  const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${userID}/user`);
+  const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/user`);
 
   function initialState() {
     const userData = localStorage.getItem("userData");
     return userData ? JSON.parse(userData) : { Role: dataRole[0], User: dataUser };
   }
-  
+
   const [userData, setUserData] = useState(initialState);
 
   useEffect(() => {
@@ -25,8 +25,8 @@ export function UserDataProvider({ children }) {
   }, [userData]);
 
   return (
-    <UserData.Provider value={{ userData }}>
+    <UserDataContext.Provider value={{ userData }}>
       {children}
-    </UserData.Provider>
+    </UserDataContext.Provider>
   );
 }

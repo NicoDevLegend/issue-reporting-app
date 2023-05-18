@@ -9,8 +9,7 @@ import UserRole from "./UserRole";
 export default function Avatar() {
   const { user } = useAuth0();
   const { userData } = useUserDataContext();
-  //const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`); 
-
+  //const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
 
   return (
     <Nav className="m-auto">

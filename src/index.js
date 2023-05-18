@@ -5,15 +5,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import Auth0ProviderWithNavigate from "./components/Auth0Provider";
-import { UserDataProvider } from "./components/UserDataProvider";
+import { UserDataContextProvider } from "./components/UserDataProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Auth0ProviderWithNavigate>
-      <UserDataProvider>
+      <UserDataContextProvider>
         <App />
-      </UserDataProvider>
+      </UserDataContextProvider>
     </Auth0ProviderWithNavigate>
   </BrowserRouter>
 );
