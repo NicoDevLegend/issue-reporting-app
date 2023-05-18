@@ -15,7 +15,7 @@ export function UserDataContextProvider({ children }) {
 
   function initialState() {
     const userData = localStorage.getItem("userData");
-    return userData ? JSON.parse(userData) : { Role: dataRole[0], User: dataUser };
+    return userData ? JSON.parse(userData) : { Role: "", User: "" };
   }
 
   const [userData, setUserData] = useState(initialState);
@@ -23,6 +23,10 @@ export function UserDataContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
+
+  if (dataRole && dataUser) {
+    setUserData({ Role: dataRole[0], User: dataUser })
+  }
 
   return (
     <UserDataContext.Provider value={{ userData }}>
