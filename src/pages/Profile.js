@@ -3,7 +3,6 @@ import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
 import { useEffect, useRef, useState } from "react";
-import useAxiosGet from "../services/ServiceAxiosGet";
 import UserRole from "../components/UserRole";
 import UserBanner from "../components/UserBanners";
 import axiosPatch from "../services/ServiceAxiosPatch";
@@ -11,9 +10,7 @@ import axiosPatch from "../services/ServiceAxiosPatch";
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [data] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`
-  );
+
   const {
     control,
     register,
@@ -33,11 +30,6 @@ export default function Profile() {
   });
 
   const inputRef = useRef();
-  let actualUser = "Default";
-
-  if (data) {
-    actualUser = data[0].name;
-  }
 
   useEffect(() => {
     inputRef.current.focus();
@@ -61,7 +53,7 @@ export default function Profile() {
       <Loading />
     ) : (
       <div className="d-grid gap-3">
-        <UserBanner role={actualUser} />
+        <UserBanner />
         <img
           src={user.picture}
           alt={user.name}
@@ -88,7 +80,7 @@ export default function Profile() {
             className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline"
             style={{ textUnderlineOffset: "3px" }}
           >
-            {data && <UserRole role={actualUser} />}
+            <UserRole />
           </p>
           <Form.Group className="mb-4" controlId="formUserName">
             <Form.Label>
