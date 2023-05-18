@@ -22,7 +22,7 @@ export default function Avatar() {
     if (data) {
       setUserData(data[0].name)
     }
-  }, [userData]);
+  }, [userData, data]);
 
   return (
     <Nav className="m-auto">
