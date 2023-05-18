@@ -408,7 +408,7 @@ export default function IssuesTableList() {
                 </tr>
               );
             })
-          ) : data.length === 0 && !value ? (
+          ) : data && data.length === 0 && !value ? (
             <tr>
               <td colSpan={8}>
                 <h3>There aren’t any open issues.</h3>
