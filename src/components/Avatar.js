@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import UserRole from "./UserRole";
 
+function initialState() {
+  const userData = localStorage.getItem("userData");
+  return userData ? JSON.parse(userData) : "";
+}
+
 export default function Avatar() {
   const { user } = useAuth0();
   const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
-
-  function initialState() {
-    const userData = localStorage.getItem("userData");
-    return userData ? JSON.parse(userData) : "";
-  }
 
   const [userData, setUserData] = useState(initialState);
 
@@ -22,7 +22,7 @@ export default function Avatar() {
   }, [userData]);
 
   if (data) {
-    setUserData(data[0])
+    setUserData(data[0].name)
   }
 
   return (
