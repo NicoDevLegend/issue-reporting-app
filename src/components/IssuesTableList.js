@@ -416,9 +416,11 @@ export default function IssuesTableList() {
             </tr>
           ) : (
             <tr>
+              <td colSpan={8}>
                 <Spinner animation="border" variant="secondary">
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
+              </td>
             </tr>
           )}
         </tbody>

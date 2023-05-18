@@ -9,7 +9,7 @@ export default function TableUserData({ userID }) {
                 <td>{dataUser.username}</td>
             ) : (
                 <td>
-                    <Spinner animation="border" variant="secondary">
+                    <Spinner animation="border" variant="secondary" size="sm">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>
                 </td>
