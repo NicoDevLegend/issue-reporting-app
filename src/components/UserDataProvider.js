@@ -8,16 +8,16 @@ export function useUserDataContext() {
   return useContext(UserDataContext);
 }
 
-function initialState() {
+export function UserDataProvider({ children }) {
   const { user } = useAuth0();
   const [dataRole] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${user.sub}/roles`);
   const [dataUser] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/${userID}/user`);
 
-  const userData = localStorage.getItem("userData");
-  return userData ? JSON.parse(userData) : { Role: dataRole[0], User: dataUser };
-}
-
-export function UserDataProvider({ children }) {
+  function initialState() {
+    const userData = localStorage.getItem("userData");
+    return userData ? JSON.parse(userData) : { Role: dataRole[0], User: dataUser };
+  }
+  
   const [userData, setUserData] = useState(initialState);
 
   useEffect(() => {
