@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { Table, Dropdown, Button } from "react-bootstrap";
+import { Table, Dropdown, Button, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import useAxiosGet from "../services/ServiceAxiosGet";
@@ -219,7 +219,7 @@ export default function IssuesTableList() {
                 </Dropdown.Menu>
               </Dropdown>
             </th>
-            <TableUserHeader userSub={user.sub}/>
+            <TableUserHeader userSub={user.sub} />
             <th>
               <Dropdown>
                 <Dropdown.Toggle variant="dark" className={filterColor.Open}>
@@ -408,10 +408,18 @@ export default function IssuesTableList() {
                 </tr>
               );
             })
-          ) : (
+          ) : data.length === 0 && !value ? (
             <tr>
               <td colSpan={8}>
                 <h3>There aren’t any open issues.</h3>
+              </td>
+            </tr>
+          ) : (
+            <tr>
+              <td colSpan={8}>
+                <Spinner animation="border" variant="secondary">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
               </td>
             </tr>
           )}
