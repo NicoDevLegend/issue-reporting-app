@@ -2,21 +2,23 @@ import { useState } from "react";
 import { DefinedRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { Table, Dropdown, Button, Spinner } from "react-bootstrap";
+import { Table, Dropdown, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { useAuth0 } from "@auth0/auth0-react";
 import { originalColors } from "../Utilities/originalColors";
 import TableUserHeader from "./TableUserHeader";
-import TableUserData from "./TableUserData";
+import TBodyUser from "./TBodyUser";
 
 export default function IssuesTableList() {
   const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
   const { user } = useAuth0();
-  const [data] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}`);
+  const [data] = useAxiosGet(
+    `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}`
+  );
   const [filterColor, setFilterColor] = useState(originalColors);
 
   const handleOpenSelect = (date) => {
@@ -254,176 +256,12 @@ export default function IssuesTableList() {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {data && data.length !== 0 && !value ? (
-            data.map((issue, index) => {
-              let dateOpen = new Date(issue.Open);
-              let dateClose = new Date(issue.Close);
-              return (
-                <tr key={index}>
-                  <td>{issue.IssueNo}</td>
-                  {issue.Status === "Resolved" ? (
-                    <td className={originalColors.Resolved}>{issue.Status}</td>
-                  ) : (
-                    <td className={originalColors.NotResolved}>
-                      {issue.Status}
-                    </td>
-                  )}
-                  <td>{issue.Description}</td>
-                  <td>{issue.Category}</td>
-                  {issue.Priority === "Important" ? (
-                    <td className={originalColors.Important}>
-                      {issue.Priority}
-                    </td>
-                  ) : issue.Priority === "Very Important" ? (
-                    <td className={originalColors.VeryImportant}>
-                      {issue.Priority}
-                    </td>
-                  ) : (
-                    <td className={originalColors.Urgent}>{issue.Priority}</td>
-                  )}
-                  <TableUserData userID={issue.AssigneeID} />
-                  <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>
-                    {dateClose.toLocaleDateString() === "Invalid Date"
-                      ? ""
-                      : dateClose.toLocaleDateString()}
-                  </td>
-                </tr>
-              );
-            })
-          ) : value && value !== "Open" ? (
-            data.filter(
-              (issue) =>
-                (filter === "Status" && issue.Status === value) ||
-                (filter === "Category" && issue.Category === value) ||
-                (filter === "Priority" && issue.Priority === value)
-            ).map((issue, index) => {
-              let dateOpen = new Date(issue.Open);
-              let dateClose = new Date(issue.Close);
-              return (
-                <tr key={index}>
-                  <td>{issue.IssueNo}</td>
-                  {issue.Status === "Resolved" ? (
-                    <td className={originalColors.Resolved}>{issue.Status}</td>
-                  ) : (
-                    <td className={originalColors.NotResolved}>
-                      {issue.Status}
-                    </td>
-                  )}
-                  <td>{issue.Description}</td>
-                  <td>{issue.Category}</td>
-                  {issue.Priority === "Important" ? (
-                    <td className={originalColors.Important}>
-                      {issue.Priority}
-                    </td>
-                  ) : issue.Priority === "Very Important" ? (
-                    <td className={originalColors.VeryImportant}>
-                      {issue.Priority}
-                    </td>
-                  ) : (
-                    <td className={originalColors.Urgent}>{issue.Priority}</td>
-                  )}
-                  <TableUserData userID={issue.AssigneeID} />
-                  <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>
-                    {dateClose.toLocaleDateString() === "Invalid Date"
-                      ? ""
-                      : dateClose.toLocaleDateString()}
-                  </td>
-                </tr>
-              );
-            })
-          ) : filteredData && filteredData !== [] && value === "Open" ? (
-            filteredData.map((issue, index) => {
-              let dateOpen = new Date(issue.Open);
-              let dateClose = new Date(issue.Close);
-              return (
-                <tr key={index}>
-                  <td>{issue.IssueNo}</td>
-                  {issue.Status === "Resolved" ? (
-                    <td className={originalColors.Resolved}>{issue.Status}</td>
-                  ) : (
-                    <td className={originalColors.NotResolved}>
-                      {issue.Status}
-                    </td>
-                  )}
-                  <td>{issue.Description}</td>
-                  <td>{issue.Category}</td>
-                  {issue.Priority === "Important" ? (
-                    <td className={originalColors.Important}>
-                      {issue.Priority}
-                    </td>
-                  ) : issue.Priority === "Very Important" ? (
-                    <td className={originalColors.VeryImportant}>
-                      {issue.Priority}
-                    </td>
-                  ) : (
-                    <td className={originalColors.Urgent}>{issue.Priority}</td>
-                  )}
-                  <TableUserData userID={issue.AssigneeID} />
-                  <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>
-                    {dateClose.toLocaleDateString() === "Invalid Date"
-                      ? ""
-                      : dateClose.toLocaleDateString()}
-                  </td>
-                </tr>
-              );
-            })
-          ) : filteredData && filteredData !== [] && value === "Close" ? (
-            filteredData.map((issue, index) => {
-              let dateOpen = new Date(issue.Open);
-              let dateClose = new Date(issue.Close);
-              return (
-                <tr key={index}>
-                  <td>{issue.IssueNo}</td>
-                  {issue.Status === "Resolved" ? (
-                    <td className={originalColors.Resolved}>{issue.Status}</td>
-                  ) : (
-                    <td className={originalColors.NotResolved}>
-                      {issue.Status}
-                    </td>
-                  )}
-                  <td>{issue.Description}</td>
-                  <td>{issue.Category}</td>
-                  {issue.Priority === "Important" ? (
-                    <td className={originalColors.Important}>
-                      {issue.Priority}
-                    </td>
-                  ) : issue.Priority === "Very Important" ? (
-                    <td className={originalColors.VeryImportant}>
-                      {issue.Priority}
-                    </td>
-                  ) : (
-                    <td className={originalColors.Urgent}>{issue.Priority}</td>
-                  )}
-                  <TableUserData userID={issue.AssigneeID} />
-                  <td>{dateOpen.toLocaleDateString()}</td>
-                  <td>
-                    {dateClose.toLocaleDateString() === "Invalid Date"
-                      ? ""
-                      : dateClose.toLocaleDateString()}
-                  </td>
-                </tr>
-              );
-            })
-          ) : data && data.length === 0 && !value ? (
-            <tr>
-              <td colSpan={8}>
-                <h3>There aren’t any open issues.</h3>
-              </td>
-            </tr>
-          ) : (
-            <tr>
-              <td colSpan={8}>
-                <Spinner animation="border" variant="secondary">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              </td>
-            </tr>
-          )}
-        </tbody>
+        <TBodyUser
+          data={data}
+          value={value}
+          filter={filter}
+          filteredData={filteredData}
+        />
       </Table>
     </div>
   );

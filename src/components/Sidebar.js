@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SideBar() {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     isAuthenticated && (
@@ -22,7 +22,7 @@ export default function SideBar() {
         breakpoint={720}
         toggled
       >
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" ></i>}>
+        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
             href="/"
             className="text-decoration-none"
@@ -49,16 +49,29 @@ export default function SideBar() {
             >
               <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              to="/newticket"
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "activeClicked" : ""
-              }
-            >
-              <CDBSidebarMenuItem icon="clipboard-list">
-                New Ticket
-              </CDBSidebarMenuItem>
-            </NavLink>
+            {user["https://my-app/roles"][0] === "User" ? (
+              <NavLink
+                to="/newticket"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "activeClicked" : ""
+                }
+              >
+                <CDBSidebarMenuItem icon="clipboard-list">
+                  New Ticket
+                </CDBSidebarMenuItem>
+              </NavLink>
+            ) : (
+               <NavLink
+                to="/home"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "activeClicked" : ""
+                }
+              >
+                <CDBSidebarMenuItem icon="clipboard-list">
+                  Not found
+                </CDBSidebarMenuItem>
+              </NavLink>
+            )}
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center">footer</CDBSidebarFooter>
