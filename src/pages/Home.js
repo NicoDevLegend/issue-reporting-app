@@ -2,9 +2,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NewIssue from "../components/NewIssue";
 import IssuesTableList from "../components/IssuesTableList";
 
-export default function Home({ value }) {
+export default function Home() {
   const { isAuthenticated } = useAuth0();
-
+  
   return isAuthenticated ? (
     <div className="d-grid align-content-start">
       <h1

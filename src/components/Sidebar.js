@@ -22,7 +22,7 @@ export default function SideBar() {
         breakpoint={720}
         toggled
       >
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" ></i>}>
           <a
             href="/"
             className="text-decoration-none"

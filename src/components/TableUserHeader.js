@@ -1,10 +1,13 @@
-import useAxiosGet from "../services/ServiceAxiosGet";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function TableUserHeader({ userSub }) {
-    const [data] = useAxiosGet(
-        `${process.env.REACT_APP_SERVICE_API}/${userSub}/roles`
-    );
-    return (
-        data && data[0].name === "User" ? (<th>Assignee</th>) : data && data[0].name === "Support" ? (<th>Reported by</th>) : (<th></th>)
-    )
+export default function TableUserHeader() {
+  const { user } = useAuth0();
+
+  return user["https://my-app/roles"][0] === "User" ? (
+    <th>Assignee</th>
+  ) : user["https://my-app/roles"][0] === "Support" ? (
+    <th>Reported by</th>
+  ) : (
+    <th></th>
+  );
 }

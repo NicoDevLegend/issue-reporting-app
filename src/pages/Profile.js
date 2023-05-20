@@ -10,6 +10,8 @@ import axiosPatch from "../services/ServiceAxiosPatch";
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
+  
+  console.log(user);
 
   const {
     control,
@@ -122,11 +124,14 @@ export default function Profile() {
           </Form.Group>
           <Form.Group className="mb-4" controlId="formEmail">
             <Form.Label>
-              <strong>Email address{!formInputState && (
-                <span className="text-warning">
-                  (The email can't be changed).
-                </span>
-              )}</strong>
+              <strong>
+                Email address
+                {!formInputState && (
+                  <span className="text-warning">
+                    (The email can't be changed).
+                  </span>
+                )}
+              </strong>
             </Form.Label>
             <Controller
               name="email"

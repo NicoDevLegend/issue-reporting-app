@@ -219,7 +219,7 @@ export default function IssuesTableList() {
                 </Dropdown.Menu>
               </Dropdown>
             </th>
-            <TableUserHeader userSub={user.sub} />
+            <TableUserHeader />
             <th>
               <Dropdown>
                 <Dropdown.Toggle variant="dark" className={filterColor.Open}>
