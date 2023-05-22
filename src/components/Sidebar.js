@@ -61,7 +61,7 @@ export default function SideBar() {
                 </CDBSidebarMenuItem>
               </NavLink>
             ) : (
-               <NavLink
+              <NavLink
                 to="/home"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "activeClicked" : ""

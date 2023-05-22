@@ -4,7 +4,7 @@ import IssuesTableList from "../components/IssuesTableList";
 
 export default function Home() {
   const { isAuthenticated } = useAuth0();
-  
+
   return isAuthenticated ? (
     <div className="d-grid align-content-start">
       <h1

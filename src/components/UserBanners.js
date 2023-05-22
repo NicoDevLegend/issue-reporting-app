@@ -14,7 +14,7 @@ export default function UserBanner() {
 
   useEffect(() => {
     localStorage.setItem("userRole", JSON.stringify(userRole));
-      setUserRole(user["https://my-app/roles"][0])
+    setUserRole(user["https://my-app/roles"][0]);
   }, [userRole, user]);
 
   return (

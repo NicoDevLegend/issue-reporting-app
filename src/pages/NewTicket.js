@@ -7,7 +7,9 @@ import useAxiosGet from "../services/ServiceAxiosGet";
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
-  const [dataRoles] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`);
+  const [dataRoles] = useAxiosGet(
+    `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
+  );
   const {
     control,
     handleSubmit,
@@ -158,10 +160,15 @@ export default function NewTicket() {
                   required
                 >
                   <option value="">---</option>
-                  {dataUsers && dataRoles && (
-                    dataUsers.filter(user => dataRoles.includes(user.userID)).map((user, index) => (
-                      <option key={index} value={user.userID}>{user.username}</option>))
-                  )}
+                  {dataUsers &&
+                    dataRoles &&
+                    dataUsers
+                      .filter((user) => dataRoles.includes(user.userID))
+                      .map((user, index) => (
+                        <option key={index} value={user.userID}>
+                          {user.username}
+                        </option>
+                      ))}
                 </Form.Control>
               )}
             />

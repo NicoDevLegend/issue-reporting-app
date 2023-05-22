@@ -28,7 +28,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID} />
+              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClose.toLocaleDateString() === "Invalid Date"
@@ -68,7 +68,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
                 ) : (
                   <td className={originalColors.Urgent}>{issue.Priority}</td>
                 )}
-                <TableUserData userID={issue.AssigneeID} />
+                <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
                 <td>{dateOpen.toLocaleDateString()}</td>
                 <td>
                   {dateClose.toLocaleDateString() === "Invalid Date"
@@ -101,7 +101,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID} />
+              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClose.toLocaleDateString() === "Invalid Date"
@@ -134,7 +134,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID} />
+              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClose.toLocaleDateString() === "Invalid Date"

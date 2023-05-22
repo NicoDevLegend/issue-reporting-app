@@ -19,21 +19,21 @@ export default function Avatar() {
           />
         </Dropdown.Toggle>
         <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
-              <Dropdown.ItemText className="text-center">
-                <p>
-                  Signed in as: <strong>{user.AppUsername}</strong>
-                </p>
-                <p>
-                <UserRole />
-                </p>
-                <Link to="/profile" className="text-decoration-none text-reset">
-                  <p>Profile</p>
-                </Link>
-              </Dropdown.ItemText>
-              <Dropdown.Divider />
-              <Dropdown.ItemText className="d-flex justify-content-center">
-                <LogOutButton />
-              </Dropdown.ItemText>
+          <Dropdown.ItemText className="text-center">
+            <p>
+              Signed in as: <strong>{user.AppUsername}</strong>
+            </p>
+            <p>
+              <UserRole />
+            </p>
+            <Link to="/profile" className="text-decoration-none text-reset">
+              <p>Profile</p>
+            </Link>
+          </Dropdown.ItemText>
+          <Dropdown.Divider />
+          <Dropdown.ItemText className="d-flex justify-content-center">
+            <LogOutButton />
+          </Dropdown.ItemText>
         </Dropdown.Menu>
       </Dropdown>
     </Nav>
