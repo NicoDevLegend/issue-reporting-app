@@ -62,13 +62,13 @@ export default function SideBar() {
               </NavLink>
             ) : (
               <NavLink
-                to="/home"
+                to="/checkticket"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "activeClicked" : ""
                 }
               >
-                <CDBSidebarMenuItem icon="clipboard-list">
-                  Not found
+                <CDBSidebarMenuItem icon="clipboard-check">
+                  Check Ticket
                 </CDBSidebarMenuItem>
               </NavLink>
             )}

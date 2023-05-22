@@ -3,7 +3,7 @@ import NewIssue from "../components/NewIssue";
 import IssuesTableList from "../components/IssuesTableList";
 
 export default function Home() {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return isAuthenticated ? (
     <div className="d-grid align-content-start">
@@ -15,7 +15,7 @@ export default function Home() {
       >
         <strong>Issue List</strong>
       </h1>
-      <NewIssue />
+      {user["https://my-app/roles"][0] === "User" && <NewIssue />}
       <IssuesTableList />
     </div>
   ) : (

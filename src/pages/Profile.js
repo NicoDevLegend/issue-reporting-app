@@ -10,8 +10,6 @@ import axiosPatch from "../services/ServiceAxiosPatch";
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
-  
-  console.log(user);
 
   const {
     control,

@@ -22,9 +22,6 @@ export default function IssuesTableList() {
     `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}/${param}`
   );
 
-  console.log(
-    `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}/${param}`
-  );
   const [filterColor, setFilterColor] = useState(originalColors);
 
   const handleOpenSelect = (date) => {
@@ -71,7 +68,7 @@ export default function IssuesTableList() {
 
   return (
     <div
-      className="container bg-dark mb-1"
+      className="container bg-dark mb-3"
       style={{ overflow: "auto", minHeight: "300px" }}
     >
       <div className="w-100" style={{ height: "50px" }}>
@@ -83,7 +80,7 @@ export default function IssuesTableList() {
           />
         )}
       </div>
-      <Table bordered variant="dark" className="mb-2">
+      <Table bordered hover variant="dark" className="mb-2" >
         <THeadAll
           setValue={setValue}
           filterColor={filterColor}

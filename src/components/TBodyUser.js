@@ -1,8 +1,16 @@
 import { Spinner } from "react-bootstrap";
 import { originalColors } from "../Utilities/originalColors";
 import TableUserData from "./TableUserData";
+import { useNavigate } from "react-router-dom";
 
 export default function TBodyUser({ data, value, filter, filteredData }) {
+  const navigate = useNavigate();
+
+  const handleClick = (issue) => {
+    navigate("/checkticket", { state: issue });
+    //e.preventDefault()
+  };
+
   return (
     <tbody>
       {data && data.length !== 0 && !value ? (
@@ -10,7 +18,13 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           let dateOpen = new Date(issue.Open);
           let dateClose = new Date(issue.Close);
           return (
-            <tr key={index}>
+            <tr
+              key={index}
+              onClick={() => {
+                handleClick(issue);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
@@ -50,7 +64,11 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
             let dateOpen = new Date(issue.Open);
             let dateClose = new Date(issue.Close);
             return (
-              <tr key={index}>
+              <tr
+                key={index}
+                onClick={handleClick}
+                style={{ cursor: "pointer" }}
+              >
                 <td>{issue.IssueNo}</td>
                 {issue.Status === "Resolved" ? (
                   <td className={originalColors.Resolved}>{issue.Status}</td>
@@ -83,7 +101,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           let dateOpen = new Date(issue.Open);
           let dateClose = new Date(issue.Close);
           return (
-            <tr key={index}>
+            <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
@@ -116,7 +134,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           let dateOpen = new Date(issue.Open);
           let dateClose = new Date(issue.Close);
           return (
-            <tr key={index}>
+            <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
