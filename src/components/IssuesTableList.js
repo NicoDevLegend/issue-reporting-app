@@ -41,21 +41,21 @@ export default function IssuesTableList() {
     setValue("Open");
   };
 
-  const handleCloseSelect = (date) => {
+  const handleClosedSelect = (date) => {
     let filtered = data.filter((issue) => {
-      let issueCloseDate = new Date(issue.Close);
+      let issueClosedDate = new Date(issue.Closed);
       return (
-        issueCloseDate >= date.selection.startDate &&
-        issueCloseDate <= date.selection.endDate
+        issueClosedDate >= date.selection.startDate &&
+        issueClosedDate <= date.selection.endDate
       );
     });
     setSelectionRange([date.selection]);
     setFilteredData(filtered);
     setFilterColor({
       ...originalColors,
-      Close: "text-light",
+      Closed: "text-light",
     });
-    setValue("Close");
+    setValue("Closed");
   };
 
   const [selectionRange, setSelectionRange] = useState([
@@ -87,7 +87,7 @@ export default function IssuesTableList() {
           setFilter={setFilter}
           setFilterColor={setFilterColor}
           handleOpenSelect={handleOpenSelect}
-          handleCloseSelect={handleCloseSelect}
+          handleClosedSelect={handleClosedSelect}
           selectionRange={selectionRange}
         />
         <TBodyUser

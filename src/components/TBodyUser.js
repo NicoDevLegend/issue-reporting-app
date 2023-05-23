@@ -8,7 +8,6 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
 
   const handleClick = (issue) => {
     navigate("/checkticket", { state: issue });
-    //e.preventDefault()
   };
 
   return (
@@ -16,7 +15,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
       {data && data.length !== 0 && !value ? (
         data.map((issue, index) => {
           let dateOpen = new Date(issue.Open);
-          let dateClose = new Date(issue.Close);
+          let dateClosed = new Date(issue.Closed);
           return (
             <tr
               key={index}
@@ -45,9 +44,9 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
-                {dateClose.toLocaleDateString() === "Invalid Date"
+                {dateClosed.toLocaleDateString() === "Invalid Date"
                   ? ""
-                  : dateClose.toLocaleDateString()}
+                  : dateClosed.toLocaleDateString()}
               </td>
             </tr>
           );
@@ -62,7 +61,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           )
           .map((issue, index) => {
             let dateOpen = new Date(issue.Open);
-            let dateClose = new Date(issue.Close);
+            let dateClosed = new Date(issue.Closed);
             return (
               <tr
                 key={index}
@@ -89,9 +88,9 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
                 <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
                 <td>{dateOpen.toLocaleDateString()}</td>
                 <td>
-                  {dateClose.toLocaleDateString() === "Invalid Date"
+                  {dateClosed.toLocaleDateString() === "Invalid Date"
                     ? ""
-                    : dateClose.toLocaleDateString()}
+                    : dateClosed.toLocaleDateString()}
                 </td>
               </tr>
             );
@@ -99,7 +98,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
       ) : filteredData && filteredData !== [] && value === "Open" ? (
         filteredData.map((issue, index) => {
           let dateOpen = new Date(issue.Open);
-          let dateClose = new Date(issue.Close);
+          let dateClosed = new Date(issue.Closed);
           return (
             <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
@@ -122,17 +121,17 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
-                {dateClose.toLocaleDateString() === "Invalid Date"
+                {dateClosed.toLocaleDateString() === "Invalid Date"
                   ? ""
-                  : dateClose.toLocaleDateString()}
+                  : dateClosed.toLocaleDateString()}
               </td>
             </tr>
           );
         })
-      ) : filteredData && filteredData !== [] && value === "Close" ? (
+      ) : filteredData && filteredData !== [] && value === "Closed" ? (
         filteredData.map((issue, index) => {
           let dateOpen = new Date(issue.Open);
-          let dateClose = new Date(issue.Close);
+          let dateClosed = new Date(issue.Closed);
           return (
             <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
@@ -155,9 +154,9 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
-                {dateClose.toLocaleDateString() === "Invalid Date"
+                {dateClosed.toLocaleDateString() === "Invalid Date"
                   ? ""
-                  : dateClose.toLocaleDateString()}
+                  : dateClosed.toLocaleDateString()}
               </td>
             </tr>
           );

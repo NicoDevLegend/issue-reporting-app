@@ -9,7 +9,7 @@ export default function THeadAll({
   setFilter,
   setFilterColor,
   handleOpenSelect,
-  handleCloseSelect,
+  handleClosedSelect,
   selectionRange,
 }) {
   return (
@@ -159,13 +159,13 @@ export default function THeadAll({
         </th>
         <th>
           <Dropdown>
-            <Dropdown.Toggle variant="dark" className={filterColor.Close}>
-              <strong>Close</strong>
+            <Dropdown.Toggle variant="dark" className={filterColor.Closed}>
+              <strong>Closed</strong>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item className="p-0">
                 <DefinedRange
-                  onChange={handleCloseSelect}
+                  onChange={handleClosedSelect}
                   inputRanges={[]}
                   ranges={selectionRange}
                 />

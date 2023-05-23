@@ -77,9 +77,9 @@ export default function CheckTicket() {
         </h5>
         <p className="mb-4">{Issue.Open || ""}</p>
         <h5 className="mb-3">
-          <strong>Close:</strong>
+          <strong>Closed:</strong>
         </h5>
-        <p className="mb-4">{Issue.Close || ""}</p>
+        <p className="mb-4">{Issue.Closed || ""}</p>
       </div>
     </div>
   );

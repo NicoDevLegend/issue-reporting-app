@@ -8,5 +8,5 @@ export const originalColors = {
     VeryImportant: "text-warning",
     Urgent: "text-danger",
     Open: "text-info",
-    Close: "text-info",
+    Closed: "text-info",
   };
