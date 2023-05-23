@@ -1,5 +1,6 @@
 export const originalColors = {
     Status: "text-info",
+    InProgress: "bg-warning text-black",
     NotResolved: "bg-danger",
     Resolved: "bg-success",
     Category: "text-info",

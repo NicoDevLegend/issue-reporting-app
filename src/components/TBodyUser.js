@@ -27,6 +27,8 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
+              ) : issue.Status === "In Progress" ? (
+                <td className={originalColors.InProgress}>{issue.Status}</td>
               ) : (
                 <td className={originalColors.NotResolved}>{issue.Status}</td>
               )}
@@ -71,6 +73,8 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
                 <td>{issue.IssueNo}</td>
                 {issue.Status === "Resolved" ? (
                   <td className={originalColors.Resolved}>{issue.Status}</td>
+                ) : issue.Status === "In Progress" ? (
+                  <td className={originalColors.InProgress}>{issue.Status}</td>
                 ) : (
                   <td className={originalColors.NotResolved}>{issue.Status}</td>
                 )}
@@ -104,6 +108,8 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
+              ) : issue.Status === "In Progress" ? (
+                <td className={originalColors.InProgress}>{issue.Status}</td>
               ) : (
                 <td className={originalColors.NotResolved}>{issue.Status}</td>
               )}
@@ -137,6 +143,8 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               <td>{issue.IssueNo}</td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
+              ) : issue.Status === "In Progress" ? (
+                <td className={originalColors.InProgress}>{issue.Status}</td>
               ) : (
                 <td className={originalColors.NotResolved}>{issue.Status}</td>
               )}

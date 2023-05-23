@@ -34,6 +34,18 @@ export default function THeadAll({
               >
                 Not Resolved
               </Dropdown.Item>
+               <Dropdown.Item
+                eventKey="In Progress"
+                onClick={() => {
+                  setFilter("Status");
+                  setFilterColor({
+                    ...originalColors,
+                    Status: "text-warning",
+                  });
+                }}
+              >
+                In Progress
+              </Dropdown.Item>
               <Dropdown.Item
                 eventKey="Resolved"
                 onClick={() => {
