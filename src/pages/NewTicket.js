@@ -37,7 +37,8 @@ export default function NewTicket() {
   };
 
   return (
-    isAuthenticated && (
+    isAuthenticated &&
+    user["https://my-app/roles"][0] === "User" && (
       <div className="d-grid mb-5">
         <h1
           className="p-2 bg-dark text-info d-flex flex-column mx-auto mt-5 mb-2 border border-secondary border-opacity-25 border-3 rounded"

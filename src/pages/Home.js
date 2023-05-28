@@ -27,7 +27,7 @@ export default function Home() {
         This is a <strong>Demo Web Application</strong> named{" "}
         <strong>"Issue Reporting"</strong>
       </h2>
-      <h5>Please get log in or sign up to continue</h5>
+      <h5>Please log in or sign up to continue</h5>
     </div>
   );
 }
