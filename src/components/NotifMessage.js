@@ -1,1 +1,5 @@
-export default function NotifMessage() {}
+export default function NotifMessage() {
+    return (
+        
+    )
+}

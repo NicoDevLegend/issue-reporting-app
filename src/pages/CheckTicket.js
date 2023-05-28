@@ -5,6 +5,7 @@ import IssueListButton from "../components/IssueListButton";
 import TicketButton from "../components/TicketButton";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import axiosPatch from "../services/ServiceAxiosPatch";
+import axiosPost from "../services/ServiceAxiosPost";
 
 export default function CheckTicket() {
   const { isAuthenticated, user } = useAuth0();
@@ -23,11 +24,22 @@ export default function CheckTicket() {
     navigate("/");
   };
 
+  async function newNotifMessage(bodyData) {
+    await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Notification`, {
+      From: user.sub,
+      To: Issue.ReportedBy,
+      Type: "Notification Message",
+      Section: "Ticket Status",
+      Body: bodyData,
+    });
+  }
+
   const handleInProgressClick = () => {
     patchTicket({
       Status: "In Progress",
       Closed: "",
     });
+    newNotifMessage(`The Ticket No.${Issue.IssueNo} is "In Progress"`);
   };
 
   const handleReOpenTicketClick = () => {
@@ -35,6 +47,7 @@ export default function CheckTicket() {
       Status: "Not Resolved",
       Closed: "",
     });
+    newNotifMessage(`The Ticket No.${Issue.IssueNo} is re-open`);
   };
 
   const handleCloseClick = () => {
@@ -43,6 +56,7 @@ export default function CheckTicket() {
       Status: "Resolved",
       Closed: date.toLocaleDateString(),
     });
+    newNotifMessage(`The Ticket No.${Issue.IssueNo} is closed`);
   };
 
   return (
