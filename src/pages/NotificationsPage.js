@@ -1,5 +1,92 @@
+import PageHeader from "../components/PageHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBellSlash, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { useLocation } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import UserData from "../components/UserData";
+
 export default function NotificationsPage() {
+  const location = useLocation();
+  const notifications = location.state;
+
+  console.log(notifications);
   return (
-    <div className="d-flex justify-content-center vh-100">Notifications</div>
+    <div className="d-grid">
+      <PageHeader name={"Notifications"} />
+      {!notifications ? (
+        <div className="text-center mt-5">
+          <FontAwesomeIcon
+            icon={faBellSlash}
+            style={{
+              width: "10em",
+              height: "10em",
+              color: "white",
+            }}
+          />
+          <h1 className="text-light mt-5">
+            <strong>No Notifications Yet</strong>
+          </h1>
+        </div>
+      ) : (
+        <div
+          style={{
+            height: "auto",
+            maxHeight: "100vh",
+            overflowX: "auto",
+            scrollbarWidth: "thin",
+          }}
+        >
+          {notifications.map((n, index) => {
+            return (
+              <div
+                key={index}
+                className="p-4 w-75 mx-auto mt-1 mb-1 bg-dark text-light rounded d-flex justify-content-center align-items-center"
+                style={{
+                  maxWidth: "800px",
+                  minHeight: "100px",
+                  boxShadow: "0px 5px 10px 10px rgba(0,0,0,0.2)",
+                }}
+              >
+                <Container>
+                  <Row className="mb-4">
+                    <Col className="mb-2">
+                      Received: <strong>{n.Date}</strong>
+                    </Col>
+                    <Col className="mb-2">
+                      Tag: <strong>{n.Section}</strong>
+                    </Col>
+                    <Col className="mb-2">
+                      From:{" "}
+                      <strong>
+                        <UserData userID={n.From} />
+                      </strong>
+                    </Col>
+                  </Row>
+                  <Row className="mt-3">
+                    <Col
+                      xs={10}
+                      className="p-2 mx-auto mb-3 border border-light"
+                    >
+                      <strong>{n.Body}</strong>
+                    </Col>
+                    <Col className="p-2">
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                          cursor: "pointer",
+                          color: "#0dcaf0",
+                        }}
+                      />
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }

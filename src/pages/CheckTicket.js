@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import PageHeader from "../components/PageHeader";
 import IssueListButton from "../components/IssueListButton";
 import TicketButton from "../components/TicketButton";
 import useAxiosGet from "../services/ServiceAxiosGet";
@@ -15,10 +16,10 @@ export default function CheckTicket() {
   const Issue = location.state || {};
   const notifBody = `The Ticket No.${Issue.IssueNo} is `;
   const getUrlParam = role === "User" ? Issue.AssigneeID : Issue.ReportedBy;
-
-  const [dataUser] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/${getUrlParam}/user`
-  );
+  const url = getUrlParam
+    ? `${process.env.REACT_APP_SERVICE_API}/${getUrlParam}/user`
+    : null;
+  const [dataUser] = useAxiosGet(url);
 
   const patchTicket = async (data) => {
     await axiosPatch(
@@ -43,7 +44,7 @@ export default function CheckTicket() {
       Status: "In Progress",
       Closed: "",
     });
-    newNotifMessage(notifBody + "In Progress");
+    newNotifMessage(notifBody + "in progress");
   };
 
   const handleReOpenTicketClick = () => {
@@ -66,14 +67,7 @@ export default function CheckTicket() {
   return (
     isAuthenticated && (
       <div className="d-grid">
-        <h1
-          className="p-2 mx-auto mt-5 mb-4 bg-dark text-info border border-secondary border-opacity-25 border-3 rounded"
-          style={{
-            boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
-          }}
-        >
-          <strong>Check Ticket</strong>
-        </h1>
+        <PageHeader name={"Check Ticket"} />
         <div
           className="p-4 w-75 mx-auto mt-3 mb-5 bg-dark text-light rounded d-flex justify-content-center align-items-center"
           style={{

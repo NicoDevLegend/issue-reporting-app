@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
 import useAxiosGet from "../services/ServiceAxiosGet";
+import PageHeader from "../components/PageHeader";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
@@ -40,14 +41,7 @@ export default function NewTicket() {
     isAuthenticated &&
     user["https://my-app/roles"][0] === "User" && (
       <div className="d-grid mb-5">
-        <h1
-          className="p-2 bg-dark text-info d-flex flex-column mx-auto mt-5 mb-2 border border-secondary border-opacity-25 border-3 rounded"
-          style={{
-            boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
-          }}
-        >
-          <strong>New Ticket</strong>
-        </h1>
+        <PageHeader name={"New Ticket"}/>
         <Form
           onReset={reset}
           className="p-5 w-75 text-start mx-auto mt-3 mb-5 bg-dark text-light d-flex justify-content-center flex-column rounded"
@@ -182,18 +176,18 @@ export default function NewTicket() {
               <strong>Attachments</strong>
             </Form.Label>
             <br></br>
-            <Form.Control type="file" className="me-auto" />
+            <Form.Control type="file" size="sm" className="mx-auto" />
           </Form.Group>
           <hr></hr>
           <Form.Group className="mx-auto mt-2 mb-3">
-            <Button variant="info" type="submit" className="mx-3">
+            <Button variant="info" type="submit" className="mx-3 mb-1">
               Submit
             </Button>
             <Button
               onClick={reset}
               variant="warning"
               type="reset"
-              className="mx-3"
+              className="mx-3 mb-1"
             >
               Reset
             </Button>

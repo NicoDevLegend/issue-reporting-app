@@ -1,13 +1,15 @@
 import axiosPatch from "../services/ServiceAxiosPatch";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function NotifMessage({ data, handleClick }) {
+  const navigate = useNavigate();
   const patchNotifMessage = async (data, notifId) => {
     await axiosPatch(
       `${process.env.REACT_APP_SERVICE_API}/Notification/${notifId}`,
       data
-    )
+    );
     handleClick();
+    navigate("/notifications", { state: data });
   };
 
   const handleNotifMessageClick = (notifId) => {
@@ -16,7 +18,7 @@ export default function NotifMessage({ data, handleClick }) {
         Read: true,
       },
       notifId
-    )
+    );
   };
 
   return (
@@ -26,17 +28,12 @@ export default function NotifMessage({ data, handleClick }) {
       const read = m.Read ? "fw-light" : "fw-bold";
 
       return (
-        <Link
+        <p
           key={index}
-          to="/notifications"
-          className="text-decoration-none text-reset"
+          className={read + " bg-secondary bg-opacity-25 p-2"}
+          style={{ fontSize: ".8rem", cursor: "pointer" }}
           onClick={() => handleNotifMessageClick(m._id)}
-        >
-          <p
-            className={read + " bg-secondary bg-opacity-25 p-2"}
-            style={{ fontSize: ".8rem" }}
-          >{`${m.Body}.`}</p>
-        </Link>
+        >{`${m.Body}.`}</p>
       );
     })
   );

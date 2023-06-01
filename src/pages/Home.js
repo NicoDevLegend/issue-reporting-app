@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import PageHeader from "../components/PageHeader";
 import NewIssue from "../components/NewIssue";
 import IssuesTableList from "../components/IssuesTableList";
 
@@ -7,14 +8,7 @@ export default function Home() {
 
   return isAuthenticated ? (
     <div className="d-grid align-content-start">
-      <h1
-        className="p-2 mx-auto mt-5 mb-4 bg-dark text-info border border-secondary border-opacity-25 border-3 rounded"
-        style={{
-          boxShadow: "0px 5px 5px 5px rgba(0,0,0,0.2)",
-        }}
-      >
-        <strong>Issue List</strong>
-      </h1>
+      <PageHeader name={"Issue List"}/>
       {user["https://my-app/roles"][0] === "User" && <NewIssue />}
       <IssuesTableList />
     </div>

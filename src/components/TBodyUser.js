@@ -1,6 +1,6 @@
 import { Spinner } from "react-bootstrap";
 import { originalColors } from "../Utilities/originalColors";
-import TableUserData from "./TableUserData";
+import UserData from "./UserData";
 import { useNavigate } from "react-router-dom";
 
 export default function TBodyUser({ data, value, filter, filteredData }) {
@@ -43,7 +43,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
+              <td><UserData userID={issue.AssigneeID || issue.ReportedBy} /></td>
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClosed.toLocaleDateString() === "Invalid Date"
@@ -89,7 +89,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
                 ) : (
                   <td className={originalColors.Urgent}>{issue.Priority}</td>
                 )}
-                <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
+                <UserData userID={issue.AssigneeID || issue.ReportedBy} />
                 <td>{dateOpen.toLocaleDateString()}</td>
                 <td>
                   {dateClosed.toLocaleDateString() === "Invalid Date"
@@ -124,7 +124,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
+              <UserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClosed.toLocaleDateString() === "Invalid Date"
@@ -159,7 +159,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <TableUserData userID={issue.AssigneeID || issue.ReportedBy} />
+              <UserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClosed.toLocaleDateString() === "Invalid Date"

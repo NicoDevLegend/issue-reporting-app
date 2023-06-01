@@ -5,6 +5,7 @@ export default function useAxiosGet(url) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
+    if (url) {
       axios
         .get(url)
         .then((res) => setData(res.data))
@@ -12,6 +13,7 @@ export default function useAxiosGet(url) {
           setData("Something is wrong!!");
           console.log(err);
         });
+    }
   }, [url]);
   return [data];
 }

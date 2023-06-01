@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate } from "react-router-dom";
 import NotifMessage from "./NotifMessage";
 import axios from "axios";
 
@@ -8,6 +9,7 @@ export default function Notifications({ userId }) {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [unreads, setUnreads] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getNotif = async () => {
@@ -39,6 +41,11 @@ export default function Notifications({ userId }) {
     };
     document.addEventListener("click", handleOutside, true);
   }, []);
+
+  const handleNotifClick = () => {
+    handleCloseNotifications();
+    navigate("/notifications", { state: data });
+  };
 
   return (
     <div className="mx-4 my-auto position-relative">
@@ -84,7 +91,9 @@ export default function Notifications({ userId }) {
             }}
             ref={ref}
           >
-            <p className="fw-bolder text-center">Notifications</p>
+            <p className="fw-bolder text-center" onClick={handleNotifClick} style={{ cursor: "pointer" }}>
+              Notifications
+            </p>
             <NotifMessage handleClick={handleCloseNotifications} data={data} />
           </div>
         </>
