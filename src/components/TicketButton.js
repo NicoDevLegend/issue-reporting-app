@@ -16,7 +16,7 @@ export default function TicketButton({ handleClick, variant, name }) {
       <ConfirmationModal
         name={name}
         variant={variant}
-        handleClick={handleClick}
+        handleclick={handleClick}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

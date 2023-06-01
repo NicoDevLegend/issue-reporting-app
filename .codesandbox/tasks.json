@@ -1,0 +1,41 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "npm install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "start": {
+      "name": "start",
+      "command": "npm run start",
+      "runAtStart": true
+    },
+    "build": {
+      "name": "build",
+      "command": "npm run build",
+      "runAtStart": false
+    },
+    "test": {
+      "name": "test",
+      "command": "npm run test",
+      "runAtStart": false
+    },
+    "eject": {
+      "name": "eject",
+      "command": "npm run eject",
+      "runAtStart": false
+    },
+    "npm i --save @type/react-date-range": {
+      "name": "npm i --save @type/react-date-range",
+      "command": "npm i --save @type/react-date-range"
+    },
+    "npm i --save-dev @types/react-date-range": {
+      "name": "npm i --save-dev @types/react-date-range",
+      "command": "npm i --save-dev @types/react-date-range"
+    }
+  }
+}

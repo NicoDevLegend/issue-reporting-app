@@ -7,7 +7,7 @@ import Notifications from "./Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function NavBar() {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
@@ -16,7 +16,7 @@ export default function NavBar() {
           {isAuthenticated ? (
             <>
               <SearchForm />
-              <Notifications />
+              <Notifications userId={user.sub}/>
               <Avatar />
             </>
           ) : (

@@ -1,10 +1,25 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import NotifMessage from "./NotifMessage";
+import axios from "axios";
 
-export default function Notifications() {
+export default function Notifications({ userId }) {
   const [show, setShow] = useState(false);
+  const [data, setData] = useState([]);
+  const [unreads, setUnreads] = useState(null);
+
+  useEffect(() => {
+    const getNotif = async () => {
+      await axios
+        .get(`${process.env.REACT_APP_SERVICE_API}/${userId}/Notifications`)
+        .then((res) => {
+          setUnreads(res.data.filter((m) => m.Read === false));
+          setData(res.data);
+        });
+    };
+    getNotif();
+  }, [userId, show]);
 
   const ref = useRef();
 
@@ -26,7 +41,12 @@ export default function Notifications() {
   }, []);
 
   return (
-    <div className="mx-3 my-auto">
+    <div className="mx-4 my-auto position-relative">
+      {unreads && unreads.length !== 0 && (
+        <span className="position-absolute top-0 start-100 translate-middle badge border border-dark rounded-circle bg-light">
+          <span className="text-black">{unreads.length}</span>
+        </span>
+      )}
       {!show && (
         <FontAwesomeIcon
           icon={faBell}
@@ -54,27 +74,18 @@ export default function Notifications() {
           <div
             className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
             style={{
-              right: "5em",
-              width: "200px",
+              right: "-3em",
+              width: "250px",
               height: "auto",
               maxHeight: "25em",
               overflowX: "auto",
               scrollbarWidth: "thin",
-              zIndex: "5",
+              zIndex: "10000",
             }}
             ref={ref}
           >
-            <Link
-              to="/notifications"
-              className="text-decoration-none text-reset"
-            >
-              <p>Notifications</p>
-            </Link>
-            <p>Message</p>
-            <p>Message</p>
-            <p>Message</p>
-            <p>Message</p>
-            <p>Message</p>
+            <p className="fw-bolder text-center">Notifications</p>
+            <NotifMessage handleClick={handleCloseNotifications} data={data} />
           </div>
         </>
       )}

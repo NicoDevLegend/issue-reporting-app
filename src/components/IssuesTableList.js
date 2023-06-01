@@ -80,7 +80,7 @@ export default function IssuesTableList() {
           />
         )}
       </div>
-      <Table bordered hover variant="dark" className="mb-2" >
+      <Table bordered hover variant="dark" className="mb-2">
         <THeadAll
           setValue={setValue}
           filterColor={filterColor}
@@ -89,6 +89,7 @@ export default function IssuesTableList() {
           handleOpenSelect={handleOpenSelect}
           handleClosedSelect={handleClosedSelect}
           selectionRange={selectionRange}
+          role={role}
         />
         <TBodyUser
           data={data}

@@ -11,6 +11,7 @@ export default function THeadAll({
   handleOpenSelect,
   handleClosedSelect,
   selectionRange,
+  role
 }) {
   return (
     <thead className="align-middle text-info">
@@ -152,7 +153,7 @@ export default function THeadAll({
             </Dropdown.Menu>
           </Dropdown>
         </th>
-        <TableUserHeader />
+        <TableUserHeader role={role}/>
         <th>
           <Dropdown>
             <Dropdown.Toggle variant="dark" className={filterColor.Open}>

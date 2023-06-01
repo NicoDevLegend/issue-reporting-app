@@ -8,7 +8,7 @@ export default function axiosPost(url, data) {
     .then((res) => {
       return JSON.stringify(res.data);
     })
-    .catch((error) => {
-      return "Something is wrong!!";
+    .catch((err) => {
+      return err;
     });
 }

@@ -9,11 +9,15 @@ import axiosPost from "../services/ServiceAxiosPost";
 
 export default function CheckTicket() {
   const { isAuthenticated, user } = useAuth0();
+  const role = user["https://my-app/roles"][0];
   const location = useLocation();
   const navigate = useNavigate();
   const Issue = location.state || {};
+  const notifBody = `The Ticket No.${Issue.IssueNo} is `;
+  const getUrlParam = role === "User" ? Issue.AssigneeID : Issue.ReportedBy;
+
   const [dataUser] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/${Issue.ReportedBy}/user`
+    `${process.env.REACT_APP_SERVICE_API}/${getUrlParam}/user`
   );
 
   const patchTicket = async (data) => {
@@ -24,22 +28,22 @@ export default function CheckTicket() {
     navigate("/");
   };
 
-  async function newNotifMessage(bodyData) {
+  const newNotifMessage = async (bodyData) => {
     await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Notification`, {
       From: user.sub,
-      To: Issue.ReportedBy,
+      To: getUrlParam,
       Type: "Notification Message",
       Section: "Ticket Status",
       Body: bodyData,
     });
-  }
+  };
 
   const handleInProgressClick = () => {
     patchTicket({
       Status: "In Progress",
       Closed: "",
     });
-    newNotifMessage(`The Ticket No.${Issue.IssueNo} is "In Progress"`);
+    newNotifMessage(notifBody + "In Progress");
   };
 
   const handleReOpenTicketClick = () => {
@@ -47,7 +51,7 @@ export default function CheckTicket() {
       Status: "Not Resolved",
       Closed: "",
     });
-    newNotifMessage(`The Ticket No.${Issue.IssueNo} is re-open`);
+    newNotifMessage(notifBody + "re-open");
   };
 
   const handleCloseClick = () => {
@@ -56,12 +60,11 @@ export default function CheckTicket() {
       Status: "Resolved",
       Closed: date.toLocaleDateString(),
     });
-    newNotifMessage(`The Ticket No.${Issue.IssueNo} is closed`);
+    newNotifMessage(notifBody + "closed");
   };
 
   return (
-    isAuthenticated &&
-    user["https://my-app/roles"][0] === "Support" && (
+    isAuthenticated && (
       <div className="d-grid">
         <h1
           className="p-2 mx-auto mt-5 mb-4 bg-dark text-info border border-secondary border-opacity-25 border-3 rounded"
@@ -134,7 +137,8 @@ export default function CheckTicket() {
                   </h5>
                   <h5 className="mb-3">
                     <strong>
-                      Reported by: <span>{dataUser?.username || ""}</span>
+                      {role === "User" ? "Assignee: " : "Reported by: "}
+                      <span>{dataUser?.username || ""}</span>
                     </strong>
                   </h5>
                 </Col>
@@ -163,7 +167,7 @@ export default function CheckTicket() {
                 </Col>
               </Row>
               <Row>
-                {Issue.Status === "Not Resolved" && (
+                {Issue.Status === "Not Resolved" && role === "Support" && (
                   <Col>
                     <TicketButton
                       handleClick={handleInProgressClick}
@@ -174,13 +178,15 @@ export default function CheckTicket() {
                 )}
                 {Issue.Status === "Resolved" && (
                   <>
-                    <Col>
-                      <TicketButton
-                        handleClick={handleInProgressClick}
-                        variant="warning"
-                        name='Re-Open as "In Progress"'
-                      />
-                    </Col>
+                    {role === "Support" && (
+                      <Col>
+                        <TicketButton
+                          handleClick={handleInProgressClick}
+                          variant="warning"
+                          name='Re-Open as "In Progress"'
+                        />
+                      </Col>
+                    )}
                     <Col>
                       <TicketButton
                         handleClick={handleReOpenTicketClick}

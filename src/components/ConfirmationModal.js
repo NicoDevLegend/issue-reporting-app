@@ -27,7 +27,7 @@ export default function ConfirmationModal(props) {
         <Button onClick={props.onHide} variant="secondary">
           Close
         </Button>
-        <Button onClick={props.handleClick} variant={props.variant}>
+        <Button onClick={props.handleclick} variant={props.variant}>
           Confirm
         </Button>
       </Modal.Footer>
