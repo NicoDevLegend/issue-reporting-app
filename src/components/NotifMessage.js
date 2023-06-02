@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function NotifMessage({ data, handleClick }) {
   const navigate = useNavigate();
-  const patchNotifMessage = async (data, notifId) => {
+
+  const patchNotifMessage = async (patchData, notifId) => {
     await axiosPatch(
       `${process.env.REACT_APP_SERVICE_API}/Notification/${notifId}`,
-      data
+      patchData
     );
     handleClick();
-    navigate("/notifications", { state: data });
+    navigate("/notifications");
   };
 
   const handleNotifMessageClick = (notifId) => {

@@ -1,27 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import { useNavigate } from "react-router-dom";
 import NotifMessage from "./NotifMessage";
-import axios from "axios";
+import { NotificationsContext } from "./NotificationsProvider";
 
-export default function Notifications({ userId }) {
+export default function Notifications() {
+  const { notifications, unreads, getNotif } = useContext(NotificationsContext);
   const [show, setShow] = useState(false);
-  const [data, setData] = useState([]);
-  const [unreads, setUnreads] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getNotif = async () => {
-      await axios
-        .get(`${process.env.REACT_APP_SERVICE_API}/${userId}/Notifications`)
-        .then((res) => {
-          setUnreads(res.data.filter((m) => m.Read === false));
-          setData(res.data);
-        });
-    };
     getNotif();
-  }, [userId, show]);
+  }, [getNotif, show]);
 
   const ref = useRef();
 
@@ -44,7 +35,7 @@ export default function Notifications({ userId }) {
 
   const handleNotifClick = () => {
     handleCloseNotifications();
-    navigate("/notifications", { state: data });
+    navigate("/notifications");
   };
 
   return (
@@ -91,10 +82,17 @@ export default function Notifications({ userId }) {
             }}
             ref={ref}
           >
-            <p className="fw-bolder text-center" onClick={handleNotifClick} style={{ cursor: "pointer" }}>
+            <p
+              className="fw-bolder text-center"
+              onClick={handleNotifClick}
+              style={{ cursor: "pointer" }}
+            >
               Notifications
             </p>
-            <NotifMessage handleClick={handleCloseNotifications} data={data} />
+            <NotifMessage
+              handleClick={handleCloseNotifications}
+              data={notifications}
+            />
           </div>
         </>
       )}

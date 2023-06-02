@@ -1,15 +1,23 @@
 import PageHeader from "../components/PageHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBellSlash, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { useLocation } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import UserData from "../components/UserData";
+import { useContext } from "react";
+import { NotificationsContext } from "../components/NotificationsProvider";
+import axiosDelete from "../services/ServiceAxiosDelete";
 
 export default function NotificationsPage() {
-  const location = useLocation();
-  const notifications = location.state;
+  const { notifications, setNotifications } = useContext(NotificationsContext);
 
-  console.log(notifications);
+  const handleDeleteNotification = async (notifId, notif) => {
+    await axiosDelete(
+      `${process.env.REACT_APP_SERVICE_API}/Notification/${notifId}`
+    );
+    const newNotifications = notifications.filter((n) => n !== notif);
+    setNotifications(newNotifications);
+  };
+
   return (
     <div className="d-grid">
       <PageHeader name={"Notifications"} />
@@ -31,11 +39,12 @@ export default function NotificationsPage() {
         <div
           style={{
             height: "auto",
-            maxHeight: "100vh",
+            maxHeight: "75vh",
             overflowX: "auto",
             scrollbarWidth: "thin",
           }}
         >
+          <div className="position-absolute" style={{ height: "50px" }}></div>
           {notifications.map((n, index) => {
             return (
               <div
@@ -48,6 +57,15 @@ export default function NotificationsPage() {
                 }}
               >
                 <Container>
+                  <Row>
+                    <Col className="mb-3">
+                      {n.Read === false && (
+                        <span className="badge border border-dark bg-info rounded-circle">
+                          <span className="text-black">!</span>
+                        </span>
+                      )}
+                    </Col>
+                  </Row>
                   <Row className="mb-4">
                     <Col className="mb-2">
                       Received: <strong>{n.Date}</strong>
@@ -78,6 +96,7 @@ export default function NotificationsPage() {
                           cursor: "pointer",
                           color: "#0dcaf0",
                         }}
+                        onClick={() => handleDeleteNotification(n._id, n)}
                       />
                     </Col>
                   </Row>
