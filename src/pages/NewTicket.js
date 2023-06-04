@@ -4,9 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import PageHeader from "../components/PageHeader";
+import { useState } from "react";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
+  const [userId, setUserId] = useState()
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
@@ -27,12 +29,23 @@ export default function NewTicket() {
       AssigneeID: "",
     },
   });
+  
+  const newNotifMessage = async () => {
+    await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Notification`, {
+      From: user.sub,
+      To: userId,
+      Type: "Notification Message",
+      Section: "Ticket Status",
+      Body: "You have a new open Ticket",
+    });
+  };
 
   const onSubmit = async (data, e) => {
     const resData = await axiosPost(
       `${process.env.REACT_APP_SERVICE_API}/ticket`,
       data
     );
+    newNotifMessage()
     alert(resData);
     e.target.reset();
   };
@@ -160,7 +173,7 @@ export default function NewTicket() {
                     dataUsers
                       .filter((user) => dataRoles.includes(user.userID))
                       .map((user, index) => (
-                        <option key={index} value={user.userID}>
+                        <option key={index} value={user.userID} onClick={() => setUserId(user.userID)}>
                           {user.username}
                         </option>
                       ))}

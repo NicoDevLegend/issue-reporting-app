@@ -1,14 +1,25 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import PageHeader from "../components/PageHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBellSlash, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { Container, Row, Col } from "react-bootstrap";
-import UserData from "../components/UserData";
-import { useContext } from "react";
+import {
+  faBellSlash,
+  faEnvelopeOpen
+} from "@fortawesome/free-regular-svg-icons";
+import { faTrashCanArrowUp, faFilter,
+  faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
+import NotificationBadge from "../components/NotificationBadge";
+import { useContext, useState } from "react";
 import { NotificationsContext } from "../components/NotificationsProvider";
 import axiosDelete from "../services/ServiceAxiosDelete";
+import axiosPatch from "../services/ServiceAxiosPatch";
 
 export default function NotificationsPage() {
-  const { notifications, setNotifications } = useContext(NotificationsContext);
+  const { user } = useAuth0();
+  const { notifications, setNotifications, unread } =
+    useContext(NotificationsContext);
+  const [showUnread, setShowUnread] = useState(false);
+  const allNotifUrl = `${process.env.REACT_APP_SERVICE_API}/Notifications/${user.sub}`;
 
   const handleDeleteNotification = async (notifId, notif) => {
     await axiosDelete(
@@ -18,10 +29,26 @@ export default function NotificationsPage() {
     setNotifications(newNotifications);
   };
 
+  const handleDeleteAllNotifications = async () => {
+    await axiosDelete(allNotifUrl);
+  };
+
+  const handleReadAllNotifications = async () => {
+    await axiosPatch(allNotifUrl);
+  };
+
+  const handleFilterUnread = () => {
+    setShowUnread(true);
+  };
+  
+  const handleUnfiltered = () => {
+    setShowUnread(false);
+  };
+
   return (
     <div className="d-grid">
       <PageHeader name={"Notifications"} />
-      {!notifications ? (
+      {!notifications || notifications.length === 0 ? (
         <div className="text-center mt-5">
           <FontAwesomeIcon
             icon={faBellSlash}
@@ -36,75 +63,89 @@ export default function NotificationsPage() {
           </h1>
         </div>
       ) : (
-        <div
-          style={{
-            height: "auto",
-            maxHeight: "75vh",
-            overflowX: "auto",
-            scrollbarWidth: "thin",
-          }}
-        >
-          <div className="position-absolute" style={{ height: "50px" }}></div>
-          {notifications.map((n, index) => {
-            return (
-              <div
-                key={index}
-                className="p-4 w-75 mx-auto mt-1 mb-1 bg-dark text-light rounded d-flex justify-content-center align-items-center"
+        <>
+          <div
+            className="p-2 w-50 mx-auto text-light"
+            style={{ minHeight: "60px" }}
+          >
+            <Button
+              variant="dark"
+              className="p-2 mx-4 my-auto"
+              size="sm"
+              onClick={handleDeleteAllNotifications}
+            >
+              Delete All{" "}
+              <FontAwesomeIcon
+                icon={faTrashCanArrowUp}
                 style={{
-                  maxWidth: "800px",
-                  minHeight: "100px",
-                  boxShadow: "0px 5px 10px 10px rgba(0,0,0,0.2)",
+                  width: "20px",
+                  height: "20px",
                 }}
-              >
-                <Container>
-                  <Row>
-                    <Col className="mb-3">
-                      {n.Read === false && (
-                        <span className="badge border border-dark bg-info rounded-circle">
-                          <span className="text-black">!</span>
-                        </span>
-                      )}
-                    </Col>
-                  </Row>
-                  <Row className="mb-4">
-                    <Col className="mb-2">
-                      Received: <strong>{n.Date}</strong>
-                    </Col>
-                    <Col className="mb-2">
-                      Tag: <strong>{n.Section}</strong>
-                    </Col>
-                    <Col className="mb-2">
-                      From:{" "}
-                      <strong>
-                        <UserData userID={n.From} />
-                      </strong>
-                    </Col>
-                  </Row>
-                  <Row className="mt-3">
-                    <Col
-                      xs={10}
-                      className="p-2 mx-auto mb-3 border border-light"
-                    >
-                      <strong>{n.Body}</strong>
-                    </Col>
-                    <Col className="p-2">
-                      <FontAwesomeIcon
-                        icon={faTrashCan}
-                        style={{
-                          width: "20px",
-                          height: "20px",
-                          cursor: "pointer",
-                          color: "#0dcaf0",
-                        }}
-                        onClick={() => handleDeleteNotification(n._id, n)}
-                      />
-                    </Col>
-                  </Row>
-                </Container>
-              </div>
-            );
-          })}
-        </div>
+              />
+            </Button>
+            <Button
+              variant="dark"
+              className="p-2 mx-4 my-2"
+              size="sm"
+              onClick={handleReadAllNotifications}
+            >
+              Read All{" "}
+              <FontAwesomeIcon
+                icon={faEnvelopeOpen}
+                style={{
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </Button>
+            {showUnread ? (
+              <Button
+              variant="dark"
+              className="p-2 mx-4 my-auto"
+              size="sm"
+              onClick={handleUnfiltered}
+            >
+              Unfiltered{" "}
+              <FontAwesomeIcon
+                icon={faFilterCircleXmark}
+                style={{
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </Button>
+            ) : (
+              <Button
+              variant="dark"
+              className="p-2 mx-4 my-auto"
+              size="sm"
+              onClick={handleFilterUnread}
+            >
+              Filter Unread{" "}
+              <FontAwesomeIcon
+                icon={faFilter}
+                style={{
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </Button>
+            )}
+          </div>
+          <div
+            style={{
+              height: "auto",
+              maxHeight: "75vh",
+              overflowX: "auto",
+              scrollbarWidth: "thin",
+            }}
+          >
+            <NotificationBadge
+              handleClick={handleDeleteNotification}
+              notif={showUnread ? unread : notifications}
+            />
+          </div>
+        </>
       )}
     </div>
   );

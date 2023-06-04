@@ -6,7 +6,7 @@ import NotifMessage from "./NotifMessage";
 import { NotificationsContext } from "./NotificationsProvider";
 
 export default function Notifications() {
-  const { notifications, unreads, getNotif } = useContext(NotificationsContext);
+  const { notifications, unread, getNotif } = useContext(NotificationsContext);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -40,9 +40,9 @@ export default function Notifications() {
 
   return (
     <div className="mx-4 my-auto position-relative">
-      {unreads && unreads.length !== 0 && (
+      {unread && unread.length !== 0 && (
         <span className="position-absolute top-0 start-100 translate-middle badge border border-dark rounded-circle bg-light">
-          <span className="text-black">{unreads.length}</span>
+          <span className="text-black">{unread.length}</span>
         </span>
       )}
       {!show && (
