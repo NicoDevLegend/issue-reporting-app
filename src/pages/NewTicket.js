@@ -52,7 +52,7 @@ export default function NewTicket() {
 
   return (
     isAuthenticated &&
-    user["https://my-app/roles"][0] === "User" && (
+    (user["https://my-app/roles"][0] === "User" || user["https://my-app/roles"][0] === "Admin") && (
       <div className="d-grid mb-5">
         <PageHeader name={"New Ticket"}/>
         <Form

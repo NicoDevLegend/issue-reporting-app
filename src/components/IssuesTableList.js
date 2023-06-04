@@ -16,7 +16,7 @@ export default function IssuesTableList() {
   const { user } = useAuth0();
   const role = user["https://my-app/roles"][0];
   const param =
-    role === "User" ? "user" : role === "Support" ? "support" : "admin";
+    role === "Support" ? "support" : "user";
 
   const [data] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}/${param}`

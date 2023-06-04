@@ -49,7 +49,7 @@ export default function SideBar() {
             >
               <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
             </NavLink>
-            {user["https://my-app/roles"][0] === "User" ? (
+            {user["https://my-app/roles"][0] === "User" || user["https://my-app/roles"][0] === "Admin" ? (
               <NavLink
                 to="/newticket"
                 className={({ isActive, isPending }) =>
@@ -71,6 +71,30 @@ export default function SideBar() {
                   Check Ticket
                 </CDBSidebarMenuItem>
               </NavLink>
+            )}
+            {user["https://my-app/roles"][0] === "Admin" && (
+              <>
+              <NavLink
+                to="/supportmanagement"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "activeClicked" : ""
+                }
+              >
+                <CDBSidebarMenuItem icon="users-cog">
+                  Support Management
+                </CDBSidebarMenuItem>
+              </NavLink>
+              <NavLink
+                to="/roleassignment"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "activeClicked" : ""
+                }
+              >
+                <CDBSidebarMenuItem icon="user-tag">
+                  Role Assignment
+                </CDBSidebarMenuItem>
+              </NavLink>
+              </>
             )}
           </CDBSidebarMenu>
         </CDBSidebarContent>
