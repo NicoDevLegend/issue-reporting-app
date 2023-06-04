@@ -9,7 +9,7 @@ export default function Home() {
   return isAuthenticated ? (
     <div className="d-grid align-content-start">
       <PageHeader name={"Issue List"}/>
-      {user["https://my-app/roles"][0] === "User" && <NewIssue />}
+      {user["https://my-app/roles"][0] !== "Support" && <NewIssue />}
       <IssuesTableList />
     </div>
   ) : (

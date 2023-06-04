@@ -15,7 +15,7 @@ export default function CheckTicket() {
   const navigate = useNavigate();
   const Issue = location.state || {};
   const notifBody = `The Ticket No.${Issue.IssueNo} is `;
-  const getUrlParam = role === "User" ? Issue.AssigneeID : Issue.ReportedBy;
+  const getUrlParam = role === "Support" ? Issue.ReportedBy : Issue.AssigneeID;
   const url = getUrlParam
     ? `${process.env.REACT_APP_SERVICE_API}/${getUrlParam}/user`
     : null;
@@ -131,7 +131,7 @@ export default function CheckTicket() {
                   </h5>
                   <h5 className="mb-3">
                     <strong>
-                      {role === "User" ? "Assignee: " : "Reported by: "}
+                      {role === "Support" ? "Reported by: " : "Assignee: "}
                       <span>{dataUser?.username || ""}</span>
                     </strong>
                   </h5>
@@ -161,7 +161,7 @@ export default function CheckTicket() {
                 </Col>
               </Row>
               <Row>
-                {Issue.Status === "Not Resolved" && role === "Support" && (
+                {Issue.Status === "Not Resolved" && role !== "User" && (
                   <Col>
                     <TicketButton
                       handleClick={handleInProgressClick}
@@ -172,7 +172,7 @@ export default function CheckTicket() {
                 )}
                 {Issue.Status === "Resolved" && (
                   <>
-                    {role === "Support" && (
+                    {role !== "User" && (
                       <Col>
                         <TicketButton
                           handleClick={handleInProgressClick}

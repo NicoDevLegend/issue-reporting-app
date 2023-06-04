@@ -9,17 +9,16 @@ import TBodyUser from "./TBodyUser";
 import THeadAll from "./THeadAll";
 import ResetTableButton from "./ResetTableButton";
 
-export default function IssuesTableList() {
+export default function IssuesTableList({ userId, userRole }) {
   const [filteredData, setFilteredData] = useState(null);
   const [value, setValue] = useState(null);
   const [filter, setFilter] = useState();
   const { user } = useAuth0();
   const role = user["https://my-app/roles"][0];
-  const param =
-    role === "Support" ? "support" : "user";
+  const param = role === "Support" ? "support" : "user";
 
   const [data] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/ticket/${user.sub}/${param}`
+    `${process.env.REACT_APP_SERVICE_API}/ticket/${userId ? userId : user.sub}/${userRole ? userRole : param}`
   );
 
   const [filterColor, setFilterColor] = useState(originalColors);
