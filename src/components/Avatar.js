@@ -9,7 +9,7 @@ export default function Avatar() {
 
   return (
     <Nav className="m-auto">
-      <Dropdown as={NavItem}>
+      <Dropdown as={NavItem} drop="down">
         <Dropdown.Toggle as={NavLink} className=" p-0">
           <img
             src={user.picture}
@@ -18,7 +18,7 @@ export default function Avatar() {
             className="rounded-circle"
           />
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ right: "5px", top: "35px" }}>
+        <Dropdown.Menu style={{ left: "-105px", top: "35px" }}>
           <Dropdown.ItemText className="text-center">
             <p>
               Signed in as: <strong>{user.AppUsername}</strong>

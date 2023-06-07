@@ -70,7 +70,7 @@ export default function Notifications() {
             onClick={handleCloseNotifications}
           />
           <div
-            className="bg-light position-absolute p-3 border border-dark-subtle border-2 rounded text-start"
+            className="bg-light position-absolute p-3 border border-dark-subtle rounded text-start"
             style={{
               right: "-3em",
               width: "250px",
@@ -82,12 +82,14 @@ export default function Notifications() {
             }}
             ref={ref}
           >
-            <p
-              className="fw-bolder text-center"
+            <p>Notifications
+            <span
+              className="fw-bolder ms-5 text-center"
               onClick={handleNotifClick}
               style={{ cursor: "pointer" }}
             >
-              Notifications
+              View All
+            </span>
             </p>
             <NotifMessage
               handleClick={handleCloseNotifications}

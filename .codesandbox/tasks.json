@@ -12,7 +12,10 @@
     "start": {
       "name": "start",
       "command": "npm run start",
-      "runAtStart": true
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
     },
     "build": {
       "name": "build",
@@ -36,6 +39,38 @@
     "npm i --save-dev @types/react-date-range": {
       "name": "npm i --save-dev @types/react-date-range",
       "command": "npm i --save-dev @types/react-date-range"
+    },
+    "npm uninstall react-bootstrap": {
+      "name": "npm uninstall react-bootstrap",
+      "command": "npm uninstall react-bootstrap"
+    },
+    "npm install react-bootstrap bootstrap": {
+      "name": "npm install react-bootstrap bootstrap",
+      "command": "npm install react-bootstrap bootstrap"
+    },
+    "npm i react-bootstrap@2.7.4": {
+      "name": "npm i react-bootstrap@2.7.4",
+      "command": "npm i react-bootstrap@2.7.4"
+    },
+    "npm i react-bootstrap-accordion": {
+      "name": "npm i react-bootstrap-accordion",
+      "command": "npm i react-bootstrap-accordion"
+    },
+    "npm uninstall react-bootstrap-accordion": {
+      "name": "npm uninstall react-bootstrap-accordion",
+      "command": "npm uninstall react-bootstrap-accordion"
+    },
+    "npm uninstall cdbreact": {
+      "name": "npm uninstall cdbreact",
+      "command": "npm uninstall cdbreact"
+    },
+    "npm i cdbreact": {
+      "name": "npm i cdbreact",
+      "command": "npm i cdbreact"
+    },
+    "npm i cdbreact@1.5.9": {
+      "name": "npm i cdbreact@1.5.9",
+      "command": "npm i cdbreact@1.5.9"
     }
   }
 }

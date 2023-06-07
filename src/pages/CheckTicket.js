@@ -15,11 +15,13 @@ export default function CheckTicket() {
   const navigate = useNavigate();
   const Issue = location.state || {};
   const notifBody = `The Ticket No.${Issue.IssueNo} is `;
-  const getUrlParam = role === "Support" ? Issue.ReportedBy : Issue.AssigneeID;
+  const getUrlParam = Issue.ReportedBy || Issue.AssigneeID;
   const url = getUrlParam
     ? `${process.env.REACT_APP_SERVICE_API}/${getUrlParam}/user`
     : null;
   const [dataUser] = useAxiosGet(url);
+
+console.log(Issue)
 
   const patchTicket = async (data) => {
     await axiosPatch(

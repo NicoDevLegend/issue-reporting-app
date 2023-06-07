@@ -16,7 +16,7 @@ export default function THeadAll({
   return (
     <thead className="align-middle text-info">
       <tr>
-        <th>Issue No</th>
+        <th className="text-info">Issue No</th>
         <th>
           <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
             <Dropdown.Toggle variant="dark" className={filterColor.Status}>
@@ -62,7 +62,7 @@ export default function THeadAll({
             </Dropdown.Menu>
           </Dropdown>
         </th>
-        <th>Description</th>
+        <th className="text-info">Description</th>
         <th>
           <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
             <Dropdown.Toggle variant="dark" className={filterColor.Category}>
