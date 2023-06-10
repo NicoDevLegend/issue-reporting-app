@@ -21,8 +21,6 @@ export default function CheckTicket() {
     : null;
   const [dataUser] = useAxiosGet(url);
 
-console.log(Issue)
-
   const patchTicket = async (data) => {
     await axiosPatch(
       `${process.env.REACT_APP_SERVICE_API}/ticket/${Issue._id}/checkticket`,
@@ -133,7 +131,7 @@ console.log(Issue)
                   </h5>
                   <h5 className="mb-3">
                     <strong>
-                      {role === "Support" ? "Reported by: " : "Assignee: "}
+                      {Issue.ReportedBy ? "Reported by: " : "Assignee: "}
                       <span>{dataUser?.username || ""}</span>
                     </strong>
                   </h5>
@@ -205,7 +203,11 @@ console.log(Issue)
               </Row>
               <Row>
                 <Col>
-                  <IssueListButton />
+                  {role === "Admin" && Issue.ReportedBy ? (
+                    <IssueListButton target/>
+                  ) : (
+                    <IssueListButton />
+                  )}
                 </Col>
               </Row>
             </Container>

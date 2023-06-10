@@ -11,8 +11,10 @@ export default function Notifications() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getNotif();
-  }, [getNotif, show]);
+    if (!unread) {
+      getNotif();
+    }
+  }, [unread, getNotif]);
 
   const ref = useRef();
 

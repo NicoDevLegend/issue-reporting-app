@@ -89,6 +89,7 @@ export default function IssuesTableList({ userId, userRole }) {
           handleClosedSelect={handleClosedSelect}
           selectionRange={selectionRange}
           role={role}
+          userId={userId}
         />
         <TBodyUser
           data={data}

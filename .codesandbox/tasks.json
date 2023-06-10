@@ -71,6 +71,14 @@
     "npm i cdbreact@1.5.9": {
       "name": "npm i cdbreact@1.5.9",
       "command": "npm i cdbreact@1.5.9"
+    },
+    "npm i secret-local-storage": {
+      "name": "npm i secret-local-storage",
+      "command": "npm i secret-local-storage"
+    },
+    "npm uninstall secret-local-storage": {
+      "name": "npm uninstall secret-local-storage",
+      "command": "npm uninstall secret-local-storage"
     }
   }
 }

@@ -3,11 +3,18 @@ import { originalColors } from "../Utilities/originalColors";
 import UserData from "./UserData";
 import { useNavigate } from "react-router-dom";
 
-export default function TBodyUser({ data, value, filter, filteredData }) {
+export default function TBodyUser({
+  data,
+  value,
+  filter,
+  filteredData
+}) {
   const navigate = useNavigate();
 
   const handleClick = (issue) => {
-    navigate("/checkticket", { state: issue });
+    navigate("/checkticket", {
+      state: issue
+    });
   };
 
   return (
@@ -43,7 +50,9 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <td><UserData userID={issue.AssigneeID || issue.ReportedBy} /></td>
+              <td>
+                <UserData userID={issue.AssigneeID || issue.ReportedBy} />
+              </td>
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClosed.toLocaleDateString() === "Invalid Date"

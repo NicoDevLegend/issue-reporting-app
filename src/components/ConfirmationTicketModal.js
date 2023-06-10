@@ -1,6 +1,6 @@
 import { Button, Modal } from "react-bootstrap";
 
-export default function ConfirmationModal(props) {
+export default function ConfirmationTicketModal(props) {
   let param = "";
   if (props.name === "Close Ticket") {
     param = "close";
@@ -21,7 +21,7 @@ export default function ConfirmationModal(props) {
     >
       <Modal.Body>
         <h4 className="color-success">{props.name}</h4>
-        <p>{`Are you sure you want to ${param} the current ticket?`}</p>
+        <p className="mt-2">Are you sure you want to <strong>{param}</strong> the current ticket?</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide} variant="secondary">

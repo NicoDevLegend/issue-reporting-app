@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,27 +9,56 @@ import PageHeader from "../components/PageHeader";
 import UserData from "../components/UserData";
 import IssuesTableList from "../components/IssuesTableList";
 import TargetUsersBadge from "../components/TargetUsersBadge";
+import { useLocation } from "react-router-dom";
 
 export default function SupportManagement() {
   const { user, isAuthenticated } = useAuth0();
   const [userId, setUserId] = useState();
-  const [userRole, setUserRole] = useState();
+  const [userSuppRole, setUserSuppRole] = useState();
+  const [selectValue, setSelectValue] = useState();
+  const location = useLocation();
+  const accordionEvent = location.state ? location.state : "0";
+  const notifUrl = userId
+    ? `${process.env.REACT_APP_SERVICE_API}/${userId}/Notifications`
+    : null;
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
   );
-  const [supportNotifications] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/${userId}/Notifications`
+  const filteredDataUsers = dataUsers?.filter((user) =>
+    dataRoles?.includes(user.userID)
   );
+  const [supportNotifications] = useAxiosGet(notifUrl);
+
+  useEffect(() => {
+    const storedUserId = sessionStorage.getItem("userId");
+    const storedUserSuppRole = sessionStorage.getItem("userSuppRole");
+    if (storedUserId && storedUserSuppRole) {
+      setUserId(storedUserId);
+      setUserSuppRole(storedUserSuppRole);
+      const storedValue = sessionStorage.getItem("selectValue");
+      if (storedValue) {
+        setSelectValue(storedValue);
+      }
+    }
+  }, []);
+
+  const handleSelectChange = (e) => {
+    const value = e.target.value;
+    setSelectValue(value);
+    sessionStorage.setItem("selectValue", value);
+  };
 
   const handleNone = () => {
     setUserId(null);
-    setUserRole(null);
+    setUserSuppRole(null);
   };
 
   const handleUserData = (userID) => {
     setUserId(userID);
-    setUserRole("support");
+    setUserSuppRole("support");
+    sessionStorage.setItem("userId", userID);
+    sessionStorage.setItem("userSuppRole", "support");
   };
 
   return (
@@ -38,37 +67,56 @@ export default function SupportManagement() {
       <div className="d-grid">
         <PageHeader name={"Support Management"} />
         <TargetUsersBadge
+          value={selectValue}
+          onChange={handleSelectChange}
           title={"Select a support"}
           options={
             <>
               <option onClick={handleNone}>---</option>
               {dataUsers &&
                 dataRoles &&
-                dataUsers
-                  .filter((user) => dataRoles.includes(user.userID))
-                  .map((user, index) => (
-                    <option
-                      key={index}
-                      value={index}
-                      onClick={() => handleUserData(user.userID)}
-                    >
-                      {!user.firstName || !user.lastName ? user.username : `${user.username} (${user.firstName} ${user.lastName})`}
-                    </option>
-                  ))}
+                filteredDataUsers.map((user, index) => (
+                  <option
+                    key={index}
+                    value={index}
+                    onClick={() => handleUserData(user.userID)}
+                  >
+                    {!user.firstName || !user.lastName
+                      ? user.username
+                      : `${user.username} (${user.firstName} ${user.lastName})`}
+                  </option>
+                ))}
             </>
           }
         />
         {userId && (
           <div className="w-75 mx-auto mb-3">
-            <Accordion defaultActiveKey="0" >
+            <Accordion defaultActiveKey={accordionEvent}>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Account Info</Accordion.Header>
-                <Accordion.Body>info.</Accordion.Body>
+                {dataUsers && (
+                  <Accordion.Body>
+                    <div
+                      className="p-4 text-start"
+                    >
+                      <p className="mb-3 text-center">
+                        Username: {filteredDataUsers[selectValue]?.username}
+                      </p>
+                      <p>Email: {filteredDataUsers[selectValue]?.email}</p>
+                      <p>
+                        Firstname: {filteredDataUsers[selectValue]?.firstName}
+                      </p>
+                      <p>
+                        Lastname: {filteredDataUsers[selectValue]?.lastName}
+                      </p>
+                    </div>
+                  </Accordion.Body>
+                )}
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Issue List</Accordion.Header>
                 <Accordion.Body>
-                  <IssuesTableList userId={userId} userRole={userRole} />
+                  <IssuesTableList userId={userId} userRole={userSuppRole} />
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="2">

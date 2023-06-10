@@ -1,22 +1,21 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
-import ConfirmationTicketModal from "./ConfirmationTicketModal";
+import ConfirmationRoleModal from "./ConfirmationRoleModal";
 
-export default function TicketButton({ handleClick, variant, name }) {
+export default function RoleButton({ handleclick, name, title }) {
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <Button
-        variant={variant}
-        className="mt-5"
+        variant="info"
+        className="mx-auto my-4"
         onClick={() => setModalShow(true)}
       >
-        {name}
+        {title}
       </Button>
-      <ConfirmationTicketModal
+      <ConfirmationRoleModal
         name={name}
-        variant={variant}
-        handleclick={handleClick}
+        handleclick={handleclick}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
