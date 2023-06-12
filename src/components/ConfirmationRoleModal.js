@@ -1,10 +1,10 @@
 import { Button, Modal } from "react-bootstrap";
 
 export default function ConfirmationRoleModal(props) {
-  const patchAndClose = () => {
-    props.onHide();
-    props.handleclick();
-  };
+  const AssignAndClose = () => {
+    props.onHide()
+    props.handleclick()
+  }
 
   return (
     <Modal
@@ -24,7 +24,7 @@ export default function ConfirmationRoleModal(props) {
         <Button onClick={props.onHide} variant="secondary">
           Close
         </Button>
-        <Button onClick={patchAndClose} variant="danger">
+        <Button onClick={AssignAndClose} variant="danger">
           Confirm
         </Button>
       </Modal.Footer>

@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import useAxiosGet from "../services/ServiceAxiosGet";
+import axiosDelete from "../services/ServiceAxiosDelete";
 import axiosPost from "../services/ServiceAxiosPost";
 import PageHeader from "../components/PageHeader";
 import TargetUsersBadge from "../components/TargetUsersBadge";
@@ -10,10 +11,9 @@ import {
   DropdownButton,
   Form,
   InputGroup,
-  Row,
+  Row
 } from "react-bootstrap";
 import RoleButton from "../components/RoleButton";
-import axiosDelete from "../services/ServiceAxiosDelete";
 
 export default function RoleAssignment() {
   const { user, isAuthenticated } = useAuth0();
@@ -37,18 +37,14 @@ export default function RoleAssignment() {
     }
   }, [userRole]);
 
-  const patchUserRole = async () => {
+  const deleteAndPostUserRole = async () => {
     try {
-      if (role) {
-        await axiosDelete(
-          `${process.env.REACT_APP_SERVICE_API}/role/${userId}`
-        );
-        await axiosPost(
-          `${process.env.REACT_APP_SERVICE_API}/role/${roleId}/${userId}`
-        );
-      }
+      await axiosDelete(`${process.env.REACT_APP_SERVICE_API}/role/${userId}`);
+      await axiosPost(
+        `${process.env.REACT_APP_SERVICE_API}/role/${roleId}/${userId}`
+      );
       alert("Role was assigned");
-    } catch (err) {
+    } catch {
       alert("Something is wrong");
     }
   };
@@ -123,11 +119,11 @@ export default function RoleAssignment() {
                   <Form.Control placeholder={role} />
                 </InputGroup>
               </Row>
-              <RoleButton
-                title="Assign Role"
-                name={role}
-                handleclick={patchUserRole}
-              />
+                <RoleButton
+                  handleclick={deleteAndPostUserRole}
+                  name={role}
+                  title="Assign Role"
+                />
             </Container>
           )}
         </TargetUsersBadge>
