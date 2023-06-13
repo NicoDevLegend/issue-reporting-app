@@ -79,6 +79,26 @@
     "npm uninstall secret-local-storage": {
       "name": "npm uninstall secret-local-storage",
       "command": "npm uninstall secret-local-storage"
+    },
+    "npm i react-bootstrap-icons": {
+      "name": "npm i react-bootstrap-icons",
+      "command": "npm i react-bootstrap-icons"
+    },
+    "npm uninstall react-bootstrap-icons": {
+      "name": "npm uninstall react-bootstrap-icons",
+      "command": "npm uninstall react-bootstrap-icons"
+    },
+    "npm i react-chartjs-2": {
+      "name": "npm i react-chartjs-2",
+      "command": "npm i react-chartjs-2"
+    },
+    "npm i chart.js@^4.0.0": {
+      "name": "npm i chart.js@^4.0.0",
+      "command": "npm i chart.js@^4.0.0"
+    },
+    "npm uninstall chart.js": {
+      "name": "npm uninstall chart.js",
+      "command": "npm uninstall chart.js"
     }
   }
 }

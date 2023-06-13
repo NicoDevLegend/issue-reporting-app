@@ -10,6 +10,7 @@ import UserData from "../components/UserData";
 import IssuesTableList from "../components/IssuesTableList";
 import TargetUsersBadge from "../components/TargetUsersBadge";
 import { useLocation } from "react-router-dom";
+import PieChartPerformance from "../components/PieChartPerformance";
 
 export default function SupportManagement() {
   const { user, isAuthenticated } = useAuth0();
@@ -28,6 +29,9 @@ export default function SupportManagement() {
   const filteredDataUsers = dataUsers?.filter((user) =>
     dataRoles?.includes(user.userID)
   );
+  const date = filteredDataUsers
+    ? new Date(filteredDataUsers[selectValue]?.lastLogin)
+    : "";
   const [supportNotifications] = useAxiosGet(notifUrl);
 
   useEffect(() => {
@@ -96,9 +100,18 @@ export default function SupportManagement() {
                 <Accordion.Header>Account Info</Accordion.Header>
                 {dataUsers && (
                   <Accordion.Body>
-                    <div
-                      className="p-4 text-start"
-                    >
+                    <div className="p-4 text-start">
+                      <div className="text-center">
+                        <img
+                          src={
+                            filteredDataUsers[selectValue]?.picture1
+                              ? filteredDataUsers[selectValue]?.picture1
+                              : filteredDataUsers[selectValue]?.picture2
+                          }
+                          alt={filteredDataUsers[selectValue]?.username}
+                          className="mx-auto border border-secondary border-opacity-25 border-3 rounded-circle"
+                        />
+                      </div>
                       <p className="mb-3 text-center">
                         Username: {filteredDataUsers[selectValue]?.username}
                       </p>
@@ -109,6 +122,7 @@ export default function SupportManagement() {
                       <p>
                         Lastname: {filteredDataUsers[selectValue]?.lastName}
                       </p>
+                      <p>Last login: {date.toLocaleString()}</p>
                     </div>
                   </Accordion.Body>
                 )}
@@ -181,6 +195,12 @@ export default function SupportManagement() {
                         );
                       })}
                   </div>
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="3">
+                <Accordion.Header>Performance</Accordion.Header>
+                <Accordion.Body>
+                  <PieChartPerformance />
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
