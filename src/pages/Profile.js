@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../components/Loading";
@@ -6,10 +6,15 @@ import { useEffect, useRef, useState } from "react";
 import UserRole from "../components/UserRole";
 import UserBanner from "../components/UserBanners";
 import axiosPatch from "../services/ServiceAxiosPatch";
+import axiosPostMultipart from "../services/ServiceAxiosPostMultipart";
+import ChangePictureModal from "../components/ChangePictureModal";
 
 export default function Profile() {
   const [formInputState, setFormInputState] = useState(true);
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [modalShow, setModalShow] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
+  const [file, setFile] = useState(null);
 
   const {
     control,
@@ -47,6 +52,41 @@ export default function Profile() {
     window.location.reload();
   };
 
+  const handleSelectPicture = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };
+
+  const handleCancelChangePicture = () => {
+    setFile(null);
+    setModalShow(false);
+  };
+
+  const handleRestorePicture = async () => {
+    await axiosPostMultipart(
+      `${process.env.REACT_APP_SERVICE_API}/${user.sub}/users/clearMetadata`,
+      {}
+    );
+    window.location.reload();
+  };
+
+  const handleSubmitPicture = async (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("file", file);
+
+    if (file) {
+      await axiosPostMultipart(
+        `${process.env.REACT_APP_SERVICE_API}/${user.sub}/users/picture`,
+        formData
+      );
+      setModalShow(false);
+      window.location.reload();
+    } else {
+      setAlertShow(true);
+    }
+  };
+
   return (
     isAuthenticated &&
     (isLoading ? (
@@ -64,8 +104,28 @@ export default function Profile() {
             marginTop: "-350px",
             marginBottom: "-75px",
             zIndex: "4",
+            cursor: "pointer",
           }}
+          onClick={() => setModalShow(true)}
         />
+        <ChangePictureModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          handleselect={handleSelectPicture}
+          handleconfirm={handleSubmitPicture}
+          handlerestore={handleRestorePicture}
+          handlecancel={handleCancelChangePicture}
+        />
+        {alertShow && (
+          <Alert
+            variant="danger position-absolute"
+            onClose={() => setAlertShow(false)}
+            style={{ zIndex: "10000" }}
+            dismissible
+          >
+            <Alert.Heading>You didn't select an image!</Alert.Heading>
+          </Alert>
+        )}
         <Form
           className="p-5 w-75 bg-dark text-light position-relative bg-light text-start mb-5 mx-auto d-flex justify-content-center flex-column rounded z-1"
           style={{
@@ -77,7 +137,7 @@ export default function Profile() {
           noValidate
         >
           <p
-            className="p-3 w-auto mx-auto mt-4 mb-5 text-decoration-underline"
+            className="p-3 w-auto mx-auto mt-5 mb-4 text-decoration-underline"
             style={{ textUnderlineOffset: "3px" }}
           >
             <UserRole />
