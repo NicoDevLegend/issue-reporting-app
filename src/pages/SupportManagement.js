@@ -56,6 +56,7 @@ export default function SupportManagement() {
   const handleNone = () => {
     setUserId(null);
     setUserSuppRole(null);
+    sessionStorage.clear()
   };
 
   const handleUserData = (userID) => {
@@ -129,9 +130,9 @@ export default function SupportManagement() {
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Issue List</Accordion.Header>
-                <Accordion.Body>
-                  <IssuesTableList userId={userId} userRole={userSuppRole} />
-                </Accordion.Body>
+                  <Accordion.Body>
+                    <IssuesTableList userId={userId} userRole={userSuppRole} />
+                  </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="2">
                 <Accordion.Header>Notifications</Accordion.Header>
@@ -199,9 +200,12 @@ export default function SupportManagement() {
               </Accordion.Item>
               <Accordion.Item eventKey="3">
                 <Accordion.Header>Performance</Accordion.Header>
-                <Accordion.Body>
-                  <PieChartPerformance userId={userId} userRole={userSuppRole}/>
-                </Accordion.Body>
+                  <Accordion.Body>
+                    <PieChartPerformance
+                      userId={userId}
+                      userRole={userSuppRole}
+                    />
+                  </Accordion.Body>
               </Accordion.Item>
             </Accordion>
           </div>
