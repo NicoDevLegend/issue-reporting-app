@@ -200,7 +200,7 @@ export default function SupportManagement() {
               <Accordion.Item eventKey="3">
                 <Accordion.Header>Performance</Accordion.Header>
                 <Accordion.Body>
-                  <PieChartPerformance />
+                  <PieChartPerformance userId={userId} userRole={userSuppRole}/>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
