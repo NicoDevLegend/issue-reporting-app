@@ -1,5 +1,4 @@
 import { Nav, Navbar, Container } from "react-bootstrap";
-import SearchForm from "./SearchForm";
 import LogInButton from "./LogInButton";
 import SignUpButton from "./SignUpButton";
 import Avatar from "./Avatar";
@@ -15,7 +14,6 @@ export default function NavBar() {
         <Nav className="" style={{ maxHeight: "100px" }}>
           {isAuthenticated ? (
             <>
-              <SearchForm />
               <Notifications />
               <Avatar />
             </>

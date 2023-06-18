@@ -71,7 +71,7 @@ export default function Profile() {
   };
 
   const handleSubmitPicture = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
 
@@ -86,7 +86,7 @@ export default function Profile() {
       setAlertShow(true);
     }
   };
-
+console.log(errors.username)
   return (
     isAuthenticated &&
     (isLoading ? (
@@ -161,6 +161,8 @@ export default function Profile() {
                     setValue("username", value, { shouldDirty: true });
                     if (value === "") {
                       setError("username", "notMatch");
+                    }else {
+                      delete errors.username;
                     }
                   }}
                 />

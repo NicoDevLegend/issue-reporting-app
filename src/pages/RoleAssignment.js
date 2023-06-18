@@ -11,7 +11,7 @@ import {
   DropdownButton,
   Form,
   InputGroup,
-  Row
+  Row,
 } from "react-bootstrap";
 import RoleButton from "../components/RoleButton";
 
@@ -28,6 +28,7 @@ export default function RoleAssignment() {
   const [userRole] = useAxiosGet(roleUrl);
   const [role, setRole] = useState();
   const [value, setValue] = useState({ User: false, Support: false });
+  const filteredDataUsers = dataUsers?.filter((u) => u.userID !== user.sub);
 
   useEffect(() => {
     if (userRole) {
@@ -73,31 +74,33 @@ export default function RoleAssignment() {
       <div className="d-grid">
         <PageHeader name={"Role Assignment"} />
         <TargetUsersBadge
+          data={filteredDataUsers}
           title={"Select an Account"}
           options={
             <>
               <option onClick={handleNone}>---</option>
               {dataUsers &&
-                dataUsers
-                  .filter((u) => u.userID !== user.sub)
-                  .map((user, index) => (
-                    <option
-                      key={index}
-                      value={index}
-                      onClick={() => handleUserData(user.userID)}
-                    >
-                      {!user.firstName || !user.lastName
-                        ? user.username
-                        : `${user.username} (${user.firstName} ${user.lastName})`}
-                    </option>
-                  ))}
+                filteredDataUsers?.map((user, index) => (
+                  <option
+                    key={index}
+                    value={index}
+                    onClick={() => handleUserData(user.userID)}
+                  >
+                    {!user.firstName || !user.lastName
+                      ? user.username
+                      : `${user.username} (${user.firstName} ${user.lastName})`}
+                  </option>
+                ))}
             </>
           }
         >
           {userId && userRole && (
             <Container>
               <Row>
-                <InputGroup className="m-3">
+                <InputGroup
+                  className="mx-auto my-3"
+                  style={{ maxWidth: "250px" }}
+                >
                   <DropdownButton variant="dark" title="Role">
                     <Dropdown.Item disabled>
                       <strong>Select a Role</strong>
@@ -116,14 +119,14 @@ export default function RoleAssignment() {
                       Support
                     </Dropdown.Item>
                   </DropdownButton>
-                  <Form.Control placeholder={role} />
+                  <Form.Control placeholder={role} disabled />
                 </InputGroup>
               </Row>
-                <RoleButton
-                  handleclick={deleteAndPostUserRole}
-                  name={role}
-                  title="Assign Role"
-                />
+              <RoleButton
+                handleclick={deleteAndPostUserRole}
+                name={role}
+                title="Assign Role"
+              />
             </Container>
           )}
         </TargetUsersBadge>

@@ -1,6 +1,24 @@
+import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
+import SearchBar from "./SearchBar";
 
-export default function TargetUsersBadge({ options, title, value, onChange, children }) {
+export default function TargetUsersBadge({
+  data,
+  options,
+  title,
+  value,
+  onChange,
+  children,
+}) {
+  const [filteredData, setFilteredData] = useState(data);
+   
+  const handleSearch = (searchTerm) => {
+    const filteredResults = data?.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filteredResults);
+  };
+
   return (
     <div
       className="p-4 w-75 mx-auto mt-1 mb-4 bg-dark text-light rounded d-flex justify-content-center align-items-center"
@@ -26,6 +44,14 @@ export default function TargetUsersBadge({ options, title, value, onChange, chil
               </Form.Select>
             </Form.Group>
           </Col>
+          <Col>
+            <Form.Label>
+              <strong>Search a Support</strong>
+            </Form.Label>
+            <SearchBar onSearch={handleSearch} data={filteredData} />
+          </Col>
+        </Row>
+        <Row>
           <Col>{children}</Col>
         </Row>
       </Container>
