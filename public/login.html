@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sign In with Auth0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+  <style>
+    body, html {
+      height: 100%;
+      background-color: #adb5bd;
+    }
+
+    .login-container {
+      position: relative;
+      height: 100%;
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px;
+      color: #fff;
+      background-color: #000;
+      box-shadow: 0px 5px 10px 10px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      border-top: 1px solid #e9e9e9;
+    }
+
+    .login-header {
+      text-align: center;
+    }
+
+    .login-header img {
+      width: 75px;
+    }
+    
+    #title-login, #title-signup, #title-forgot {
+      margin: 15px 0;
+    }
+    
+    .signup-switcher, .login-switcher, .forgot-switcher {
+    	margin-top: 15px;
+    }
+
+    #error-message {
+      display: none;
+      white-space: break-spaces;
+    }
+  </style>
+<body>
+  <div class="login-container">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4 login-box">
+      <div class="login-header">
+        <img src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"/>
+        <h3>Welcome to Issue Reporting</h3>
+        <h5 id="title-login"><strong>PLEASE LOG IN</strong></h5>
+        <h5 id="title-signup" class="hidden"><strong>SIGN UP</strong></h5>
+        <h5 id="title-forgot" class="hidden"><strong>FORGOT PASSWORD</strong></h5>
+      </div>
+      <div id="error-message" class="alert alert-danger"></div>
+      <form id="logininitial" onsubmit="return false;" method="post">
+        <div id="loginEmail" class="form-group">
+         <label for="name">Email/Username</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter your email/username">
+        </div>
+        <div id="signupEmail" class="form-group hidden">
+         <label for="name">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="signup-email"
+            placeholder="Enter your email">
+        </div>
+        <div id="signupUsername" class="form-group hidden">
+         <label for="name">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+          <label for="name">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Enter your password">
+        </div>
+        <div class="captcha-container form-group"></div>
+        <div class="form-group">
+        	<div id="select-accounts" >
+        <label for="demo-accounts">Or select a demo account:</label>
+        <select class="form-control" id="demo-accounts" name="demo-accounts">
+          <option value="">---</option>
+          <option value="admin@demo.com">Admin</option>
+          <option value="user@demo.com">User</option>
+          <option value="support@demo.com">Support</option>
+        </select>
+          </div>  
+      </div>
+        <button
+          type="submit"
+          id="btn-login"
+          class="btn btn-primary btn-block">
+            Log In
+        </button>
+        <button
+          type="button"
+          id="btn-signup"
+          class="btn btn-default btn-block hidden">
+            Sign Up
+        </button>
+        <p id="signupP" class="signup-switcher hidden">
+          Already have an account?
+          <a
+            href="#"
+            id="signupSwitcher"
+           >
+          Log In
+          </a>
+         </p>
+         <p id="loginP" class="login-switcher">
+           Don&apos;t have an account yet?
+           <a
+             href="#"
+             id="loginSwitcher"             
+            >
+           Sign Up
+           </a>
+          <br/>
+          <small class="form-text text-muted">
+            <a
+              href="#"
+              id="forgotswitcher"
+             >
+            Forgot Password?
+            </a>
+          </small>
+         </p>
+      </form>
+      <form class="hidden" id="forgotpassword" onsubmit="return false;" method="post">
+        <div class="form-group" id="forgot-contents">
+           <label for="name">Email</label>
+          <input
+             required
+             type="email"
+             name="email"
+             autoFocus="true"
+             autoComplete="username"
+             id="forgotemail"
+             class="form-control"
+             placeholder="Enter your email"
+            />
+            </div>
+             <div class="captcha-container form-group"></div>
+        		<div id="error-message" class="alert alert-danger"></div>
+           <button
+             class="btn btn-primary btn-block btn-lg"
+             type="submit"
+             id="btn-forgot"
+           >
+             Lookup
+            </button>
+        		<p id="forgotP" class="forgot-switcher hidden">
+          		Back to
+          		<a
+          		href="#"
+          		id="loginSwitcher2"
+          		>
+          		Log In
+          		</a>
+        		</p>
+           </form>
+    </div>
+  </div>
+
+  <!--[if IE 8]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ie8/0.2.5/ie8.js"></script>
+  <![endif]-->
+
+  <!--[if lte IE 9]>
+  <script src="https://cdn.auth0.com/js/polyfills/1.0/base64.min.js"></script>
+  <script src="https://cdn.auth0.com/js/polyfills/1.0/es5-shim.min.js"></script>
+  <![endif]-->
+
+  <script src="https://cdn.auth0.com/js/auth0/9.18/auth0.min.js"></script>
+  <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+
+      var config = JSON.parse(
+        decodeURIComponent(escape(window.atob('@@config@@')))
+      );
+			
+      function loginSwitch(e) {
+          e.preventDefault();
+          clearErrors();
+          document.getElementById('btn-signup').className = 'btn btn-default btn-block';
+        	document.getElementById('btn-login').className = 'hidden';
+        	document.getElementById('title-signup').className = '';
+        	document.getElementById('title-login').className = 'hidden';
+        	document.getElementById('select-accounts').className = 'hidden';
+        	document.getElementById('signupP').className = 'signup-switcher';
+        	document.getElementById('loginP').className = 'hidden';
+        	document.getElementById('loginEmail').className = 'hidden';
+        	document.getElementById('signupEmail').className = 'form-group';
+        	document.getElementById('signupUsername').className = 'form-group';
+        };
+      
+      function forgotSwitch(e) {
+          e.preventDefault();
+          clearErrors();
+          document.getElementById('forgotpassword').className = '';
+        	document.getElementById('btn-login').className = 'hidden';
+        	document.getElementById('title-forgot').className = '';
+        	document.getElementById('title-login').className = 'hidden';
+        	document.getElementById('select-accounts').className = 'hidden';
+        	document.getElementById('forgotP').className = 'forgot-switcher';
+        	document.getElementById('loginP').className = 'hidden';
+        	document.getElementById('logininitial').className = 'hidden';
+        	document.getElementById('forgotEmail').className = 'form-group';     	
+        };
+      
+      function backToLoginSwitch(e) {
+          e.preventDefault();
+          clearErrors();
+          document.getElementById('forgotpassword').className = 'hidden';
+        	document.getElementById('btn-login').className = 'btn btn-primary btn-block';
+        	document.getElementById('title-forgot').className = 'hidden';
+        	document.getElementById('title-login').className = '';
+        	document.getElementById('select-accounts').className = '';
+        	document.getElementById('forgotP').className = 'hidden';
+        	document.getElementById('loginP').className = 'forgot-switcher';
+        	document.getElementById('logininitial').className = 'form-group';
+        	document.getElementById('forgotEmail').className = 'hidden';     	
+        };
+      
+      function signupSwitch(e) {
+          e.preventDefault();
+          clearErrors();
+          document.getElementById('btn-signup').className = 'hidden';
+        	document.getElementById('btn-login').className = 'btn btn-primary btn-block';
+        	document.getElementById('title-signup').className = 'hidden';
+        	document.getElementById('title-login').className = '';
+        	document.getElementById('select-accounts').className = '';
+        	document.getElementById('signupP').className = 'hidden';
+        	document.getElementById('loginP').className = 'login-switcher';
+        	document.getElementById('loginEmail').className = 'form-group';
+        	document.getElementById('signupEmail').className = 'hidden';
+        	document.getElementById('signupUsername').className = 'hidden';
+        };
+      
+      if (config.extraParams.screen_hint === 'signup') {
+      	loginSwitch()
+      }
+
+      var leeway = config.internalOptions.leeway;
+      if (leeway) {
+        var convertedLeeway = parseInt(leeway);
+
+        if (!isNaN(convertedLeeway)) {
+          config.internalOptions.leeway = convertedLeeway;
+        }
+      }
+
+      var params = Object.assign({
+        overrides: {
+          __tenant: config.auth0Tenant,
+          __token_issuer: config.authorizationServer.issuer
+        },
+        domain: config.auth0Domain,
+        clientID: config.clientID,
+        redirectUri: config.callbackURL,
+        responseType: 'code'
+      }, config.internalOptions);
+
+      var webAuth = new auth0.WebAuth(params);
+      var databaseConnection = 'Username-Password-Authentication';
+      var captcha = webAuth.renderCaptcha(
+        document.querySelector('.captcha-container')
+      );
+
+      function login(e) {
+        e.preventDefault();
+        var button = this;
+        var username = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        button.disabled = true;
+        webAuth.login({
+          realm: databaseConnection,
+          username: username,
+          password: password,
+          captcha: captcha.getValue()
+        }, function(err) {
+          if (err) displayError(err);
+          button.disabled = false;
+        });
+      }
+      
+      function forgotpassword(e) {
+          e.preventDefault();
+          clearErrors();
+          var button = this;
+          var email = document.getElementById('forgotemail').value;
+          button.disabled = true;
+          webAuth.changePassword({
+            connection: databaseConnection,
+            email: email,
+            captcha: captcha.getValue()
+          }, function (err, resp) {
+            if (err) {
+              if (err) displayError(err);
+            } else {
+              document.getElementById("forgot-contents").innerHTML = resp;
+              document.getElementById("btn-forgot").classList.add('d-none');
+              button.disabled = false;
+            }
+          });
+        }
+
+      function signup() {
+        var button = this;
+        var email = document.getElementById('signup-email').value;
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        button.disabled = true;
+        webAuth.redirect.signupAndLogin({
+          connection: databaseConnection,
+          email: email,
+          username: username,
+          password: password,
+          captcha: captcha.getValue()
+        }, function(err) {
+          if (err) displayError(err);
+          button.disabled = false;
+        });
+      }
+      
+      function clearErrors() {
+          var errorMessage = document.getElementById('error-message');
+            errorMessage.innerHTML = "";
+            errorMessage.style.display = 'none';
+        }
+
+      function displayError(err) {
+        captcha.reload();
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.innerText = err.policy || err.description || "Please complete the fields and try again";
+        errorMessage.style.display = 'block';
+      }
+      
+      var select = document.getElementById('demo-accounts');
+      var inputEmail = document.getElementById('email');
+      var inputPassword = document.getElementById('password');
+      
+      function setAccount() {
+      	var selectedValue = select.value;
+        var admin = "demoPassword3";
+        var user = "demoPassword1";
+        var support = "demoPassword2";
+        inputEmail.value = selectedValue;
+        if (selectedValue === "admin@demo.com") {
+            inputPassword.value = admin;
+         }else if (selectedValue === "user@demo.com") {
+           	inputPassword.value = user;
+         }else if (selectedValue === "support@demo.com") {
+            inputPassword.value = support;      
+         }else {
+         		inputPassword.value = selectedValue;
+         }     
+      }
+ 
+      document.getElementById('btn-login').addEventListener('click', login);
+      document.getElementById('btn-forgot').addEventListener('click', forgotpassword);
+      document.getElementById('btn-signup').addEventListener('click', signup);
+      document.getElementById('loginSwitcher').addEventListener('click', loginSwitch);
+      document.getElementById('forgotswitcher').addEventListener('click', forgotSwitch);
+      document.getElementById('loginSwitcher2').addEventListener('click', backToLoginSwitch);
+      document.getElementById('signupSwitcher').addEventListener('click', signupSwitch);
+      select.addEventListener('change', setAccount);
+    });
+  </script>
+</body>
+</html>

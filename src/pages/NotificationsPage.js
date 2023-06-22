@@ -19,7 +19,7 @@ import axiosPatch from "../services/ServiceAxiosPatch";
 
 export default function NotificationsPage() {
   const { user, isAuthenticated } = useAuth0();
-  const { notifications, setNotifications, unread } =
+  const { notifications, setNotifications, unread, getNotif } =
     useContext(NotificationsContext);
   const [showUnread, setShowUnread] = useState(false);
   const allNotifUrl = `${process.env.REACT_APP_SERVICE_API}/Notifications/${user.sub}`;
@@ -34,14 +34,17 @@ export default function NotificationsPage() {
 
   const handleDeleteAllNotifications = async () => {
     await axiosDelete(allNotifUrl);
+    getNotif();
   };
 
   const handleReadAllNotifications = async () => {
     await axiosPatch(allNotifUrl);
+    getNotif();
   };
 
   const handleFilterUnread = () => {
     setShowUnread(true);
+    getNotif();
   };
 
   const handleUnfiltered = () => {

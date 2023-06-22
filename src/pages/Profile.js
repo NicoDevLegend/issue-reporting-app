@@ -86,7 +86,7 @@ export default function Profile() {
       setAlertShow(true);
     }
   };
-console.log(errors.username)
+
   return (
     isAuthenticated &&
     (isLoading ? (
@@ -161,7 +161,7 @@ console.log(errors.username)
                     setValue("username", value, { shouldDirty: true });
                     if (value === "") {
                       setError("username", "notMatch");
-                    }else {
+                    } else {
                       delete errors.username;
                     }
                   }}

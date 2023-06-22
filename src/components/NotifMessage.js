@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import axiosPatch from "../services/ServiceAxiosPatch";
 import { useNavigate } from "react-router-dom";
+import { NotificationsContext } from "../components/NotificationsProvider";
 
 export default function NotifMessage({ data, handleClick }) {
   const navigate = useNavigate();
+    const { getNotif } = useContext(NotificationsContext);
 
   const patchNotifMessage = async (patchData, notifId) => {
     await axiosPatch(
@@ -10,6 +13,7 @@ export default function NotifMessage({ data, handleClick }) {
       patchData
     );
     handleClick();
+    getNotif();
     navigate("/notifications");
   };
 
