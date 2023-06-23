@@ -8,10 +8,11 @@ export default function TargetUsersBadge({
   title,
   value,
   onChange,
+  searchSelect,
   children,
 }) {
   const [filteredData, setFilteredData] = useState(data);
-   
+
   const handleSearch = (searchTerm) => {
     const filteredResults = data?.filter((user) =>
       user.username.toLowerCase().includes(searchTerm.toLowerCase())
@@ -48,7 +49,12 @@ export default function TargetUsersBadge({
             <Form.Label>
               <strong>Search a Support</strong>
             </Form.Label>
-            <SearchBar onSearch={handleSearch} data={filteredData} />
+            <SearchBar
+              onSearch={handleSearch}
+              data={filteredData}
+              onChange={onChange}
+              searchSelect={searchSelect}
+            />
           </Col>
         </Row>
         <Row>

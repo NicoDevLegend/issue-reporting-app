@@ -27,6 +27,7 @@ export default function RoleAssignment() {
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [userRole] = useAxiosGet(roleUrl);
   const [role, setRole] = useState();
+  const [selectValue, setSelectValue] = useState();
   const [value, setValue] = useState({ User: false, Support: false });
   const filteredDataUsers = dataUsers?.filter((u) => u.userID !== user.sub);
 
@@ -67,6 +68,11 @@ export default function RoleAssignment() {
     setRole("Support");
     setRoleId(userSupportRole);
   };
+  
+  const handleSelectChange = (e) => {
+    const value = e.target?.value ? e.target.value : e;
+    setSelectValue(value);
+  };
 
   return (
     isAuthenticated &&
@@ -76,6 +82,9 @@ export default function RoleAssignment() {
         <TargetUsersBadge
           data={filteredDataUsers}
           title={"Select an Account"}
+          value={selectValue}
+          onChange={handleSelectChange}
+          searchSelect={handleUserData}
           options={
             <>
               <option onClick={handleNone}>---</option>

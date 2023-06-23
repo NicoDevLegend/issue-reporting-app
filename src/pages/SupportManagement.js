@@ -48,7 +48,7 @@ export default function SupportManagement() {
   }, []);
 
   const handleSelectChange = (e) => {
-    const value = e.target.value;
+    const value = e.target?.value ? e.target.value : e;
     setSelectValue(value);
     sessionStorage.setItem("selectValue", value);
   };
@@ -75,6 +75,7 @@ export default function SupportManagement() {
           data={filteredDataUsers}
           value={selectValue}
           onChange={handleSelectChange}
+          searchSelect={handleUserData}
           title={"Select a support"}
           options={
             <>
@@ -146,7 +147,7 @@ export default function SupportManagement() {
                       scrollbarWidth: "thin",
                     }}
                   >
-                    {supportNotifications &&
+                    {supportNotifications && supportNotifications.length !== 0 ? (
                       supportNotifications.map((n, index) => {
                         return (
                           <div
@@ -195,7 +196,10 @@ export default function SupportManagement() {
                             </Container>
                           </div>
                         );
-                      })}
+                      })
+                    ) : (
+                      <div>Not notifications yet.</div>
+                    )}
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
