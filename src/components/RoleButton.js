@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import ConfirmationRoleModal from "./ConfirmationRoleModal";
 
-export default function RoleButton({ handleclick, name, title }) {
+export default function RoleButton({ handleclick, name, title, disabled }) {
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
@@ -10,6 +10,7 @@ export default function RoleButton({ handleclick, name, title }) {
         variant="info"
         className="mx-auto my-4"
         onClick={() => setModalShow(true)}
+        disabled={disabled}
       >
         {title}
       </Button>

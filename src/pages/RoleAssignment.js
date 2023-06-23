@@ -28,6 +28,7 @@ export default function RoleAssignment() {
   const [userRole] = useAxiosGet(roleUrl);
   const [role, setRole] = useState();
   const [selectValue, setSelectValue] = useState();
+  const [disableButton, setDisabledButton] = useState(true);
   const [value, setValue] = useState({ User: false, Support: false });
   const filteredDataUsers = dataUsers?.filter((u) => u.userID !== user.sub);
 
@@ -53,20 +54,24 @@ export default function RoleAssignment() {
 
   const handleNone = () => {
     setUserId(null);
+    setDisabledButton(true);
   };
 
   const handleUserData = (userID) => {
     setUserId(userID);
+    setDisabledButton(true);
   };
 
   const handleUserRole = () => {
     setRole("User");
     setRoleId(userUserRole);
+    setDisabledButton(false);
   };
 
   const handleSupportRole = () => {
     setRole("Support");
     setRoleId(userSupportRole);
+    setDisabledButton(false);
   };
   
   const handleSelectChange = (e) => {
@@ -135,6 +140,7 @@ export default function RoleAssignment() {
                 handleclick={deleteAndPostUserRole}
                 name={role}
                 title="Assign Role"
+                disabled={disableButton}
               />
             </Container>
           )}
