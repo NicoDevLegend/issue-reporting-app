@@ -2,6 +2,7 @@ import { Button, Form, Alert } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
+import axiosPostMultipart from "../services/ServiceAxiosPostMultipart";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import PageHeader from "../components/PageHeader";
 import { useState } from "react";
@@ -10,6 +11,8 @@ export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
   const [userId, setUserId] = useState();
   const [alertShow, setAlertShow] = useState(false);
+  const [errorAlertShow, setErrorAlertShow] = useState(false);
+  //const [file, setFile] = useState(null);
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
@@ -28,6 +31,7 @@ export default function NewTicket() {
       Category: "",
       Priority: "",
       AssigneeID: "",
+      Attachments: "",
     },
   });
 
@@ -43,12 +47,19 @@ export default function NewTicket() {
 
   const onSubmit = async (data, e) => {
     try {
-      await axiosPost(`${process.env.REACT_APP_SERVICE_API}/ticket`, data);
+      await axiosPostMultipart(`${process.env.REACT_APP_SERVICE_API}/ticket`, data);
       newNotifMessage();
       setAlertShow(true);
       e.target.reset();
-    } catch {}
+    } catch {
+      setErrorAlertShow(true);
+    }
   };
+
+  /*const handleSelectFile = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+  };*/
 
   return (
     isAuthenticated &&
@@ -194,7 +205,19 @@ export default function NewTicket() {
               <strong>Attachments</strong>
             </Form.Label>
             <br></br>
-            <Form.Control type="file" size="sm" className="mx-auto" />
+            <Controller
+              name="Attachments"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  onChange={(e) => field.onChange(e.target.files[0])}
+                  type="file"
+                  size="sm"
+                  className="mx-auto"
+                  accept=".pdf,.doc,.jpg"
+                />
+              )}
+            />
           </Form.Group>
           <hr></hr>
           <Form.Group className="mx-auto mt-2 mb-3">
@@ -218,6 +241,18 @@ export default function NewTicket() {
               dismissible
             >
               <Alert.Heading>Ticket submited!</Alert.Heading>
+            </Alert>
+          )}
+          {errorAlertShow && (
+            <Alert
+              variant="danger position-fixed"
+              onClose={() => setAlertShow(false)}
+              style={{ zIndex: "10000", top: "50%" }}
+              dismissible
+            >
+              <Alert.Heading>
+                Something is wrong!, please try again
+              </Alert.Heading>
             </Alert>
           )}
         </Form>
