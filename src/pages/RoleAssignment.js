@@ -12,6 +12,7 @@ import {
   Form,
   InputGroup,
   Row,
+  Alert,
 } from "react-bootstrap";
 import RoleButton from "../components/RoleButton";
 
@@ -21,6 +22,8 @@ export default function RoleAssignment() {
   const userSupportRole = process.env.REACT_APP_SUPPORT_ROLE;
   const [userId, setUserId] = useState();
   const [roleId, setRoleId] = useState();
+  const [alertShow, setAlertShow] = useState(false);
+  const [errorAlertShow, setErrorAlertShow] = useState(false);
   const roleUrl = userId
     ? `${process.env.REACT_APP_SERVICE_API}/${userId}/roles`
     : null;
@@ -46,9 +49,10 @@ export default function RoleAssignment() {
       await axiosPost(
         `${process.env.REACT_APP_SERVICE_API}/role/${roleId}/${userId}`
       );
-      alert("Role was assigned");
+      setAlertShow(true);
+      handleNone();
     } catch {
-      alert("Something is wrong");
+      setErrorAlertShow(true);
     }
   };
 
@@ -73,7 +77,7 @@ export default function RoleAssignment() {
     setRoleId(userSupportRole);
     setDisabledButton(false);
   };
-  
+
   const handleSelectChange = (e) => {
     const value = e.target?.value ? e.target.value : e;
     setSelectValue(value);
@@ -110,6 +114,9 @@ export default function RoleAssignment() {
         >
           {userId && userRole && (
             <Container>
+              <Row className="mt-3">
+                <strong>Select a Role</strong>
+              </Row>
               <Row>
                 <InputGroup
                   className="mx-auto my-3"
@@ -143,6 +150,26 @@ export default function RoleAssignment() {
                 disabled={disableButton}
               />
             </Container>
+          )}
+          {alertShow && (
+            <Alert
+              variant="success position-fixed"
+              onClose={() => setAlertShow(false)}
+              style={{ zIndex: "10000", top: "50%" }}
+              dismissible
+            >
+              <Alert.Heading>Role Assigned!</Alert.Heading>
+            </Alert>
+          )}
+          {errorAlertShow && (
+            <Alert
+              variant="danger position-fixed"
+              onClose={() => setAlertShow(false)}
+              style={{ zIndex: "10000", top: "50%" }}
+              dismissible
+            >
+              <Alert.Heading>Something is wrong!, please try again</Alert.Heading>
+            </Alert>
           )}
         </TargetUsersBadge>
       </div>

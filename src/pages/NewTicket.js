@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Alert } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
@@ -8,7 +8,8 @@ import { useState } from "react";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
+  const [alertShow, setAlertShow] = useState(false);
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
@@ -29,7 +30,7 @@ export default function NewTicket() {
       AssigneeID: "",
     },
   });
-  
+
   const newNotifMessage = async () => {
     await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Notification`, {
       From: user.sub,
@@ -41,20 +42,20 @@ export default function NewTicket() {
   };
 
   const onSubmit = async (data, e) => {
-    const resData = await axiosPost(
-      `${process.env.REACT_APP_SERVICE_API}/ticket`,
-      data
-    );
-    newNotifMessage()
-    alert(resData);
-    e.target.reset();
+    try {
+      await axiosPost(`${process.env.REACT_APP_SERVICE_API}/ticket`, data);
+      newNotifMessage();
+      setAlertShow(true);
+      e.target.reset();
+    } catch {}
   };
 
   return (
     isAuthenticated &&
-    (user["https://my-app/roles"][0] === "User" || user["https://my-app/roles"][0] === "Admin") && (
+    (user["https://my-app/roles"][0] === "User" ||
+      user["https://my-app/roles"][0] === "Admin") && (
       <div className="d-grid mb-5">
-        <PageHeader name={"New Ticket"}/>
+        <PageHeader name={"New Ticket"} />
         <Form
           onReset={reset}
           className="p-5 w-75 text-start mx-auto mt-3 mb-5 bg-dark text-light d-flex justify-content-center flex-column rounded"
@@ -173,7 +174,11 @@ export default function NewTicket() {
                     dataUsers
                       .filter((user) => dataRoles.includes(user.userID))
                       .map((user, index) => (
-                        <option key={index} value={user.userID} onClick={() => setUserId(user.userID)}>
+                        <option
+                          key={index}
+                          value={user.userID}
+                          onClick={() => setUserId(user.userID)}
+                        >
                           {user.username}
                         </option>
                       ))}
@@ -205,6 +210,16 @@ export default function NewTicket() {
               Reset
             </Button>
           </Form.Group>
+          {alertShow && (
+            <Alert
+              variant="success position-fixed"
+              onClose={() => setAlertShow(false)}
+              style={{ zIndex: "10000", top: "50%" }}
+              dismissible
+            >
+              <Alert.Heading>Ticket submited!</Alert.Heading>
+            </Alert>
+          )}
         </Form>
       </div>
     )

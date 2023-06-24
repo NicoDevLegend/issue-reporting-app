@@ -3,12 +3,22 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Container, Row, Col } from "react-bootstrap";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { conditionalPieColors } from "../Utilities/conditionalPieColors";
+import { useEffect, useState } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function PieChartPerformance({ userId, userRole }) {
   const [data] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/ticket/${userId}/${userRole}`
   );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mobileVerification = () => {
+      const isMobile = /Android/i.test(navigator.userAgent);
+      setIsMobile(isMobile);
+    };
+    mobileVerification();
+  }, []);
 
   const contentCounts = data?.reduce((counts, data) => {
     counts[data?.Status] = (counts[data?.Status] || 0) + 1;
@@ -21,7 +31,7 @@ export default function PieChartPerformance({ userId, userRole }) {
         ((item / total) * 100).toFixed(2)
       )
     : null;
-  
+
   const performanceData = {
     labels: contentCounts ? Object.keys(contentCounts) : [],
     datasets: [
@@ -69,15 +79,25 @@ export default function PieChartPerformance({ userId, userRole }) {
   };
 
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col>
-            <h3>Task Status</h3>
-            {data && <Pie data={performanceData} options={options} />}
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container
+      style={{
+        maxWidth: "400px",
+        minWidth: "150px",
+        minHeight: "150px",
+        margin: "20px auto",
+      }}
+    >
+      <Row>
+        <Col>
+          <h3>Task Status</h3>
+          {data && <Pie data={performanceData} options={options} />}
+        </Col>
+      </Row>
+      <Row>
+        <p className="mt-3">
+          {isMobile ? "Touch" : "Hover"} the image to see more info.
+        </p>
+      </Row>
+    </Container>
   );
 }
