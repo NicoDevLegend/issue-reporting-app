@@ -69,7 +69,7 @@ export default function SupportManagement() {
   return (
     isAuthenticated &&
     user["https://my-app/roles"][0] === "Admin" && (
-      <div className="d-grid">
+      <div className="mx-auto d-flex flex-column justify-content-center">
         <PageHeader name={"Support Management"} />
         <TargetUsersBadge
           data={filteredDataUsers}
@@ -132,7 +132,7 @@ export default function SupportManagement() {
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Issue List</Accordion.Header>
-                <Accordion.Body>
+                <Accordion.Body className="p-0">
                   <IssuesTableList userId={userId} userRole={userSuppRole} />
                 </Accordion.Body>
               </Accordion.Item>
@@ -147,7 +147,8 @@ export default function SupportManagement() {
                       scrollbarWidth: "thin",
                     }}
                   >
-                    {supportNotifications && supportNotifications.length !== 0 ? (
+                    {supportNotifications &&
+                    supportNotifications.length !== 0 ? (
                       supportNotifications.map((n, index) => {
                         return (
                           <div

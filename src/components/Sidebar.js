@@ -19,17 +19,11 @@ export default function SideBar() {
         backgroundColor="#212529"
         maxWidth="200px"
         className="h-auto min-vh-100"
-        breakpoint={720}
+        breakpoint={0}
         toggled
       >
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a
-            href="/"
-            className="text-decoration-none"
-            style={{ color: "inherit" }}
-          >
-            Issue Reporting
-          </a>
+        <CDBSidebarHeader prefix={<i className="ms-2 fa fa-bars fa-large"></i>}>
+          Issue Reporting
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
@@ -62,16 +56,16 @@ export default function SideBar() {
               </NavLink>
             ) : user["https://my-app/roles"][0] === "Admin" ? (
               <>
-              <NavLink
-                to="/newticket"
-                className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "activeClicked" : ""
-                }
-              >
-                <CDBSidebarMenuItem icon="clipboard-list">
-                  New Ticket
-                </CDBSidebarMenuItem>
-              </NavLink>
+                <NavLink
+                  to="/newticket"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "activeClicked" : ""
+                  }
+                >
+                  <CDBSidebarMenuItem icon="clipboard-list">
+                    New Ticket
+                  </CDBSidebarMenuItem>
+                </NavLink>
                 <NavLink
                   to="/supportmanagement"
                   className={({ isActive, isPending }) =>

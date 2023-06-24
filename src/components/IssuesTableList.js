@@ -67,10 +67,10 @@ export default function IssuesTableList({ userId, userRole }) {
 
   return (
     <div
-      className="container bg-dark mb-3"
+      className="container-fluid bg-dark mb-3"
       style={{ overflow: "auto", minHeight: "300px", maxHeight: "500px" }}
     >
-      <div className="w-100" style={{ height: "50px" }}>
+      <div style={{ height: "50px" }}>
         {value && (
           <ResetTableButton
             setFilteredData={setFilteredData}
