@@ -79,7 +79,7 @@ export default function IssuesTableList({ userId, userRole }) {
           />
         )}
       </div>
-      <Table bordered hover variant="dark" className="mb-2">
+      <Table bordered hover variant="dark" className="mb-2" responsive>
         <THeadAll
           setValue={setValue}
           filterColor={filterColor}
