@@ -99,6 +99,14 @@
     "npm uninstall chart.js": {
       "name": "npm uninstall chart.js",
       "command": "npm uninstall chart.js"
+    },
+    "npm i mime-types": {
+      "name": "npm i mime-types",
+      "command": "npm i mime-types"
+    },
+    "npm uninstall mime-types": {
+      "name": "npm uninstall mime-types",
+      "command": "npm uninstall mime-types"
     }
   }
 }

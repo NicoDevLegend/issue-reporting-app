@@ -12,7 +12,6 @@ export default function NewTicket() {
   const [userId, setUserId] = useState();
   const [alertShow, setAlertShow] = useState(false);
   const [errorAlertShow, setErrorAlertShow] = useState(false);
-  //const [file, setFile] = useState(null);
   const [dataUsers] = useAxiosGet(`${process.env.REACT_APP_SERVICE_API}/users`);
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
@@ -31,7 +30,7 @@ export default function NewTicket() {
       Category: "",
       Priority: "",
       AssigneeID: "",
-      Attachments: "",
+      Attachment: "",
     },
   });
 
@@ -55,11 +54,6 @@ export default function NewTicket() {
       setErrorAlertShow(true);
     }
   };
-
-  /*const handleSelectFile = (e) => {
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
-  };*/
 
   return (
     isAuthenticated &&
@@ -202,11 +196,11 @@ export default function NewTicket() {
           </Form.Group>
           <Form.Group controlId="formFileMultiple" className="mb-4">
             <Form.Label>
-              <strong>Attachments</strong>
+              <strong>Attachment</strong>
             </Form.Label>
             <br></br>
             <Controller
-              name="Attachments"
+              name="Attachment"
               control={control}
               render={({ field }) => (
                 <Form.Control

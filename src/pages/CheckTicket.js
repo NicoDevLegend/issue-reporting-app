@@ -1,5 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import IssueListButton from "../components/IssueListButton";
@@ -62,6 +64,11 @@ export default function CheckTicket() {
       Closed: date.toLocaleDateString(),
     });
     newNotifMessage(notifBody + "closed");
+  };
+
+  const openFile = () => {
+    const fileUrl = `data:${Issue.AttachmentMimeType};base64,${Issue.Attachment}`;
+    window.open(fileUrl, "_blank");
   };
 
   return (
@@ -160,6 +167,26 @@ export default function CheckTicket() {
                   <p className="mb-4">{Issue.Closed || "-"}</p>
                 </Col>
               </Row>
+              {Issue.Attachment && (
+                <Row>
+                  <Col>
+                    <Button
+                      className="mx-auto"
+                      variant="secondary"
+                      onClick={openFile}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPaperclip}
+                        style={{
+                          width: "20px",
+                          height: "20px",
+                        }}
+                      />
+                      Attachment
+                    </Button>
+                  </Col>
+                </Row>
+              )}
               <Row>
                 {Issue.Status === "Not Resolved" && role !== "User" && (
                   <Col>
@@ -204,7 +231,7 @@ export default function CheckTicket() {
               <Row>
                 <Col>
                   {role === "Admin" && Issue.ReportedBy ? (
-                    <IssueListButton target/>
+                    <IssueListButton target />
                   ) : (
                     <IssueListButton />
                   )}

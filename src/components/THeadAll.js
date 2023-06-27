@@ -1,4 +1,6 @@
 import { Dropdown } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { DefinedRange } from "react-date-range";
 import { originalColors } from "../Utilities/originalColors";
 import TableUserHeader from "./TableUserHeader";
@@ -12,12 +14,21 @@ export default function THeadAll({
   handleClosedSelect,
   selectionRange,
   role,
-  userId
+  userId,
 }) {
   return (
     <thead className="align-middle text-info">
       <tr>
         <th className="text-info">Issue No</th>
+        <th className="text-info">
+          <FontAwesomeIcon
+            icon={faPaperclip}
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          />
+        </th>
         <th>
           <Dropdown onSelect={(selectedKey) => setValue(selectedKey)}>
             <Dropdown.Toggle variant="dark" className={filterColor.Status}>
@@ -36,7 +47,7 @@ export default function THeadAll({
               >
                 Not Resolved
               </Dropdown.Item>
-               <Dropdown.Item
+              <Dropdown.Item
                 eventKey="In Progress"
                 onClick={() => {
                   setFilter("Status");

@@ -1,19 +1,16 @@
 import { Spinner } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { originalColors } from "../Utilities/originalColors";
 import UserData from "./UserData";
 import { useNavigate } from "react-router-dom";
 
-export default function TBodyUser({
-  data,
-  value,
-  filter,
-  filteredData
-}) {
+export default function TBodyUser({ data, value, filter, filteredData }) {
   const navigate = useNavigate();
 
   const handleClick = (issue) => {
     navigate("/checkticket", {
-      state: issue
+      state: issue,
     });
   };
 
@@ -32,6 +29,17 @@ export default function TBodyUser({
               style={{ cursor: "pointer" }}
             >
               <td>{issue.IssueNo}</td>
+              <td>
+                {issue.Attachment && (
+                  <FontAwesomeIcon
+                    icon={faPaperclip}
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                    }}
+                  />
+                )}
+              </td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
               ) : issue.Status === "In Progress" ? (
@@ -80,6 +88,17 @@ export default function TBodyUser({
                 style={{ cursor: "pointer" }}
               >
                 <td>{issue.IssueNo}</td>
+                <td>
+                {issue.Attachment && (
+                  <FontAwesomeIcon
+                    icon={faPaperclip}
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                    }}
+                  />
+                )}
+              </td>
                 {issue.Status === "Resolved" ? (
                   <td className={originalColors.Resolved}>{issue.Status}</td>
                 ) : issue.Status === "In Progress" ? (
@@ -115,6 +134,17 @@ export default function TBodyUser({
           return (
             <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
+              <td>
+                {issue.Attachment && (
+                  <FontAwesomeIcon
+                    icon={faPaperclip}
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                    }}
+                  />
+                )}
+              </td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
               ) : issue.Status === "In Progress" ? (
@@ -150,6 +180,17 @@ export default function TBodyUser({
           return (
             <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
               <td>{issue.IssueNo}</td>
+              <td>
+                {issue.Attachment && (
+                  <FontAwesomeIcon
+                    icon={faPaperclip}
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                    }}
+                  />
+                )}
+              </td>
               {issue.Status === "Resolved" ? (
                 <td className={originalColors.Resolved}>{issue.Status}</td>
               ) : issue.Status === "In Progress" ? (
