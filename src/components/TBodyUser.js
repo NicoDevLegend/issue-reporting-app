@@ -221,7 +221,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
         })
       ) : data && data.length === 0 && !value ? (
         <tr>
-          <td colSpan={8}>
+          <td colSpan={9}>
             <h3>There aren’t any open issues.</h3>
           </td>
         </tr>

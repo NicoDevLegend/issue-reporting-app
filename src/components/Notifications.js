@@ -84,14 +84,15 @@ export default function Notifications() {
             }}
             ref={ref}
           >
-            <p>Notifications
-            <span
-              className="fw-bolder ms-5 text-center"
-              onClick={handleNotifClick}
-              style={{ cursor: "pointer" }}
-            >
-              View All
-            </span>
+            <p>
+              Notifications
+              <span
+                className="fw-bolder ms-5 text-center"
+                onClick={handleNotifClick}
+                style={{ cursor: "pointer" }}
+              >
+                View All
+              </span>
             </p>
             <NotifMessage
               handleClick={handleCloseNotifications}

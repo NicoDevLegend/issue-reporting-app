@@ -18,7 +18,9 @@ export default function IssuesTableList({ userId, userRole }) {
   const param = role === "Support" ? "support" : "user";
 
   const [data] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/ticket/${userId ? userId : user.sub}/${userRole ? userRole : param}`
+    `${process.env.REACT_APP_SERVICE_API}/ticket/${
+      userId ? userId : user.sub
+    }/${userRole ? userRole : param}`
   );
 
   const [filterColor, setFilterColor] = useState(originalColors);
@@ -79,7 +81,7 @@ export default function IssuesTableList({ userId, userRole }) {
           />
         )}
       </div>
-      <Table bordered hover variant="dark" className="mb-2" responsive>
+      <Table bordered hover variant="dark" className="mb-2">
         <THeadAll
           setValue={setValue}
           filterColor={filterColor}
