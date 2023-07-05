@@ -16,6 +16,9 @@ export default function NewTicket() {
   const [dataRoles] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/role/${process.env.REACT_APP_SUPPORT_ROLE}/users`
   );
+  const [dataCategories] = useAxiosGet(
+    `${process.env.REACT_APP_SERVICE_API}/Categories`
+  );
   const {
     control,
     handleSubmit,
@@ -46,7 +49,10 @@ export default function NewTicket() {
 
   const onSubmit = async (data, e) => {
     try {
-      await axiosPostMultipart(`${process.env.REACT_APP_SERVICE_API}/ticket`, data);
+      await axiosPostMultipart(
+        `${process.env.REACT_APP_SERVICE_API}/ticket`,
+        data
+      );
       newNotifMessage();
       setAlertShow(true);
       e.target.reset();
@@ -88,9 +94,12 @@ export default function NewTicket() {
                   {...field}
                 >
                   <option value="">---</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
+                  {dataCategories &&
+                    dataCategories?.map((category, index) => (
+                      <option key={index} value={category.Title}>
+                        {category.Title}
+                      </option>
+                    ))}
                 </Form.Control>
               )}
             />

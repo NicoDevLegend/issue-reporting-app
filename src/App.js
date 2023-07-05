@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import NotificationsPage from "./pages/NotificationsPage";
 import NewTicket from "./pages/NewTicket";
 import CheckTicket from "./pages/CheckTicket";
+import Categories from "./pages/Categories";
 import SupportManagement from "./pages/SupportManagement";
 import RoleAssignment from "./pages/RoleAssignment";
 import NotFound from "./pages/NotFound";
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/checkticket"
               element={<AuthenticationGuard component={CheckTicket} />}
+            />
+            <Route
+              path="/categories"
+              element={<AuthenticationGuard component={Categories} />}
             />
             <Route
               path="/supportmanagement"

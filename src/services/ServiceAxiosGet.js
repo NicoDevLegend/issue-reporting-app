@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useAxiosGet(url) {
+export default function useAxiosGet(url, dependencies) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -14,6 +14,6 @@ export default function useAxiosGet(url) {
           console.log(err);
         });
     }
-  }, [url]);
+  }, [url, dependencies]);
   return [data];
 }

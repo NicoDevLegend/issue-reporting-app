@@ -99,6 +99,14 @@ export default function SideBar() {
                 </CDBSidebarMenuItem>
               </NavLink>
             )}
+            <NavLink
+              to="/categories"
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "activeClicked" : ""
+              }
+            >
+              <CDBSidebarMenuItem icon="tags" >Categories</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center">footer</CDBSidebarFooter>

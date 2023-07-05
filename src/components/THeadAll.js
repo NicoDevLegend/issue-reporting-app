@@ -4,6 +4,7 @@ import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { DefinedRange } from "react-date-range";
 import { originalColors } from "../Utilities/originalColors";
 import TableUserHeader from "./TableUserHeader";
+import useAxiosGet from "../services/ServiceAxiosGet";
 
 export default function THeadAll({
   setValue,
@@ -16,6 +17,10 @@ export default function THeadAll({
   role,
   userId,
 }) {
+  const [dataCategories] = useAxiosGet(
+    `${process.env.REACT_APP_SERVICE_API}/Categories`
+  );
+
   return (
     <thead className="align-middle text-info">
       <tr>
@@ -81,42 +86,22 @@ export default function THeadAll({
               <strong>Category</strong>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item
-                eventKey="1"
-                onClick={() => {
-                  setFilter("Category");
-                  setFilterColor({
-                    ...originalColors,
-                    Category: "text-light",
-                  });
-                }}
-              >
-                1
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="2"
-                onClick={() => {
-                  setFilter("Category");
-                  setFilterColor({
-                    ...originalColors,
-                    Category: "text-light",
-                  });
-                }}
-              >
-                2
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="3"
-                onClick={() => {
-                  setFilter("Category");
-                  setFilterColor({
-                    ...originalColors,
-                    Category: "text-light",
-                  });
-                }}
-              >
-                3
-              </Dropdown.Item>
+              {dataCategories &&
+                dataCategories?.map((category, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    eventKey={category.Title}
+                    onClick={() => {
+                      setFilter("Category");
+                      setFilterColor({
+                        ...originalColors,
+                        Category: "text-light",
+                      });
+                    }}
+                  >
+                    {category.Title}
+                  </Dropdown.Item>
+                ))}
             </Dropdown.Menu>
           </Dropdown>
         </th>
