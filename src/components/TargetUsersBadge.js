@@ -37,13 +37,14 @@ export default function TargetUsersBadge({
               <Form.Label>
                 <strong>{title}</strong>
               </Form.Label>
-              <Form.Select
+              <Form.Control
+                as="select"
                 className="disable-responsive-select"
                 value={value}
                 onChange={onChange}
               >
                 {options}
-              </Form.Select>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Col>
