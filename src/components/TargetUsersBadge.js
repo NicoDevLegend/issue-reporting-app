@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import SearchBar from "./SearchBar";
 import "./TargetUsersBadge.css";
@@ -13,6 +13,18 @@ export default function TargetUsersBadge({
   children,
 }) {
   const [filteredData, setFilteredData] = useState(data);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("recize", handleResize);
+    };
+  }, []);
 
   const handleSearch = (searchTerm) => {
     const filteredResults = data?.filter((user) =>
@@ -33,19 +45,24 @@ export default function TargetUsersBadge({
       <Container>
         <Row>
           <Col>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <strong>{title}</strong>
-              </Form.Label>
-              <Form.Control
-                as="select"
-                className="disable-responsive-select"
+            {isMobile ? (
+              <select
                 value={value}
                 onChange={onChange}
+                className="disable-responsive-select"
               >
                 {options}
-              </Form.Control>
-            </Form.Group>
+              </select>
+            ) : (
+              <Form.Group className="mb-3">
+                <Form.Label>
+                  <strong>{title}</strong>
+                </Form.Label>
+                <Form.Control as="select" value={value} onChange={onChange}>
+                  {options}
+                </Form.Control>
+              </Form.Group>
+            )}
           </Col>
           <Col>
             <Form.Label>
