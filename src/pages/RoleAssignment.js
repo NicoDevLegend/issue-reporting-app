@@ -37,6 +37,18 @@ export default function RoleAssignment() {
   const [disabledButton, setDisabledButton] = useState(true);
   const [value, setValue] = useState({ User: false, Support: false });
   const filteredDataUsers = dataUsers?.filter((u) => u.userID !== user.sub);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("recize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (userRole) {
@@ -103,21 +115,38 @@ export default function RoleAssignment() {
           onChange={handleSelectChange}
           searchSelect={handleUserData}
           options={
-            <>
-              <option onClick={handleNone}>---</option>
-              {dataUsers &&
-                filteredDataUsers?.map((user, index) => (
-                  <option
-                    key={index}
-                    value={index}
-                    onClick={() => handleUserData(user.userID)}
-                  >
-                    {!user.firstName || !user.lastName
-                      ? user.username
-                      : `${user.username} (${user.firstName} ${user.lastName})`}
-                  </option>
-                ))}
-            </>
+            isMobile ? (
+              <>
+                {dataUsers &&
+                  filteredDataUsers?.map((user, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      eventKey={index}
+                      onClick={() => handleUserData(user.userID)}
+                    >
+                      {!user.firstName || !user.lastName
+                        ? user.username
+                        : `${user.username} (${user.firstName} ${user.lastName})`}
+                    </Dropdown.Item>
+                  ))}
+              </>
+            ) : (
+              <>
+                <option onClick={handleNone}>---</option>
+                {dataUsers &&
+                  filteredDataUsers?.map((user, index) => (
+                    <option
+                      key={index}
+                      value={index}
+                      onClick={() => handleUserData(user.userID)}
+                    >
+                      {!user.firstName || !user.lastName
+                        ? user.username
+                        : `${user.username} (${user.firstName} ${user.lastName})`}
+                    </option>
+                  ))}
+              </>
+            )
           }
         >
           {userId && userRole && (
