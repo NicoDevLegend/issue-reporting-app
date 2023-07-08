@@ -47,10 +47,8 @@ export default function TargetUsersBadge({
           <Col>
             {isMobile ? (
               <Dropdown onSelect={onChange}>
-                <Dropdown.Toggle variant="secondary">{value || title}</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {options}
-                </Dropdown.Menu>
+                <Dropdown.Toggle variant="secondary">{title}</Dropdown.Toggle>
+                <Dropdown.Menu>{options}</Dropdown.Menu>
               </Dropdown>
             ) : (
               <Form.Group className="mb-3">
