@@ -1,0 +1,6 @@
+@media (max-width: 767px) {
+  .disable-responsive-select {
+    pointer-events: none;
+    touch-action: none;
+  }
+}

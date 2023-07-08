@@ -87,7 +87,7 @@ export default function RoleAssignment() {
   };
 
   const handleSelectChange = (e) => {
-    const value = e.target?.value ? e.target.value : e;
+    const value = e.target?.value ? e.target?.value : e;
     setSelectValue(value);
   };
 
