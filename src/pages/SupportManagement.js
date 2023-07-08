@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -33,6 +33,18 @@ export default function SupportManagement() {
     ? new Date(filteredDataUsers[selectValue]?.lastLogin)
     : "";
   const [supportNotifications] = useAxiosGet(notifUrl);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("recize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const storedUserId = sessionStorage.getItem("userId");
@@ -78,22 +90,39 @@ export default function SupportManagement() {
           searchSelect={handleUserData}
           title={"Select a support"}
           options={
-            <>
-              <option onClick={handleNone}>---</option>
-              {dataUsers &&
-                dataRoles &&
-                filteredDataUsers.map((user, index) => (
-                  <option
-                    key={index}
-                    value={index}
-                    onClick={() => handleUserData(user.userID)}
-                  >
-                    {!user.firstName || !user.lastName
-                      ? user.username
-                      : `${user.username} (${user.firstName} ${user.lastName})`}
-                  </option>
-                ))}
-            </>
+            isMobile ? (
+              <>
+                {dataUsers &&
+                  filteredDataUsers?.map((user, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      eventKey={index}
+                      onClick={() => handleUserData(user.userID)}
+                    >
+                      {!user.firstName || !user.lastName
+                        ? user.username
+                        : `${user.username} (${user.firstName} ${user.lastName})`}
+                    </Dropdown.Item>
+                  ))}
+              </>
+            ) : (
+              <>
+                <option onClick={handleNone}>---</option>
+                {dataUsers &&
+                  dataRoles &&
+                  filteredDataUsers.map((user, index) => (
+                    <option
+                      key={index}
+                      value={index}
+                      onClick={() => handleUserData(user.userID)}
+                    >
+                      {!user.firstName || !user.lastName
+                        ? user.username
+                        : `${user.username} (${user.firstName} ${user.lastName})`}
+                    </option>
+                  ))}
+              </>
+            )
           }
         />
         {userId && (

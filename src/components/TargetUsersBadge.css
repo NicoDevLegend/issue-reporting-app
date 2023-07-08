@@ -1,7 +1,0 @@
-@media (max-width: 767px) {
-  .disable-responsive-select {
-    -webkit-appearance: menulist;
-    -moz-appearance: menulist;
-    appearance: menulist;
-  }
-}
