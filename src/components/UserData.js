@@ -23,7 +23,7 @@ export default function UserData({ userID }) {
     <OverlayTrigger
       placement="top"
       delay={{ show: 250, hide: 400 }}
-      trigger={isMobile ? "click" : "focus"}
+      trigger={isMobile ? "focus" : "hover"}
       overlay={
         <Tooltip>
           <div className="p-2 text-center">
