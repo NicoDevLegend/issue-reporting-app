@@ -36,13 +36,13 @@ export default function TargetUsersBadge({
               <Form.Label>
                 <strong>{title}</strong>
               </Form.Label>
-              <Form.Select
-                aria-label="target-user-badge"
+              <Form.Control
+                as="select"
                 value={value}
                 onChange={onChange}
               >
                 {options}
-              </Form.Select>
+              </Form.Control>
             </Form.Group>
           </Col>
           <Col>
