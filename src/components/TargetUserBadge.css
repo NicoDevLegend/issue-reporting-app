@@ -1,8 +1,0 @@
-@media (max-width: 767px) {
-  .custom-select::-ms-expand {
-    display: none;
-    -webkit-appearance: menulist;
-    -moz-appearance: menulist;
-    appearance: menulist;
-  }
-}

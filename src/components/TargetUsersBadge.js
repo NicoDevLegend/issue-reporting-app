@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import SearchBar from "./SearchBar";
-import "./TargetUserBadge.css";
 
 export default function TargetUsersBadge({
   data,
@@ -13,6 +12,25 @@ export default function TargetUsersBadge({
   children,
 }) {
   const [filteredData, setFilteredData] = useState(data);
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth <= 767) {
+        selectRef.current.size = 1;
+      } else {
+        selectRef.current.size = undefined;
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleSearch = (searchTerm) => {
     const filteredResults = data?.filter((user) =>
@@ -37,11 +55,7 @@ export default function TargetUsersBadge({
               <Form.Label>
                 <strong>{title}</strong>
               </Form.Label>
-              <Form.Select
-                className="custom-select"
-                value={value}
-                onChange={onChange}
-              >
+              <Form.Select ref={selectRef} value={value} onChange={onChange}>
                 {options}
               </Form.Select>
             </Form.Group>
