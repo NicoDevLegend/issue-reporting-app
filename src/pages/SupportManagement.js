@@ -92,6 +92,7 @@ export default function SupportManagement() {
           options={
             isMobile ? (
               <>
+                <Dropdown.Item onClick={handleNone}>---</Dropdown.Item>
                 {dataUsers &&
                   filteredDataUsers?.map((user, index) => {
                     const userValue =

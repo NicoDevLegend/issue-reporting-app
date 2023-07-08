@@ -117,6 +117,7 @@ export default function RoleAssignment() {
           options={
             isMobile ? (
               <>
+                <Dropdown.Item onClick={handleNone}>---</Dropdown.Item>
                 {dataUsers &&
                   filteredDataUsers?.map((user, index) => {
                     const userValue =
