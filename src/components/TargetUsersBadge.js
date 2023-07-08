@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import SearchBar from "./SearchBar";
-import { selectStyle } from "../Utilities/customSelectStyle";
+import "./TargetUserBadge.css";
 
 export default function TargetUsersBadge({
   data,
@@ -38,7 +38,7 @@ export default function TargetUsersBadge({
                 <strong>{title}</strong>
               </Form.Label>
               <Form.Select
-                style={selectStyle}
+                className="custom-select"
                 value={value}
                 onChange={onChange}
               >

@@ -1,0 +1,7 @@
+@media (max-width: 767px) {
+  .custom-select {
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+  }
+}
