@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import { Spinner, OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -6,24 +5,11 @@ export default function UserData({ userID }) {
   const [dataUser] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/${userID}/user`
   );
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("recize", handleResize);
-    };
-  }, []);
 
   return dataUser ? (
     <OverlayTrigger
       placement="top"
       delay={{ show: 250, hide: 400 }}
-      trigger={isMobile ? "focus" : "hover"}
       overlay={
         <Tooltip>
           <div className="p-2 text-center">
