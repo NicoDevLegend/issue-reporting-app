@@ -13,6 +13,7 @@ import {
   InputGroup,
   Row,
   Alert,
+  Spinner,
 } from "react-bootstrap";
 import RoleButton from "../components/RoleButton";
 
@@ -22,8 +23,10 @@ export default function RoleAssignment() {
   const userSupportRole = process.env.REACT_APP_SUPPORT_ROLE;
   const [userId, setUserId] = useState();
   const [roleId, setRoleId] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [alertShow, setAlertShow] = useState(false);
   const [errorAlertShow, setErrorAlertShow] = useState(false);
+  const [resData, setResData] = useState({});
   const roleUrl = userId
     ? `${process.env.REACT_APP_SERVICE_API}/${userId}/roles`
     : null;
@@ -31,7 +34,7 @@ export default function RoleAssignment() {
   const [userRole] = useAxiosGet(roleUrl);
   const [role, setRole] = useState();
   const [selectValue, setSelectValue] = useState();
-  const [disableButton, setDisabledButton] = useState(true);
+  const [disabledButton, setDisabledButton] = useState(true);
   const [value, setValue] = useState({ User: false, Support: false });
   const filteredDataUsers = dataUsers?.filter((u) => u.userID !== user.sub);
 
@@ -44,12 +47,17 @@ export default function RoleAssignment() {
   }, [userRole]);
 
   const deleteAndPostUserRole = async () => {
+    setIsLoading(true);
+    setDisabledButton(true);
     try {
       await axiosDelete(`${process.env.REACT_APP_SERVICE_API}/role/${userId}`);
-      await axiosPost(
+      const res = await axiosPost(
         `${process.env.REACT_APP_SERVICE_API}/role/${roleId}/${userId}`
       );
+      setResData(res);
       setAlertShow(true);
+      setIsLoading(false);
+      setDisabledButton(false);
       handleNone();
     } catch {
       setErrorAlertShow(true);
@@ -146,19 +154,27 @@ export default function RoleAssignment() {
               <RoleButton
                 handleclick={deleteAndPostUserRole}
                 name={role}
-                title="Assign Role"
-                disabled={disableButton}
+                title={
+                  isLoading ? (
+                    <Spinner animation="border" size="sm" variant="secondary">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  ) : (
+                    "Assign Role"
+                  )
+                }
+                disabled={disabledButton}
               />
             </Container>
           )}
           {alertShow && (
             <Alert
-              variant="success position-fixed"
+              variant={`${resData?.color} position-fixed`}
               onClose={() => setAlertShow(false)}
               style={{ zIndex: "10000", top: "50%" }}
               dismissible
             >
-              <Alert.Heading>Role Assigned!</Alert.Heading>
+              <Alert.Heading>{resData?.text}</Alert.Heading>
             </Alert>
           )}
           {errorAlertShow && (
@@ -168,7 +184,9 @@ export default function RoleAssignment() {
               style={{ zIndex: "10000", top: "50%" }}
               dismissible
             >
-              <Alert.Heading>Something is wrong!, please try again</Alert.Heading>
+              <Alert.Heading>
+                Something is wrong!, please try again
+              </Alert.Heading>
             </Alert>
           )}
         </TargetUsersBadge>

@@ -6,7 +6,7 @@ export default function axiosPostMultipart(url, data) {
       headers: { "Content-Type": "multipart/form-data" },
     })
     .then((res) => {
-      return JSON.stringify(res.data);
+      return res.data;
     })
     .catch((err) => {
       return err;

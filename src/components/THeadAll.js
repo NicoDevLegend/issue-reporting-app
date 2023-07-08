@@ -4,9 +4,9 @@ import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { DefinedRange } from "react-date-range";
 import { originalColors } from "../Utilities/originalColors";
 import TableUserHeader from "./TableUserHeader";
-import useAxiosGet from "../services/ServiceAxiosGet";
 
 export default function THeadAll({
+  data,
   setValue,
   filterColor,
   setFilter,
@@ -17,9 +17,19 @@ export default function THeadAll({
   role,
   userId,
 }) {
-  const [dataCategories] = useAxiosGet(
-    `${process.env.REACT_APP_SERVICE_API}/Categories`
-  );
+  const newDataArray = data?.reduce((acc, issue) => {
+    const key = issue.Category;
+    if (!acc[key]) {
+      acc[key] = issue;
+    }
+    return acc;
+  }, {});
+
+  var categoriesArray = {};
+
+  if (data) {
+    categoriesArray = Object.values(newDataArray);
+  }
 
   return (
     <thead className="align-middle text-info">
@@ -86,11 +96,11 @@ export default function THeadAll({
               <strong>Category</strong>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {dataCategories &&
-                dataCategories?.map((category, index) => (
+              {data &&
+                categoriesArray?.map((category, index) => (
                   <Dropdown.Item
                     key={index}
-                    eventKey={category.Title}
+                    eventKey={category.Category}
                     onClick={() => {
                       setFilter("Category");
                       setFilterColor({
@@ -99,7 +109,7 @@ export default function THeadAll({
                       });
                     }}
                   >
-                    {category.Title}
+                    {category.Category}
                   </Dropdown.Item>
                 ))}
             </Dropdown.Menu>

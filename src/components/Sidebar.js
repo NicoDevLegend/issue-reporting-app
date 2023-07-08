@@ -105,11 +105,13 @@ export default function SideBar() {
                 isPending ? "pending" : isActive ? "activeClicked" : ""
               }
             >
-              <CDBSidebarMenuItem icon="tags" >Categories</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="tags">Categories</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-        <CDBSidebarFooter className="text-center">footer</CDBSidebarFooter>
+        <CDBSidebarFooter className="text-center" style={{ fontSize: "12px" }}>
+          NicoDev&#169;
+        </CDBSidebarFooter>
       </CDBSidebar>
     )
   );

@@ -4,25 +4,37 @@ import {
   faPenToSquare,
   faFloppyDisk,
   faTrashCan,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
+import {
+  Form,
+  Container,
+  Row,
+  Col,
+  Button,
+  Alert,
+  Spinner,
+} from "react-bootstrap";
 import PageHeader from "../components/PageHeader";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import axiosPost from "../services/ServiceAxiosPost";
 import axiosPatch from "../services/ServiceAxiosPatch";
 import useAxiosGet from "../services/ServiceAxiosGet";
+import axiosDelete from "../services/ServiceAxiosDelete";
 
 export default function Categories() {
   const { user, isAuthenticated } = useAuth0();
   const [formInputState, setFormInputState] = useState(true);
   const [disabled, setDisabled] = useState(true);
   const [addNewCategory, setAddNewCategory] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [alertShow, setAlertShow] = useState(false);
   const [errorAlertShow, setErrorAlertShow] = useState(false);
   const [selectValue, setSelectValue] = useState("default");
   const [descriptionValue, setDescriptionValue] = useState("");
   const [categoryID, setCategoryID] = useState("");
+  const [resData, setResData] = useState({});
   const inputRef = useRef(null);
   const {
     control,
@@ -56,6 +68,7 @@ export default function Categories() {
   const handleSelectCategory = (description, ID) => {
     setDescriptionValue(description);
     setCategoryID(ID);
+    setAddNewCategory(false);
   };
 
   const handleEdit = () => {
@@ -69,9 +82,17 @@ export default function Categories() {
   };
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
-      await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Category`, data);
+      const res = await axiosPost(
+        `${process.env.REACT_APP_SERVICE_API}/Category`,
+        data
+      );
+      setResData(res);
+      handleEdit();
+      setDescriptionValue("");
       setAlertShow(true);
+      setIsLoading(false);
       reset();
     } catch {
       setErrorAlertShow(true);
@@ -85,6 +106,22 @@ export default function Categories() {
     setDescriptionValue("");
     setCategoryID("");
     reset();
+  };
+
+  const handleDeleteCategory = async () => {
+    setIsLoading(true);
+    try {
+      const res = await axiosDelete(
+        `${process.env.REACT_APP_SERVICE_API}/Category/${categoryID}`
+      );
+      setResData(res);
+      handleEdit();
+      setDescriptionValue("");
+      setAlertShow(true);
+      setIsLoading(false);
+    } catch {
+      setErrorAlertShow(true);
+    }
   };
 
   return (
@@ -112,6 +149,7 @@ export default function Categories() {
                     </h5>
                   </Form.Label>
                   <Form.Control
+                    className="text-center"
                     as="select"
                     value={selectValue}
                     onChange={(e) => setSelectValue(e.target.value)}
@@ -119,10 +157,15 @@ export default function Categories() {
                     <option value="default" onClick={handleCancel}>
                       ---
                     </option>
-                    <option onClick={() => setAddNewCategory(true)}>
-                      New Category (select to add a new category)
-                    </option>
-                    {dataCategories &&
+                    {user["https://my-app/roles"][0] === "Admin" && (
+                      <option
+                        value="add"
+                        onClick={() => setAddNewCategory(true)}
+                      >
+                        --Add a new Category--
+                      </option>
+                    )}
+                    {dataCategories ? (
                       dataCategories?.map((category, index) => (
                         <option
                           key={index}
@@ -136,7 +179,10 @@ export default function Categories() {
                         >
                           {category?.Title}
                         </option>
-                      ))}
+                      ))
+                    ) : (
+                      <option>...waiting data</option>
+                    )}
                   </Form.Control>
                 </Form.Group>
               </Col>
@@ -201,38 +247,28 @@ export default function Categories() {
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
-                <Button variant="info" type="submit" className="m-3">
-                  Submit
+                <Button
+                  variant="info"
+                  type="submit"
+                  className="m-3"
+                  disabled={isLoading ? true : false}
+                >
+                  {isLoading ? (
+                    <Spinner animation="border" size="sm" variant="secondary">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  ) : (
+                    "Submit"
+                  )}
                 </Button>
                 <Button
                   variant="warning"
                   className="m-3"
                   onClick={handleCancel}
+                  disabled={isLoading ? true : false}
                 >
                   Cancel
                 </Button>
-                {alertShow && (
-                  <Alert
-                    variant="success position-fixed"
-                    onClose={() => setAlertShow(false)}
-                    style={{ zIndex: "10000", top: "50%" }}
-                    dismissible
-                  >
-                    <Alert.Heading>Category submited!</Alert.Heading>
-                  </Alert>
-                )}
-                {errorAlertShow && (
-                  <Alert
-                    variant="danger position-fixed"
-                    onClose={() => setAlertShow(false)}
-                    style={{ zIndex: "10000", top: "50%" }}
-                    dismissible
-                  >
-                    <Alert.Heading>
-                      Something is wrong!, please try again
-                    </Alert.Heading>
-                  </Alert>
-                )}
               </Form>
             ) : (
               <Row>
@@ -242,23 +278,24 @@ export default function Categories() {
                       <strong>Description: </strong>{" "}
                     </h5>
                   </Form.Label>
-                  {user["https://my-app/roles"][0] === "Admin" && (
-                    <Col sm className="mb-1 text-end">
-                      <FontAwesomeIcon
-                        icon={disabled ? faPenToSquare : faFloppyDisk}
-                        style={{ cursor: "pointer" }}
-                        onClick={disabled ? handleEdit : patchCategory}
-                      />
-                      {!disabled && (
+                  {user["https://my-app/roles"][0] === "Admin" &&
+                    selectValue !== "default" && (
+                      <Col sm className="mb-1 text-end">
                         <FontAwesomeIcon
-                          icon={faTrashCan}
+                          icon={disabled ? faPenToSquare : faFloppyDisk}
                           style={{ cursor: "pointer" }}
-                          onClick={handleEdit}
-                          className="ms-3"
+                          onClick={disabled ? handleEdit : patchCategory}
                         />
-                      )}
-                    </Col>
-                  )}
+                        {!disabled && (
+                          <FontAwesomeIcon
+                            icon={faXmark}
+                            style={{ cursor: "pointer" }}
+                            onClick={handleEdit}
+                            className="ms-3"
+                          />
+                        )}
+                      </Col>
+                    )}
                   <Form.Control
                     ref={inputRef}
                     as="textarea"
@@ -269,6 +306,49 @@ export default function Categories() {
                   />
                 </Form.Group>
               </Row>
+            )}
+            {user["https://my-app/roles"][0] === "Admin" &&
+              selectValue !== "default" &&
+              !addNewCategory && (
+                <Button
+                  variant="danger"
+                  className="mb-3"
+                  onClick={handleDeleteCategory}
+                  disabled={isLoading ? true : false}
+                >
+                  {isLoading ? (
+                    <Spinner animation="border" size="sm" variant="secondary">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  ) : (
+                    <>
+                      Delete category
+                      <FontAwesomeIcon icon={faTrashCan} className="ms-2" />
+                    </>
+                  )}
+                </Button>
+              )}
+            {alertShow && (
+              <Alert
+                variant={`${resData?.color} position-fixed`}
+                onClose={() => setAlertShow(false)}
+                style={{ zIndex: "10000", top: "50%" }}
+                dismissible
+              >
+                <Alert.Heading>{resData?.text}</Alert.Heading>
+              </Alert>
+            )}
+            {errorAlertShow && (
+              <Alert
+                variant="danger position-fixed"
+                onClose={() => setAlertShow(false)}
+                style={{ zIndex: "10000", top: "50%" }}
+                dismissible
+              >
+                <Alert.Heading>
+                  Something is wrong!, please try later
+                </Alert.Heading>
+              </Alert>
             )}
           </Container>
         </div>

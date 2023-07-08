@@ -2,9 +2,9 @@ import { Button, Modal } from "react-bootstrap";
 
 export default function ConfirmationRoleModal(props) {
   const AssignAndClose = () => {
-    props.onHide()
-    props.handleclick()
-  }
+    props.onHide();
+    props.handleclick();
+  };
 
   return (
     <Modal

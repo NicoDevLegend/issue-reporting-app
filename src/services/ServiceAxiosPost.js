@@ -6,7 +6,7 @@ export default function axiosPost(url, data) {
       headers: { "Content-Type": "application/json" },
     })
     .then((res) => {
-      return JSON.stringify(res.data);
+      return res.data;
     })
     .catch((err) => {
       return err;

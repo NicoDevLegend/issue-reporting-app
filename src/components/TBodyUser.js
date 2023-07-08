@@ -58,9 +58,7 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
               ) : (
                 <td className={originalColors.Urgent}>{issue.Priority}</td>
               )}
-              <td>
-                <UserData userID={issue.AssigneeID || issue.ReportedBy} />
-              </td>
+              <UserData userID={issue.AssigneeID || issue.ReportedBy} />
               <td>{dateOpen.toLocaleDateString()}</td>
               <td>
                 {dateClosed.toLocaleDateString() === "Invalid Date"
@@ -84,21 +82,23 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
             return (
               <tr
                 key={index}
-                onClick={handleClick}
+                onClick={() => {
+                  handleClick(issue);
+                }}
                 style={{ cursor: "pointer" }}
               >
                 <td>{issue.IssueNo}</td>
                 <td>
-                {issue.Attachment && (
-                  <FontAwesomeIcon
-                    icon={faPaperclip}
-                    style={{
-                      width: "15px",
-                      height: "15px",
-                    }}
-                  />
-                )}
-              </td>
+                  {issue.Attachment && (
+                    <FontAwesomeIcon
+                      icon={faPaperclip}
+                      style={{
+                        width: "15px",
+                        height: "15px",
+                      }}
+                    />
+                  )}
+                </td>
                 {issue.Status === "Resolved" ? (
                   <td className={originalColors.Resolved}>{issue.Status}</td>
                 ) : issue.Status === "In Progress" ? (
@@ -132,7 +132,13 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           let dateOpen = new Date(issue.Open);
           let dateClosed = new Date(issue.Closed);
           return (
-            <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
+            <tr
+              key={index}
+              onClick={() => {
+                handleClick(issue);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <td>{issue.IssueNo}</td>
               <td>
                 {issue.Attachment && (
@@ -178,7 +184,13 @@ export default function TBodyUser({ data, value, filter, filteredData }) {
           let dateOpen = new Date(issue.Open);
           let dateClosed = new Date(issue.Closed);
           return (
-            <tr key={index} onClick={handleClick} style={{ cursor: "pointer" }}>
+            <tr
+              key={index}
+              onClick={() => {
+                handleClick(issue);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <td>{issue.IssueNo}</td>
               <td>
                 {issue.Attachment && (

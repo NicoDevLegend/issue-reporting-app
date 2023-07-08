@@ -5,7 +5,7 @@ import { NotificationsContext } from "../components/NotificationsProvider";
 
 export default function NotifMessage({ data, handleClick }) {
   const navigate = useNavigate();
-    const { getNotif } = useContext(NotificationsContext);
+  const { getNotif } = useContext(NotificationsContext);
 
   const patchNotifMessage = async (patchData, notifId) => {
     await axiosPatch(

@@ -1,9 +1,9 @@
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useEffect, useState } from "react";
+import { conditionalPieColors } from "../Utilities/conditionalPieColors";
 import { Container, Row, Col } from "react-bootstrap";
 import useAxiosGet from "../services/ServiceAxiosGet";
-import { conditionalPieColors } from "../Utilities/conditionalPieColors";
-import { useEffect, useState } from "react";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function PieChartPerformance({ userId, userRole }) {

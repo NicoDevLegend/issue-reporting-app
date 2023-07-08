@@ -25,11 +25,15 @@ export default function UserData({ userID }) {
         </Tooltip>
       }
     >
-      <div className="text-decoration-underline">{dataUser.username}</div>
+      <td>
+        <div className="text-decoration-underline">{dataUser.username}</div>
+      </td>
     </OverlayTrigger>
   ) : (
-    <Spinner animation="border" variant="secondary" size="sm">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>
+    <td>
+      <Spinner animation="border" variant="secondary" size="sm">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </td>
   );
 }
