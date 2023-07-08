@@ -1,7 +1,5 @@
 @media (max-width: 767px) {
   .disable-responsive-select {
-    pointer-events: none;
-    touch-action: none;
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
     appearance: menulist;
