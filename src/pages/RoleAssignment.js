@@ -118,17 +118,21 @@ export default function RoleAssignment() {
             isMobile ? (
               <>
                 {dataUsers &&
-                  filteredDataUsers?.map((user, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      eventKey={index}
-                      onClick={() => handleUserData(user.userID)}
-                    >
-                      {!user.firstName || !user.lastName
+                  filteredDataUsers?.map((user, index) => {
+                    const userValue =
+                      !user.firstName || !user.lastName
                         ? user.username
-                        : `${user.username} (${user.firstName} ${user.lastName})`}
-                    </Dropdown.Item>
-                  ))}
+                        : `${user.username} (${user.firstName} ${user.lastName})`;
+                    return (
+                      <Dropdown.Item
+                        key={index}
+                        eventKey={userValue}
+                        onClick={() => handleUserData(user.userID)}
+                      >
+                        {userValue}
+                      </Dropdown.Item>
+                    );
+                  })}
               </>
             ) : (
               <>
