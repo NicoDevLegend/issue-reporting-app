@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Dropdown } from "react-bootstrap";
 import SearchBar from "./SearchBar";
 import "./TargetUsersBadge.css";
 
@@ -46,13 +46,14 @@ export default function TargetUsersBadge({
         <Row>
           <Col>
             {isMobile ? (
-              <select
-                value={value}
-                onChange={onChange}
-                className="disable-responsive-select"
-              >
-                {options}
-              </select>
+              <Dropdown onSelect={onChange}>
+                <Dropdown.Toggle>{value}</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="option1"></Dropdown.Item>
+                  <Dropdown.Item eventKey="option2"></Dropdown.Item>
+                  <Dropdown.Item eventKey="option3"></Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             ) : (
               <Form.Group className="mb-3">
                 <Form.Label>
