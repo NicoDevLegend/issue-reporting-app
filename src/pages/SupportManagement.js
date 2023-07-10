@@ -108,7 +108,7 @@ export default function SupportManagement() {
                     return (
                       <Dropdown.Item
                         key={index}
-                        eventKey={userValue}
+                        eventKey={index}
                         onClick={() => handleUserData(user.userID)}
                       >
                         {userValue}

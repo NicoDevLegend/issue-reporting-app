@@ -46,9 +46,9 @@ export default function TargetUsersBadge({
         <Row>
           <Col>
             {isMobile ? (
-              <Dropdown onSelect={() => handleSelect()}>
+              <Dropdown onSelect={handleSelect}>
                 <Dropdown.Toggle variant="secondary">
-                  {value || title}
+                  {data[value]?.username || title}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>{options}</Dropdown.Menu>
               </Dropdown>

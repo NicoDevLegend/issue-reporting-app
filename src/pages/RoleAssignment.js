@@ -132,7 +132,7 @@ export default function RoleAssignment() {
                     return (
                       <Dropdown.Item
                         key={index}
-                        eventKey={userValue}
+                        eventKey={index}
                         onClick={() => handleUserData(user.userID)}
                       >
                         {userValue}
