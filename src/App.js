@@ -52,7 +52,6 @@ function App() {
               path="/supportmanagement"
               element={<AuthenticationGuard component={SupportManagement} />}
             />
-            <Route path="*" element={<NotFound />} />
             <Route
               path="/roleassignment"
               element={<AuthenticationGuard component={RoleAssignment} />}

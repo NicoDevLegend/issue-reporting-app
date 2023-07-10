@@ -9,7 +9,7 @@ export default function useAxiosGet(url, dependencies) {
       axios
         .get(url)
         .then((res) => setData(res.data))
-        .catch((err) => {
+        .catch(() => {
           setData("Something is wrong!!");
         });
     }

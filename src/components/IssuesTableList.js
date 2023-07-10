@@ -8,6 +8,7 @@ import { originalColors } from "../Utilities/originalColors";
 import TBodyUser from "./TBodyUser";
 import THeadAll from "./THeadAll";
 import ResetTableButton from "./ResetTableButton";
+import { useNavigate } from "react-router-dom";
 
 export default function IssuesTableList({ userId, userRole }) {
   const [filteredData, setFilteredData] = useState(null);
@@ -16,12 +17,17 @@ export default function IssuesTableList({ userId, userRole }) {
   const { user } = useAuth0();
   const role = user["https://my-app/roles"][0];
   const param = role === "Support" ? "support" : "user";
+  const navigate = useNavigate();
 
   const [data] = useAxiosGet(
     `${process.env.REACT_APP_SERVICE_API}/ticket/${
       userId ? userId : user.sub
     }/${userRole ? userRole : param}`
   );
+  
+  if (!data) {
+    navigate("/notfound");
+  }
 
   const [filterColor, setFilterColor] = useState(originalColors);
 
