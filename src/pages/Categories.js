@@ -168,9 +168,9 @@ export default function Categories() {
                   {isMobile ? (
                     <Dropdown onSelect={handleSelect}>
                       <Dropdown.Toggle variant="secondary">
-                        {dataCategories && selectValue
+                        {dataCategories && selectValue !== "default"
                           ? dataCategories[selectValue]?.Title
-                          : selectValue}
+                          : "--Add a new Category--"}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
                         <Dropdown.Item
