@@ -170,6 +170,8 @@ export default function Categories() {
                       <Dropdown.Toggle variant="secondary">
                         {dataCategories && selectValue !== "default"
                           ? dataCategories[selectValue]?.Title
+                          : selectValue === "default"
+                          ? "---"
                           : "--Add a new Category--"}
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
