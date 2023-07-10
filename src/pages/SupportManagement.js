@@ -65,6 +65,11 @@ export default function SupportManagement() {
     sessionStorage.setItem("selectValue", value);
   };
 
+  const handleSelect = (value) => {
+    setSelectValue(value);
+    sessionStorage.setItem("selectValue", value);
+  };
+
   const handleNone = () => {
     setUserId(null);
     setUserSuppRole(null);
@@ -87,6 +92,7 @@ export default function SupportManagement() {
           data={filteredDataUsers}
           value={selectValue}
           onChange={handleSelectChange}
+          handleSelect={handleSelect}
           searchSelect={handleUserData}
           title={"Select a support"}
           options={

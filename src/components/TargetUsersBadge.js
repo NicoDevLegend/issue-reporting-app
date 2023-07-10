@@ -8,11 +8,11 @@ export default function TargetUsersBadge({
   title,
   value,
   onChange,
+  handleSelect,
   searchSelect,
   children,
 }) {
   const [filteredData, setFilteredData] = useState(data);
-  const [selectedValue, setSelectedValue] = useState("")
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -32,10 +32,6 @@ export default function TargetUsersBadge({
     );
     setFilteredData(filteredResults);
   };
-  
-  const handleSelect = (value) => {
-    setSelectedValue(value)
-  }
 
   return (
     <div
@@ -51,7 +47,9 @@ export default function TargetUsersBadge({
           <Col>
             {isMobile ? (
               <Dropdown onSelect={handleSelect}>
-                <Dropdown.Toggle variant="secondary">{selectedValue || title}</Dropdown.Toggle>
+                <Dropdown.Toggle variant="secondary">
+                  {value || title}
+                </Dropdown.Toggle>
                 <Dropdown.Menu>{options}</Dropdown.Menu>
               </Dropdown>
             ) : (

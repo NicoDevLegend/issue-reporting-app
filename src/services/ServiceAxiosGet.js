@@ -11,7 +11,6 @@ export default function useAxiosGet(url, dependencies) {
         .then((res) => setData(res.data))
         .catch((err) => {
           setData("Something is wrong!!");
-          console.log(err);
         });
     }
   }, [url, dependencies]);

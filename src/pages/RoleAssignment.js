@@ -103,6 +103,10 @@ export default function RoleAssignment() {
     setSelectValue(value);
   };
 
+  const handleSelect = (value) => {
+    setSelectValue(value);
+  };
+
   return (
     isAuthenticated &&
     user["https://my-app/roles"][0] === "Admin" && (
@@ -113,6 +117,7 @@ export default function RoleAssignment() {
           title={"Select an Account"}
           value={selectValue}
           onChange={handleSelectChange}
+          handleSelect={handleSelect}
           searchSelect={handleUserData}
           options={
             isMobile ? (
