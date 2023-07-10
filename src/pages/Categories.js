@@ -156,58 +156,58 @@ export default function Categories() {
           <Container>
             <Row>
               <Col>
-                {isMobile ? (
-                  <>
+                <Form.Group
+                  className="mb-5 mx-auto"
+                  style={{ maxWidth: "300px" }}
+                >
+                  <Form.Label>
                     <h5 className="mb-3">
                       <strong>Category: </strong>{" "}
                     </h5>
+                  </Form.Label>
+                  {isMobile ? (
                     <Dropdown onSelect={handleSelect}>
                       <Dropdown.Toggle variant="secondary">
                         {dataCategories && selectValue
                           ? dataCategories[selectValue]?.Title
                           : selectValue}
                       </Dropdown.Toggle>
-                      <Dropdown.Item eventKey="default" onClick={handleCancel}>
-                        ---
-                      </Dropdown.Item>
-                      {user["https://my-app/roles"][0] === "Admin" && (
+                      <Dropdown.Menu>
                         <Dropdown.Item
-                          eventKey="--Add a new Category--"
-                          onClick={() => setAddNewCategory(true)}
+                          eventKey="default"
+                          onClick={handleCancel}
                         >
-                          --Add a new Category--
+                          ---
                         </Dropdown.Item>
-                      )}
-                      {dataCategories ? (
-                        dataCategories?.map((category, index) => (
+                        {user["https://my-app/roles"][0] === "Admin" && (
                           <Dropdown.Item
-                            key={index}
-                            eventKey={index}
-                            onClick={() =>
-                              handleSelectCategory(
-                                category?.Description,
-                                category?._id
-                              )
-                            }
+                            eventKey="--Add a new Category--"
+                            onClick={() => setAddNewCategory(true)}
                           >
-                            {category?.Title}
+                            --Add a new Category--
                           </Dropdown.Item>
-                        ))
-                      ) : (
-                        <Dropdown.Item>...waiting data</Dropdown.Item>
-                      )}
+                        )}
+                        {dataCategories ? (
+                          dataCategories?.map((category, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              eventKey={index}
+                              onClick={() =>
+                                handleSelectCategory(
+                                  category?.Description,
+                                  category?._id
+                                )
+                              }
+                            >
+                              {category?.Title}
+                            </Dropdown.Item>
+                          ))
+                        ) : (
+                          <Dropdown.Item>...waiting data</Dropdown.Item>
+                        )}
+                      </Dropdown.Menu>
                     </Dropdown>
-                  </>
-                ) : (
-                  <Form.Group
-                    className="mb-5 mx-auto"
-                    style={{ maxWidth: "300px" }}
-                  >
-                    <Form.Label>
-                      <h5 className="mb-3">
-                        <strong>Category: </strong>{" "}
-                      </h5>
-                    </Form.Label>
+                  ) : (
                     <Form.Control
                       className="text-center"
                       as="select"
@@ -244,8 +244,8 @@ export default function Categories() {
                         <option>...waiting data</option>
                       )}
                     </Form.Control>
-                  </Form.Group>
-                )}
+                  )}
+                </Form.Group>
               </Col>
             </Row>
             {addNewCategory ? (
