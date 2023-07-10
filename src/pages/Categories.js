@@ -156,16 +156,11 @@ export default function Categories() {
           <Container>
             <Row>
               <Col>
-                <Form.Group
-                  className="mb-5 mx-auto"
-                  style={{ maxWidth: "300px" }}
-                >
-                  <Form.Label>
+                {isMobile ? (
+                  <>
                     <h5 className="mb-3">
                       <strong>Category: </strong>{" "}
                     </h5>
-                  </Form.Label>
-                  {isMobile ? (
                     <Dropdown onSelect={handleSelect}>
                       <Dropdown.Toggle variant="secondary">
                         {dataCategories && selectValue
@@ -202,7 +197,17 @@ export default function Categories() {
                         <Dropdown.Item>...waiting data</Dropdown.Item>
                       )}
                     </Dropdown>
-                  ) : (
+                  </>
+                ) : (
+                  <Form.Group
+                    className="mb-5 mx-auto"
+                    style={{ maxWidth: "300px" }}
+                  >
+                    <Form.Label>
+                      <h5 className="mb-3">
+                        <strong>Category: </strong>{" "}
+                      </h5>
+                    </Form.Label>
                     <Form.Control
                       className="text-center"
                       as="select"
@@ -239,8 +244,8 @@ export default function Categories() {
                         <option>...waiting data</option>
                       )}
                     </Form.Control>
-                  )}
-                </Form.Group>
+                  </Form.Group>
+                )}
               </Col>
             </Row>
             {addNewCategory ? (
