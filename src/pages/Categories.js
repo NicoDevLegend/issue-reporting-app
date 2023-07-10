@@ -14,6 +14,7 @@ import {
   Button,
   Alert,
   Spinner,
+  Dropdown,
 } from "react-bootstrap";
 import PageHeader from "../components/PageHeader";
 import { useEffect, useRef, useState } from "react";
@@ -48,6 +49,18 @@ export default function Categories() {
       Description: "",
     },
   });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("recize", handleResize);
+    };
+  }, []);
 
   const patchCategory = async () => {
     await axiosPatch(
@@ -124,6 +137,10 @@ export default function Categories() {
     }
   };
 
+  const handleSelect = (value) => {
+    setSelectValue(value);
+  };
+
   return (
     isAuthenticated && (
       <div className="d-grid align-content-start">
@@ -148,42 +165,81 @@ export default function Categories() {
                       <strong>Category: </strong>{" "}
                     </h5>
                   </Form.Label>
-                  <Form.Control
-                    className="text-center"
-                    as="select"
-                    value={selectValue}
-                    onChange={(e) => setSelectValue(e.target.value)}
-                  >
-                    <option value="default" onClick={handleCancel}>
-                      ---
-                    </option>
-                    {user["https://my-app/roles"][0] === "Admin" && (
-                      <option
-                        value="add"
-                        onClick={() => setAddNewCategory(true)}
-                      >
-                        --Add a new Category--
-                      </option>
-                    )}
-                    {dataCategories ? (
-                      dataCategories?.map((category, index) => (
-                        <option
-                          key={index}
-                          value={index}
-                          onClick={() =>
-                            handleSelectCategory(
-                              category?.Description,
-                              category?._id
-                            )
-                          }
+                  {isMobile ? (
+                    <Dropdown onSelect={handleSelect}>
+                      <Dropdown.Toggle variant="secondary">
+                        {dataCategories && selectValue
+                          ? dataCategories[selectValue]?.Title
+                          : selectValue}
+                      </Dropdown.Toggle>
+                      <Dropdown.Item eventKey="default" onClick={handleCancel}>
+                        ---
+                      </Dropdown.Item>
+                      {user["https://my-app/roles"][0] === "Admin" && (
+                        <Dropdown.Item
+                          eventKey="--Add a new Category--"
+                          onClick={() => setAddNewCategory(true)}
                         >
-                          {category?.Title}
+                          --Add a new Category--
+                        </Dropdown.Item>
+                      )}
+                      {dataCategories ? (
+                        dataCategories?.map((category, index) => (
+                          <Dropdown.Item
+                            key={index}
+                            eventKey={index}
+                            onClick={() =>
+                              handleSelectCategory(
+                                category?.Description,
+                                category?._id
+                              )
+                            }
+                          >
+                            {category?.Title}
+                          </Dropdown.Item>
+                        ))
+                      ) : (
+                        <Dropdown.Item>...waiting data</Dropdown.Item>
+                      )}
+                    </Dropdown>
+                  ) : (
+                    <Form.Control
+                      className="text-center"
+                      as="select"
+                      value={selectValue}
+                      onChange={(e) => setSelectValue(e.target.value)}
+                    >
+                      <option value="default" onClick={handleCancel}>
+                        ---
+                      </option>
+                      {user["https://my-app/roles"][0] === "Admin" && (
+                        <option
+                          value="add"
+                          onClick={() => setAddNewCategory(true)}
+                        >
+                          --Add a new Category--
                         </option>
-                      ))
-                    ) : (
-                      <option>...waiting data</option>
-                    )}
-                  </Form.Control>
+                      )}
+                      {dataCategories ? (
+                        dataCategories?.map((category, index) => (
+                          <option
+                            key={index}
+                            value={index}
+                            onClick={() =>
+                              handleSelectCategory(
+                                category?.Description,
+                                category?._id
+                              )
+                            }
+                          >
+                            {category?.Title}
+                          </option>
+                        ))
+                      ) : (
+                        <option>...waiting data</option>
+                      )}
+                    </Form.Control>
+                  )}
                 </Form.Group>
               </Col>
             </Row>
