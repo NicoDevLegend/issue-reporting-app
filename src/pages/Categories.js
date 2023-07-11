@@ -23,7 +23,6 @@ import axiosPost from "../services/ServiceAxiosPost";
 import axiosPatch from "../services/ServiceAxiosPatch";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import axiosDelete from "../services/ServiceAxiosDelete";
-import { useNavigate } from "react-router-dom";
 
 export default function Categories() {
   const { user, isAuthenticated } = useAuth0();
@@ -51,7 +50,6 @@ export default function Categories() {
     },
   });
   const [isMobile, setIsMobile] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,10 +73,6 @@ export default function Categories() {
     `${process.env.REACT_APP_SERVICE_API}/Categories`,
     disabled
   );
-
-  if (!dataCategories) {
-    navigate("/notfound");
-  }
 
   useEffect(() => {
     inputRef.current?.focus();
