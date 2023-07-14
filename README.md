@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white) ![mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) ![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![react-router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![codesandbox](https://img.shields.io/badge/Codesandbox-000000?style=for-the-badge&logo=CodeSandbox&logoColor=white) ![vscode](https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white) ![prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E) ![auth0](https://img.shields.io/badge/Auth0-000000?style=for-the-badge&logo=auth0&logoColor=white)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ISSUE-REPORTING-APP
 
-## Available Scripts
+-Aplicación web creada con React.js.
 
-In the project directory, you can run:
+-La idea de esta aplicación es ofrecer a un usuario regular autenticado, la generación de reportes de problemas referidos a una categoría dada(seleccionable entre varias categorías precargadas en dicha aplicación), este reporte origina un "ticket" con los datos del problema, que será recibido por un usuario autenticado con el rol de "soporte", quien se encargará de dar seguimiento y respuesta a estos reportes. Así mismo se dispone de un usuario autenticado con rol de "administrador", quien podrá tener funciones varias, tales como: la creación de reportes, el seguimiento de tickets, la gestión de categorías, la asignación de roles de usuario, entre otras.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Dependencias 
+![Npm package version](https://img.shields.io/badge/npm-v8.15.0-blue)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-auth0 (autenticación y autorización)  
+-fontawesome (iconos)  
+-axios (fetching de datos)  
+-bootstrap (diseño responsive)  
+-cdbreact (sidebar)  
+-chart.js (gráfico de datos)  
+-date-fns (filtrado de fechas)  
+-react  
+-react-bootstrap (diseño responsive)  
+-react-chartsjs-2 (graáfico de datos)  
+-react-date-range (filtrado por fechas)  
+-react-dom  
+-react-hook-form (manejo de formularos)  
+-react-router-bootstrap (integración de react-bootstrap con react-router-dom)  
+-react-router-dom (manejo de rutas de navegación)  
+-react-scripts  
 
-### `npm test`
+## Licencia 
+[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Estado del proyecto 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Creador
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### NicoDev
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/NicoDevLegend?tab=repositories)  
+<a href="mailto:enectrl@gmail.com">![email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)</a>  
+[Nico-Portfolio](https://nico-portfolio.netlify.app/)  
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
