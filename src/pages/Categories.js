@@ -266,7 +266,7 @@ export default function Categories() {
                   <Controller
                     name="Title"
                     control={control}
-                    rules={{ required: true, maxLength: 20 }}
+                    rules={{ required: true, maxLength: 50 }}
                     render={({ field }) => (
                       <Form.Control
                         type="text"
@@ -282,7 +282,7 @@ export default function Categories() {
                   )}
                   {errors.Title?.type === "maxLength" && (
                     <Form.Control.Feedback type="invalid">
-                      The maximun length of the field is 20 characters.
+                      The maximun length of the field is 50 characters.
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
@@ -291,7 +291,7 @@ export default function Categories() {
                   <Controller
                     name="Description"
                     control={control}
-                    rules={{ required: true, maxLength: 50 }}
+                    rules={{ required: true, maxLength: 500 }}
                     render={({ field }) => (
                       <Form.Control
                         as="textarea"
@@ -308,7 +308,7 @@ export default function Categories() {
                   )}
                   {errors.Description?.type === "maxLength" && (
                     <Form.Control.Feedback type="invalid">
-                      The maximun length of the field is 50 characters.
+                      The maximun length of the field is 500 characters.
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
