@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
   const [userId, setUserId] = useState();
+  const [selectedUser, setSelectedUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [alertShow, setAlertShow] = useState(false);
   const [errorAlertShow, setErrorAlertShow] = useState(false);
@@ -76,6 +77,11 @@ export default function NewTicket() {
     } catch {
       setErrorAlertShow(true);
     }
+  };
+
+  const handleSelect = (id, username) => {
+    setUserId(id);
+    setSelectedUser(username);
   };
 
   return (
@@ -196,7 +202,7 @@ export default function NewTicket() {
                 isMobile ? (
                   <Dropdown onSelect={field.onChange}>
                     <Dropdown.Toggle variant="secondary">
-                      {field.value}
+                      {selectedUser || "Select an option"}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item eventKey="---">---</Dropdown.Item>
@@ -208,7 +214,7 @@ export default function NewTicket() {
                             <Dropdown.Item
                               key={index}
                               eventKey={user.userID}
-                              onClick={() => setUserId(user.userID)}
+                              onClick={handleSelect(user.userID, user.username)}
                             >
                               {user.username}
                             </Dropdown.Item>
