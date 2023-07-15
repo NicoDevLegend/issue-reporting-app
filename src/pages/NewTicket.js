@@ -205,7 +205,6 @@ export default function NewTicket() {
                       {selectedUser || "Select an option"}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item eventKey="---">---</Dropdown.Item>
                       {dataUsers &&
                         dataRoles &&
                         dataUsers
