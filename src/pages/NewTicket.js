@@ -214,7 +214,7 @@ export default function NewTicket() {
                             <Dropdown.Item
                               key={index}
                               eventKey={user.userID}
-                              onClick={handleSelect(user.userID, user.username)}
+                              onClick={() => handleSelect(user.userID, user.username)}
                             >
                               {user.username}
                             </Dropdown.Item>
