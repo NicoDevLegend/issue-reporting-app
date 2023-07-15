@@ -210,7 +210,7 @@ export default function RoleAssignment() {
             <Alert
               variant={`${resData?.color} position-fixed`}
               onClose={() => setAlertShow(false)}
-              style={{ zIndex: "10000", top: "50%" }}
+              style={{ zIndex: "10000", position: "fixed", top: "0", left: "0", width: "100%" }}
               dismissible
             >
               <Alert.Heading>{resData?.text}</Alert.Heading>
@@ -220,7 +220,7 @@ export default function RoleAssignment() {
             <Alert
               variant="danger position-fixed"
               onClose={() => setAlertShow(false)}
-              style={{ zIndex: "10000", top: "50%" }}
+              style={{ zIndex: "10000", position: "fixed", top: "0", left: "0", width: "100%" }}
               dismissible
             >
               <Alert.Heading>
