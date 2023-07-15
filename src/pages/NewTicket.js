@@ -1,11 +1,11 @@
-import { Button, Form, Alert, Spinner } from "react-bootstrap";
+import { Button, Form, Alert, Spinner, Dropdown } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import axiosPost from "../services/ServiceAxiosPost";
 import axiosPostMultipart from "../services/ServiceAxiosPostMultipart";
 import useAxiosGet from "../services/ServiceAxiosGet";
 import PageHeader from "../components/PageHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NewTicket() {
   const { isAuthenticated, user } = useAuth0();
@@ -38,6 +38,18 @@ export default function NewTicket() {
       Attachment: "",
     },
   });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("recize", handleResize);
+    };
+  }, []);
 
   const newNotifMessage = async () => {
     await axiosPost(`${process.env.REACT_APP_SERVICE_API}/Notification`, {
@@ -180,29 +192,52 @@ export default function NewTicket() {
               name="AssigneeID"
               control={control}
               rules={{ required: true }}
-              render={({ field }) => (
-                <Form.Control
-                  as="select"
-                  isInvalid={errors.AssigneeID}
-                  {...field}
-                  required
-                >
-                  <option value="">---</option>
-                  {dataUsers &&
-                    dataRoles &&
-                    dataUsers
-                      .filter((user) => dataRoles.includes(user.userID))
-                      .map((user, index) => (
-                        <option
-                          key={index}
-                          value={user.userID}
-                          onClick={() => setUserId(user.userID)}
-                        >
-                          {user.username}
-                        </option>
-                      ))}
-                </Form.Control>
-              )}
+              render={({ field }) =>
+                isMobile ? (
+                  <Dropdown onSelect={field.onChange}>
+                    <Dropdown.Toggle variant="secondary">
+                      Select and option
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {dataUsers &&
+                        dataRoles &&
+                        dataUsers
+                          .filter((user) => dataRoles.includes(user.userID))
+                          .map((user, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              eventKey={user.userID}
+                              onClick={() => setUserId(user.userID)}
+                            >
+                              {user.username}
+                            </Dropdown.Item>
+                          ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                ) : (
+                  <Form.Control
+                    as="select"
+                    isInvalid={errors.AssigneeID}
+                    {...field}
+                    required
+                  >
+                    <option value="">---</option>
+                    {dataUsers &&
+                      dataRoles &&
+                      dataUsers
+                        .filter((user) => dataRoles.includes(user.userID))
+                        .map((user, index) => (
+                          <option
+                            key={index}
+                            value={user.userID}
+                            onClick={() => setUserId(user.userID)}
+                          >
+                            {user.username}
+                          </option>
+                        ))}
+                  </Form.Control>
+                )
+              }
             />
             <Form.Control.Feedback type="invalid">
               Please choose an Assignation.
