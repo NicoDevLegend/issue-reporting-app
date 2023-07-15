@@ -139,7 +139,7 @@ export default function NewTicket() {
             <Controller
               name="Description"
               control={control}
-              rules={{ required: true, maxLength: 30 }}
+              rules={{ required: true, maxLength: 150 }}
               render={({ field }) => (
                 <Form.Control
                   as="textarea"
@@ -156,7 +156,7 @@ export default function NewTicket() {
             )}
             {errors.Description?.type === "maxLength" && (
               <Form.Control.Feedback type="invalid">
-                The maximun length of the field is 30 characters.
+                The maximun length of the field is 150 characters.
               </Form.Control.Feedback>
             )}
           </Form.Group>
