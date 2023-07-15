@@ -166,7 +166,7 @@ export default function Categories() {
                     </h5>
                   </Form.Label>
                   {isMobile ? (
-                    <Dropdown onSelect={handleSelect}>
+                    <Dropdown drop="down-centered" onSelect={handleSelect}>
                       <Dropdown.Toggle variant="secondary">
                         {dataCategories &&
                         selectValue !== "default" &&
