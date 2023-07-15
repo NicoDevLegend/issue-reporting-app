@@ -196,9 +196,10 @@ export default function NewTicket() {
                 isMobile ? (
                   <Dropdown onSelect={field.onChange}>
                     <Dropdown.Toggle variant="secondary">
-                      Select and option
+                      {field.value}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
+                      <Dropdown.Item eventKey="---">---</Dropdown.Item>
                       {dataUsers &&
                         dataRoles &&
                         dataUsers
