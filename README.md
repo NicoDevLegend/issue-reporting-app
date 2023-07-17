@@ -17,7 +17,7 @@
 -cdbreact (sidebar)  
 -chart.js (gráfico de datos)  
 -date-fns (filtrado de fechas)  
--react  
+-react(create-react-app)  
 -react-bootstrap (diseño responsive)  
 -react-chartsjs-2 (graáfico de datos)  
 -react-date-range (filtrado por fechas)  
