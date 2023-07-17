@@ -28,9 +28,11 @@
 -react-scripts  
 
 ## Licencia 
-[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)
 
 ## Estado del proyecto 
+
+![demo](https://img.shields.io/badge/demo-v1.0-blue)
 
 
 ## Creador
