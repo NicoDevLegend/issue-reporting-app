@@ -2,6 +2,8 @@
 
 # ISSUE-REPORTING-APP
 
+[issue-reporting-app.netlify.app](https://issue-reporting-app.netlify.app)
+
 -Aplicación web creada con React.js.
 
 -La idea de esta aplicación es ofrecer a un usuario regular autenticado, la generación de reportes de problemas referidos a una categoría dada(seleccionable entre varias categorías precargadas en dicha aplicación), este reporte origina un "ticket" con los datos del problema, que será recibido por un usuario autenticado con el rol de "soporte", quien se encargará de dar seguimiento y respuesta a estos reportes. Así mismo se dispone de un usuario autenticado con rol de "administrador", quien podrá tener funciones varias, tales como: la creación de reportes, el seguimiento de tickets, la gestión de categorías, la asignación de roles de usuario, entre otras.
