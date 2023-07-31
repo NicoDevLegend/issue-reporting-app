@@ -11,7 +11,7 @@ export default function NavBar() {
   return (
     <Navbar bg="dark" variant="dark" style={{ height: "75px" }}>
       <Container className="justify-content-end">
-        <Nav className="" style={{ maxHeight: "100px" }}>
+        <Nav style={{ maxHeight: "100px" }}>
           {isAuthenticated ? (
             <>
               <Notifications />

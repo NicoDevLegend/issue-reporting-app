@@ -24,7 +24,7 @@ export default function IssuesTableList({ userId, userRole }) {
       userId ? userId : user.sub
     }/${userRole ? userRole : param}`
   );
-  
+
   if (!data) {
     navigate("/notfound");
   }
