@@ -8,6 +8,7 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import icon from "../assets/issue-reporting-icon.svg";
 
 export default function SideBar() {
   const { user, isAuthenticated } = useAuth0();
@@ -23,7 +24,7 @@ export default function SideBar() {
         toggled
       >
         <CDBSidebarHeader prefix={<i className="ms-2 fa fa-bars fa-large"></i>}>
-          Issue Reporting
+        <img src={icon} alt="icon" style={{width: "70px", height: "70px" }} />
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
