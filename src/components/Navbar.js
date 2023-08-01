@@ -4,6 +4,7 @@ import SignUpButton from "./SignUpButton";
 import Avatar from "./Avatar";
 import Notifications from "./Notifications";
 import { useAuth0 } from "@auth0/auth0-react";
+import icon from "../assets/issue-reporting-icon.svg";
 
 export default function NavBar() {
   const { isAuthenticated } = useAuth0();
@@ -21,10 +22,10 @@ export default function NavBar() {
             <>
               <Navbar.Brand
                 className="position-absolute"
-                style={{ left: "1em" }}
+                style={{ left: "1em", top: "0" }}
                 href="/"
               >
-                Issue Reporting{" "}
+                <img src={icon} alt="icon" style={{width: "70px", height: "70px" }} />
               </Navbar.Brand>
               <LogInButton />
               <SignUpButton />
