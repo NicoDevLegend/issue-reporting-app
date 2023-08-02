@@ -2,6 +2,7 @@
 
 # ISSUE-REPORTING-APP
 
+![issue-reporting-app.netlify.app-image](src/assets/issue-reporting-app-image.svg)
 [issue-reporting-app.netlify.app](https://issue-reporting-app.netlify.app)
 
 -Aplicación web creada con React.js.
