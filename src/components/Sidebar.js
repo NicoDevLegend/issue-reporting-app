@@ -111,7 +111,7 @@ export default function SideBar() {
           </CDBSidebarMenu>
         </CDBSidebarContent>
         <CDBSidebarFooter className="text-center" style={{ fontSize: "12px" }}>
-          NicoDev&#169;
+          NicoE&#169;
         </CDBSidebarFooter>
       </CDBSidebar>
     )
