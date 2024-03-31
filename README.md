@@ -22,7 +22,7 @@ LINK: [issue-reporting-app.netlify.app](https://issue-reporting-app.netlify.app)
 -date-fns (filtrado de fechas)  
 -react(create-react-app)  
 -react-bootstrap (diseño responsive)  
--react-chartsjs-2 (graáfico de datos)  
+-react-chartsjs-2 (gráfico de datos)  
 -react-date-range (filtrado por fechas)  
 -react-dom  
 -react-hook-form (manejo de formularos)  
